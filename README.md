@@ -29,8 +29,8 @@ Note: Store Binaries (And Their Associated DLLs/Files) In The Following Folder S
 <blockquote>
 #   ./YAAAAT*.py<br/>
 #      ./win/<br/>
-#         ./strings.exe
-#         ./openssl.exe (and associated dlls)
+#         ./strings.exe<br/>
+#         ./openssl.exe (and associated dlls)<br/>
 #         ./lib/(jadx classes)<br/>
 #         ./bin/jadx.bat<br/>
 #         ./bin/jadx<br/>
