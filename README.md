@@ -81,10 +81,6 @@ Note: Store Binaries (And Their Associated DLLs/Files) In The Following Folder S
 When updating various binaries, ensure the name matches what is currently in the directory and copy over any associated files. 
 
 ### Where To Get The Core Binaries: <br />
-winpmem: https://github.com/Velocidex/WinPmem <br />
-memoryze: https://www.fireeye.com/services/freeware/memoryze.html <br />
-ramcapture: https://belkasoft.com/ram-capturer <br />
-Surge Collect Pro (Not Free): https://www.volexity.com/products-overview/surge/ <br />
-FTK Imager (CLI): https://accessdata.com/product-download/ftk-imager-version-4-5 <br />
-RedLine Collector: https://www.fireeye.com/services/freeware/redline.html <br />
-SpadowSpawn (Still Testing): https://github.com/candera/shadowspawn <br />
+strings: https://docs.microsoft.com/en-us/sysinternals/downloads/strings <br />
+openssl: https://www.openssl.org/source/ <br />
+jadx:    https://github.com/skylot/jadx/releases <br />
