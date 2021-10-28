@@ -1,6 +1,6 @@
 # This Project Is Still In Early Alpha #
 
-## Yet Another Android Analysis Tool (YAAAT) ###
+## Yet Another Android Analysis Tool (YAAAAT) ###
 
 ##### Because it is still in pre-alpha, there are alot of bugs. Please let me know if you run into any issues and I'll try my best to knock them out. #####
 
