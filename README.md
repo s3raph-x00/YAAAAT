@@ -56,10 +56,16 @@ Note: Store Binaries (And Their Associated DLLs/Files) In The Following Folder S
        - [ ] Testing 
      - [ ] GUI   
   3. Linux/Unix Python Script
-     - [ ] Core Functionality
-       - [ ] Additional Triage Sources   
-       - [ ] Switches and Parametization
-       - [ ] Testing
+     - [ ] Decompile and Analysis Functionaliy
+       - [ ] APK decompilation and analysis<br/>   
+       - [ ] OAT decompilation and analysis<br/>
+       - [ ] JAR decompilation and analysis<br/>
+       - [ ] DEX decompilation and analysis<br/>
+       - [ ] CLASS decompilation and analysis<br/>
+       - [ ] XAPK decompilation and analysis<br/>
+       - [ ] vDEX/cDEX decompilation and analysis<br/>
+       - [ ] SO decompilation and analysis<br/>
+       - [ ] Testing 
      - [ ] GUI   
   4. ELK/Splunk Linkage Tool
      - [ ] Core Functionality
