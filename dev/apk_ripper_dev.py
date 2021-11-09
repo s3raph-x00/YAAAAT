@@ -1,3 +1,8 @@
+### Author: s3raph
+### Purpose: To Pass the Butter
+### Version: .05
+### Date Since I Remebered to Update: 20211108
+
 import os
 import shutil
 import sys
