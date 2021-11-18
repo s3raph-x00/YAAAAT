@@ -29,11 +29,11 @@ Note: Store Binaries (And Their Associated DLLs/Files) In The Following Folder S
 <blockquote>
 #   ./YAAAAT*.py<br/>
 #      ./win/<br/>
-#         ./strings.exe<br/>
-#         ./openssl.exe (and associated dlls)<br/>
-#         ./lib/(jadx classes)<br/>
-#         ./bin/jadx.bat<br/>
-#         ./bin/jadx<br/>
+#         ./win/strings.exe<br/>
+#         ./win/openssl.exe (and associated dlls)<br/>
+#         ./win/lib/(jadx classes)<br/>
+#         ./win/bin/jadx.bat<br/>
+#         ./win/bin/jadx<br/>
 </blockquote>
     
 ### Current Development Status 
