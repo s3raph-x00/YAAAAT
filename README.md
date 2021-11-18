@@ -40,7 +40,7 @@ Note: Store Binaries (And Their Associated DLLs/Files) In The Following Folder S
   1. Autopsy Plugin
      - [X] Core Functionality <br />
        [ ] Additional Indicing of Ripped Data   <br/>
-       [ ] Switches and Parametization<br/>
+       &#9746; Switches and Parametization<br/>
        &#9746; Testing<br/>
      - [ ] GUI   
   2. Python Ripper
