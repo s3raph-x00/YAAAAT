@@ -63,7 +63,7 @@ Note: Store Binaries (And Their Associated DLLs/Files) In The Following Folder S
        - [ ] DEX decompilation and analysis<br/>
        - [ ] CLASS decompilation and analysis<br/>
        - [ ] XAPK decompilation and analysis<br/>
-       - [ ] vDEX/cDEX decompilation and analysis<br/>
+       - [ ] vDEX/oDEX decompilation and analysis<br/>
        - [ ] SO decompilation and analysis<br/>
        - [ ] Testing 
      - [ ] GUI   
