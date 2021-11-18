@@ -1022,10 +1022,10 @@ def main(argv):
 ########################################################################################################################################     
 
         apk_move_cleanup_loc = apk_source_directory + "\\" + apk_with_extension
-        #try:
-            #shutil.move(apk_full_path, apk_move_cleanup_loc)
-        #except:
-        #    log_txt_update.write("[WARN]: Error Moving APK: " + apk_full_path + " to: " + apk_move_cleanup_loc + "\n")
+        try:
+            shutil.move(apk_full_path, apk_move_cleanup_loc)
+        except:
+            log_txt_update.write("[WARN]: Error Moving APK: " + apk_full_path + " to: " + apk_move_cleanup_loc + "\n")
         file_txt_update.close()
     func_clean_up()
 
