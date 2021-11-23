@@ -1,7 +1,9 @@
-### Author: s3raph
-### Purpose: To Pass the Butter
-### Version: .065
-### Date Since I Remembered to Update: 2021122
+########################################################################################################################################
+#################################################### Author:      s3raph                ################################################
+#################################################### Purpose:     To Pass the Butter    ################################################
+#################################################### Version:     .071                  ################################################
+#################################################### Last Update: 2021123               ################################################
+########################################################################################################################################
 
 import os
 import time
@@ -9,7 +11,6 @@ import subprocess
 import shutil
 import sys
 import json
-#import urlparse
 import getopt
 import glob
 import hashlib
@@ -19,17 +20,35 @@ from zipfile import ZipFile
 from struct import pack, unpack
 from xml.sax.saxutils import escape
 
-### Error Control For Soft Process Failure
+if sys.version_info >= (2, 7, 0) and sys.version_info < (3, 0, 0):
+    import urlparse
+if sys.version_info >= (3, 0, 0):
+    import urllib.parse
+
+global var_current_function
+
 def func_fail_whale():
+########################################################################################################################################
+########################################################### FAIL WHALE FUNCTION ########################################################
+########################################################################################################################################
+    if var_current_function:
+        print(var_current_function)
     var_current_function = "func_fail_whale"
+    print(u"\u2584\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2584\u2590\u2588\u2584\u2584\u2584\u2584\u2588\u258c")
+    print(u"\u2588\u2588\u2588\u2588\u2588\u2588\u258c\u2584\u258c\u2584\u2590\u2590\u258c\u2588\u2588\u2588\u258c\u2580\u2580\u2588\u2588\u2580\u2580")
+    print(u"\u2588\u2588\u2588\u2588\u2584\u2588\u258c\u2584\u258c\u2584\u2590\u2590\u258c\u2580\u2588\u2588\u2588\u2584\u2584\u2588\u258c")
+    print(u"\u2584\u2584\u2584\u2584\u2584\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2580")
     time.sleep(.5) 
-    print("Something Bad Happened")
+    print("[ERROR]: Error Occured")
     time.sleep(.3)
-    print("Trying Again...")
+    print("[INFO]: Trying Process Again")
     time.sleep(.5)
     return
 
 def func_hello():
+########################################################################################################################################
+########################################################### MUCH ASCII FUNCTION ########################################################
+########################################################################################################################################
     print("")
     print(" @@@ @@@ @@@@@@@@ @@@@@@@       @@@@@@  @@@  @@@  @@@@@@  @@@@@@@ @@@  @@@ @@@@@@@@ @@@@@@@        @@@@@@  @@@  @@@ @@@@@@@  @@@@@@@   @@@@@@  @@@ @@@@@@@ ")
     print(" @@! !@@ @@!        @@!        @@!  @@@ @@!@!@@@ @@!  @@@   @@!   @@!  @@@ @@!      @@!  @@@      @@!  @@@ @@!@!@@@ @@!  @@@ @@!  @@@ @@!  @@@ @@! @@!  @@@")
@@ -43,27 +62,24 @@ def func_hello():
     print("                                :   : : ::    :   :   : : : ::.::.:    ::.: :  :   ::.: :           :     : :. :   : :. :  : ::.: :")
     print("")
     print("") 
-    print("                                                        __..--"".          .""--..__                 ")#Credits For The ASCII Scythe Go To: David Palmer
-    print("                                                  _..-``       ][\        /[]       ``-.._           ")
-    print("                                              _.-`           __/\ \      / /\__           `-._       ")
-    print("                                           .-`     __..---```    \ \    / /    ```---..__     `-.    ")
-    print("                                         .`  _.--``               \ \  / /               ``--._  `.    ")
-    print("                                        / .-`                      \ \/ /                      `-. \    ")
-    print("                                       /.`                          \/ /                          `.\    ")
-    print("                                      |`                            / /\                            `|    ")
+    print("                                                         __..--"".          .""--..__                 ")#Credits For The ASCII Scythe Go To: David Palmer
+    print("                                                   _..-``       ][\        /[]       ``-.._           ")
+    print("                                               _.-`           __/\ \      / /\__           `-._       ")
+    print("                                            .-`     __..---```    \ \    / /    ```---..__     `-.    ")
+    print("                                          .`  _.--``               \ \  / /               ``--._  `.    ")
+    print("                                         / .-`                      \ \/ /                      `-. \    ")
+    print("                                        /.`                          \/ /                          `.\    ")
+    print("                                       |`                            / /\                            `|    ")
     print("                               @@@@@@  @@@@@@@  @@@  @@@      @@@@@@@  @@@ @@@@@@@  @@@@@@@  @@@@@@@@ @@@@@@@ ")
     print("                              @@!  @@@ @@!  @@@ @@!  !@@      @@!  @@@ @@! @@!  @@@ @@!  @@@ @@!      @@!  @@@")
     print("                              @!@!@!@! @!@@!@!  @!@@!@!       @!@!!@!  !!@ @!@@!@!  @!@@!@!  @!!!:!   @!@!!@! ")
     print("                              !!:  !!! !!:      !!: :!!       !!: :!!  !!: !!:      !!:      !!:      !!: :!! ")
     print("                               :   : :  :        :   :::       :   : : :    :        :       : :: :::  :   : :")
 
-def func_gu_st():
-    if arg_verbose_output == 1:
-        if arg_gucci_output == 1:
-            func_set_console_strobe()
-            os.system('color 04')
-
 def func_goodbye():
+########################################################################################################################################
+############################################################# SUCH END FUNCTION ########################################################
+########################################################################################################################################
     print("")
     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$NN$$$$$$$NN$$$$N$N$NN$$$$$N$$$$$$$$NNN$$NN$$$$NNNNNNN$$$N$$$NNN$$$$$$N$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$NNV.....:.VN..........M..........F$$$$F:::*VNNV:::VMM*.....*MNMM.....*NNV...*N$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
@@ -87,37 +103,24 @@ def func_goodbye():
     print("$$NN$$$$$$$NN$$$N$$$$$$N$NNNN$$NNN$$N$N$NNN$$NNNNNNNNNNN$$$$$$$NNNNNNNNN$$NNNNNNNNNNN$$$$NNNNNNN$N$$$$NN$$$$$$$$$NN$$$$$$$$$$$$$$$$$NN$$$N$$$NNNNNNNNN$NN$N$$$")
     print("")
 
-### ASCII Art Pulled from SSt @ascii.co.uk/art/whale
-### Error Control For Hard Process Failure
-def func_fail_whale():
-    print("      __________...----..____..--``-..___")
-    print("    , .                                  ```--.._")
-    print("   :    (-)                                      ``._")
-    print("   |    GIANT FAIL WHALE       --                    ``.")
-    print("   |                   -.-      -.     -   -.        `. :")
-    print("   |                     __           --            .    :")
-    print("    `._____________     (  `.   -.-      --  -   .   `    :")
-    print("       `------------------   /_.--------..__..--.._ `. `.  :")
-    print("                          `---                     `-._ .  |")
-    print("                                                       `.` |")
-    print("                                                         |`|")
-    print("                                                          ||")
-    print("                                                          /|`.")
-    print("                                                         / _|-")
-    print("                                                        /_,")
-    time.sleep(.5) 
-    print("Something Really Bad Happened")
-    time.sleep(.3)
-    print("Program Exiting (Harvest The Logs)")
-    time.sleep(.5)
-    exit
+def func_gu_st():
+########################################################################################################################################
+########################################################### GUCCI MODE FUNCTION ########################################################
+########################################################################################################################################
+    if arg_verbose_output == 1:
+        if arg_gucci_output == 1:
+            func_set_console_strobe()
+            os.system('color 04')
 
-### Checking Python Version - Initial ###
 def func_python_version_check():
+########################################################################################################################################
+########################################################## PYTHON CHECK FUNCTION #######################################################
+########################################################################################################################################
     global var_python_version_info
     global var_python_version2_check
     global var_python_version3_check
     var_current_function = "func_python_version_check"
+    
     if sys.version_info >= (2, 7, 0) and sys.version_info < (3, 0, 0):
         var_python_version2_check = "TRUE"
         var_python_version3_check = "FALSE"
@@ -127,26 +130,30 @@ def func_python_version_check():
         var_python_version3_check = "TRUE"
         var_python_version_info = "3.0+"   
     else:
-        print("Python Version Does Not Appear to Be Supported")
-        print("Python 2.7+ or 3.1+ is a requirement")
+        print("[ERROR]: Python Version Does Not Appear to Be Supported")
+        print("[WARN]: Python 2.7+ or 3.1+ is a requirement")
         func_fail_whale()
 
-### This Function Does Some O/S Checks ###
 def func_determine_operating_system():
+########################################################################################################################################
+####################################################### O/S DETERMINATION FUNCTION #####################################################
+########################################################################################################################################
     var_current_function = "func_determine_operating_system"
     try:
         var_OS_ver_A = platform.system()
         var_OS_ver_B = os.name
         var_OS_ver_C = sys.platform
-        var_OS_main_ver = "O/S: " + var_OS_ver_A + " " + var_OS_ver_B.upper + ": " + var_OS_ver_C
+        var_OS_ver_D = platform.platform()
+        var_OS_ver_E = platform.processor()
+        var_OS_main_ver = "O/S: " + platform.platform()
+        var_PROC_model = "Processor: " + platform.processor()
         var_PY_ver_A = platform.python_version()
         var_PY_ver_B = sys.version
         var_PY_ver_C = sys.version_info
-        var_PY_ver_D = platform.python_implementation() ## Unused But Potentially Relevant Data Point for TroubleShooting
+
         print(var_OS_main_ver)
         print("Python Version is: " + var_PY_ver_A)
         print("Full Python Info is: " + var_PY_ver_B)
-        print("Additional Python Details: " + var_PY_ver_C)
     except:
         var_manual_error_code = 1
         print("[WARN]: Operating System Determination Failed")
@@ -155,6 +162,9 @@ def func_determine_operating_system():
 
 ### Console/Error Text Color ###
 def func_set_console_color_for_errors():
+########################################################################################################################################
+######################################################### CONSOLE COLOR FUNCTION #######################################################
+########################################################################################################################################
     if var_manual_error_code == (0): ## This Means Normal Operation
         os.system('color 70') 
         return
@@ -168,6 +178,9 @@ def func_set_console_color_for_errors():
         print("Error")
 
 def func_set_console_strobe():
+########################################################################################################################################
+############################################################ STROBE FUNCTION ###########################################################
+########################################################################################################################################
     var_current_function = "func_set_console_strobe"    
     os.system('color 7C')
     time.sleep(.1)
@@ -181,6 +194,9 @@ def func_set_console_strobe():
     time.sleep(.1)
 
 def func_global_var_declare():
+########################################################################################################################################
+######################################################## GLOBAL VARIABLE FUNCTION ######################################################
+########################################################################################################################################
     ### REGEX Global Varible Declaration and Assignment ###
     global var_ipv4_regex_pattern
     global var_ipv6_regex_pattern
@@ -195,17 +211,17 @@ def func_global_var_declare():
     global possible_url_hiconf_regex_pattern
     global possible_url_lowconf_regex_pattern
 
-    var_ipv4_regex_pattern = re.compile(r'^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$')
-    var_ipv6_regex_pattern = re.compile(r'(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))')
-    var_phonenum_regex_pattern = re.compile(r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$')
-    possible_default_password_regex_pattern = re.compile(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$')
-    possible_ssn_regex_pattern = re.compile(r'^(?!0{3})(?!6{3})[0-8]\d{2}-(?!0{2})\d{2}-(?!0{4})\d{4}$')
-    possible_url_hiconf_regex_pattern = re.compile(r'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)')
-    possible_url_lowconf_regex_pattern = re.compile(r'(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)')
-    possible_ftp_hiconf_regex_pattern = re.compile(r'ftps?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)')
-    possible_ssh_hiconf_regex_pattern = re.compile(r'ssh:\/\/(@\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b')
-    possible_bitcoinaddr_regex_pattern = re.compile(r'^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39}$')
-    possible_macaddr_regex_pattern = re.compile(r'^[a-fA-F0-9]{2}(:[a-fA-F0-9]{2}){5}$')
+    var_ipv4_regex_pattern = "r'^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'"
+    var_ipv6_regex_pattern = "r'(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))'"
+    var_phonenum_regex_pattern = "r'^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$')"
+    possible_default_password_regex_pattern = "r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$')"
+    possible_ssn_regex_pattern = "r'^(?!0{3})(?!6{3})[0-8]\d{2}-(?!0{2})\d{2}-(?!0{4})\d{4}$')"
+    possible_url_hiconf_regex_pattern = "r'https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)')"
+    possible_url_lowconf_regex_pattern = "r'(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)')"
+    possible_ftp_hiconf_regex_pattern = "r'ftps?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)')"
+    possible_ssh_hiconf_regex_pattern = "r'ssh:\/\/(@\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b')"
+    possible_bitcoinaddr_regex_pattern = "r'^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39}$')"
+    possible_macaddr_regex_pattern = "r'^[a-fA-F0-9]{2}(:[a-fA-F0-9]{2}){5}$')"
     possible_email_regex_pattern = re.compile(r'(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))')
 
     ### JSON Global Variable Declaration ###
@@ -240,6 +256,9 @@ def func_global_var_declare():
     global cert_content_extract_notafter
 
 def func_apk_json_map():
+########################################################################################################################################
+######################################################## JSON-PYTHON DICTIONARY MAP ####################################################
+########################################################################################################################################
     apk_json = {
         "FILE- Filename": "",
         "FILE- True Filename": "",
@@ -458,6 +477,9 @@ def func_apk_json_map():
     }
 
 def func_find_javahome():
+########################################################################################################################################
+############################################################ Find JDK Function #########################################################
+########################################################################################################################################
     if 'JAVA_HOME' in os.environ:
         var_jdk_loc_1 = os.environ['JAVA_HOME']
         if "jdk" in var_jdk_loc_1:
@@ -465,6 +487,9 @@ def func_find_javahome():
             var_jdk_keytool_location = var_jdk_loc_1 + "\\bin\\keytool.exe"
 
 def func_base64_decode(var_string_decode_req_base64):
+########################################################################################################################################
+########################################################## BASE-64 Decode Function #####################################################
+########################################################################################################################################
     global var_base64_decode
     global var_decoded_base64
     if var_string_decode_req_base64:
@@ -480,6 +505,9 @@ def func_base64_decode(var_string_decode_req_base64):
                 #print("[INFO]: Error Decoding Potential Base64 String: " + var_string_decode_req_base64 + "\n")
 
 def func_android_cert_pull():
+########################################################################################################################################
+####################################################### APK Certificate Rip Function ###################################################
+########################################################################################################################################
     global var_path_to_android_xml
     global var_cert_RSA_location
     global var_android_buildinfo_location
@@ -492,10 +520,7 @@ def func_android_cert_pull():
             var_keytool_command = "\"" + var_jdk_keytool_location + "\"" + " -printcert -file " + var_cert_RSA_location + " >> " + apk_results_directory + "\\" + apk + "_cert_keytool_out.txt"
             os.system(var_keytool_command)
         except:
-            if var_forensic_case_bool == 1:
-                log_txt_update.write("[WARN]: Error Running Keytool against Certificate File Located At: " + var_cert_RSA_location + "\n")
-            if arg_verbose_output == 1:
-                print("[WARN]: Error Running Keytool against Certificate File Located At: " + var_cert_RSA_location + "\n")
+            log_txt_update.write("[WARN]: Error Running Keytool against Certificate File Located At: " + var_cert_RSA_location + "\n")
 
     temp_certificate_keytxt_file = apk_results_directory + "\\" + apk + "_cert_keytool_out.txt"
     var_bool_keytxt_file = os.path.exists(temp_certificate_keytxt_file)
@@ -522,10 +547,7 @@ def func_android_cert_pull():
     try:
         os.system(".\\win\\openssl.exe pkcs7 -inform DER -in " + var_cert_RSA_location + " -noout -print_certs -text" + " >> " + apk_results_directory + "\\" + apk + "_cert_meth_1.txt")
     except:
-        if var_forensic_case_bool == 1:
-            log_txt_update.write("[WARN]: Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + " with [Method 1]\n")
-        if arg_verbose_output == 1:
-            print("[WARN]: Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + " with [Method 1]\n")
+        log_txt_update.write("[WARN]: [Method 1] Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + ", Trying [Method 2]\n")
     
     temp_certificate_txt_file = apk_results_directory + "\\" + apk + "_cert_meth_1.txt"
     if os.path.exists(temp_certificate_txt_file):
@@ -559,35 +581,40 @@ def func_android_cert_pull():
             cert_unproc_txt_update.write("[Method 2]: APK Certificate Subject: " + cert_content_extract_subject + "\n")
             cert_unproc_txt_update.write("[Method 2]: APK Certificate Algorithm: " + cert_content_extract_algorithm + "\n")
         except:
-            if var_forensic_case_bool == 1:
-                log_txt_update.write("[WARN]: Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + " with [Method 2]\n")
-            if arg_verbose_output == 1:
-                print("[WARN]: Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + " with [Method 2]\n")
+            log_txt_update.write("[WARN]: Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + " with [Method 2]\n")
 
 def func_large_scale_regex():
+########################################################################################################################################
+########################################################## REGEX PER LINE FUNCTION #####################################################
+########################################################################################################################################
+    if arg_verbose_output == 1:
+        print("[REGEX] #################################### RUNNING REGEX AGAINST JADX OUTPUT ####################################")
+        print("")
     for var_path, var_directory, var_files in os.walk(os.path.abspath(apk_decomp_directory)):
         for var_each_file in var_files:
             var_ref_filepath = os.path.join(var_path, var_each_file)
             if os.path.isfile(var_ref_filepath):
                 var_directory_file_object = open(var_ref_filepath)
                 for var_directory_file_object_line in var_directory_file_object:
-                    ### NEEDS POST REGEX CHECK ###
                     apk_content_extract_ipv4 = re.findall(r'^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$', var_directory_file_object_line)
                     apk_content_extract_ipv4_tup_len = len(apk_content_extract_ipv4)
                     var_chain_count = 0
                     if apk_content_extract_ipv4:
+                        print(apk_content_extract_ipv4)
                         while var_chain_count < apk_content_extract_ipv4_tup_len:
                             if apk_content_extract_ipv4[var_chain_count]:
                                 ip_extract_write_txt.write("[IPV4]: Potential IPv4 Address Found: " + apk_content_extract_ipv4[var_chain_count] + "\n")
                                 var_chain_count = var_chain_count + 1
                             else:
                                 var_chain_count = var_chain_count + 1
-                    
+
                     ### NEEDS POST REGEX CHECK ###
                     apk_content_extract_ipv6 = re.findall(r'(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))', var_directory_file_object_line)
                     apk_content_extract_ipv6_len = len(apk_content_extract_ipv6)
                     var_chain_count = 0
                     if apk_content_extract_ipv6:
+                        print("[IPv6]: SOURCE FILE: " + var_ref_filepath)
+                        print("[IPv6]: SOURCE LINE: " + var_directory_file_object_line)
                         while var_chain_count < apk_content_extract_ipv6_len:
                             if apk_content_extract_ipv6[var_chain_count]:
                                 var_tmp_string = apk_content_extract_ipv6[var_chain_count]
@@ -597,7 +624,8 @@ def func_large_scale_regex():
                                     while var_chain_v2_count < var_tmp_string_len:
                                         if var_tmp_string[var_chain_v2_count]:
                                             var_tmp_string_cln = var_tmp_string[var_chain_v2_count]
-                                            ipv6_extract_write_txt_up.write("[IPV6]: Potential IPv6 Address Found: " + var_tmp_string_cln + "\n")
+                                            #ipv6_extract_write_txt_up.write("[IPV6]: REGEX HIT(S)" + var_tmp_string_cln + "\n")
+                                            #print("[IPV6]: REGEX HIT(S)" + var_tmp_string_cln)
                                             var_chain_v2_count = var_chain_v2_count + 1
                                         else:
                                             var_chain_v2_count = var_chain_v2_count + 1
@@ -608,39 +636,43 @@ def func_large_scale_regex():
                                 var_chain_count = var_chain_count + 1
 
                     ### REGEX NEEDS WORK ###
-                    apk_content_extract_base64 = re.findall(r'^@(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$', var_directory_file_object_line)
-                    apk_content_extract_base64_len = len(apk_content_extract_base64)
-                    global var_string_decode_req_base64
-                    var_chain_count = 0
-                    if apk_content_extract_base64:
-                        print(apk_content_extract_base64)
-                        while var_chain_count < apk_content_extract_base64_len:
-                            if apk_content_extract_base64[var_chain_count]:
-                                var_tmp_string = apk_content_extract_base64[var_chain_count]
-                                var_tmp_string_len = len(var_tmp_string)
-                                if var_tmp_string_len != 0:
-                                    var_chain_v2_count = 0
-                                    while var_chain_v2_count < var_tmp_string_len:
-                                        if var_tmp_string[var_chain_v2_count]:
-                                            var_tmp_string_cln = var_tmp_string[var_chain_v2_count]
-                                            if var_tmp_string_cln:
-                                                var_string_decode_req_base64 = var_tmp_string_cln
-                                                func_base64_decode(var_string_decode_req_base64)
-                                            base64_extract_write_txt_up.write("[BASE64]: Potential Base64 String Found: " + var_tmp_string_cln + "\n")
-                                            var_chain_v2_count = var_chain_v2_count + 1
-                                        else:
-                                            var_chain_v2_count = var_chain_v2_count + 1
-                                    else:
-                                        null_var = 0
-                                var_chain_count = var_chain_count + 1
-                            else:
-                                var_chain_count = var_chain_count + 1
+                    #apk_content_extract_base64 = re.findall(r'^@(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$', var_directory_file_object_line)
+                    #apk_content_extract_base64_len = len(apk_content_extract_base64)
+                    #global var_string_decode_req_base64
+                    #var_chain_count = 0
+                    #if apk_content_extract_base64:
+                    #    print("[BASE64]: SOURCE FILE: " + var_ref_filepath)
+                    #    print("[BASE64]: SOURCE LINE: " + var_directory_file_object_line)
+                    #    while var_chain_count < apk_content_extract_base64_len:
+                    #        if apk_content_extract_base64[var_chain_count]:
+                    #            var_tmp_string = apk_content_extract_base64[var_chain_count]
+                    #            var_tmp_string_len = len(var_tmp_string)
+                    #            if var_tmp_string_len != 0:
+                    #                var_chain_v2_count = 0
+                    #                while var_chain_v2_count < var_tmp_string_len:
+                    #                    if var_tmp_string[var_chain_v2_count]:
+                    #                        var_tmp_string_cln = var_tmp_string[var_chain_v2_count]
+                    #                        if var_tmp_string_cln:
+                    #                            var_string_decode_req_base64 = var_tmp_string_cln
+                    #                            func_base64_decode(var_string_decode_req_base64)
+                    #                        #base64_extract_write_txt_up.write("[BASE64]: REGEX HIT(S)" + var_tmp_string_cln + "\n")
+                    #                        #print("[BASE64]: REGEX HIT(S)" + var_tmp_string_cln)
+                    #                        var_chain_v2_count = var_chain_v2_count + 1
+                    #                    else:
+                    #                        var_chain_v2_count = var_chain_v2_count + 1
+                    #                else:
+                    #                    null_var = 0
+                    #            var_chain_count = var_chain_count + 1
+                    #        else:
+                    #            var_chain_count = var_chain_count + 1
 
                     ### MOSTLY OK WITH CURRENT REGEX ###
                     apk_content_extract_loconf_url = re.findall(r'https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)', var_directory_file_object_line)
                     apk_content_extract_loconf_len = len(apk_content_extract_loconf_url)
                     var_chain_count = 0
                     if apk_content_extract_loconf_url:
+                        print("[URL-LOW]: SOURCE FILE: " + var_ref_filepath)
+                        print("[URL-LOW]: SOURCE LINE: " + var_directory_file_object_line)
                         while var_chain_count < apk_content_extract_loconf_len:
                             if apk_content_extract_loconf_url[var_chain_count]:
                                 var_tmp_string = apk_content_extract_loconf_url[var_chain_count]
@@ -650,7 +682,8 @@ def func_large_scale_regex():
                                     while var_chain_v2_count < var_tmp_string_len:
                                         if var_tmp_string[var_chain_v2_count]:
                                             var_tmp_string_cln = var_tmp_string[var_chain_v2_count]
-                                            low_conf_URL_extract_write_txt_up.write("[URL_LO]: Potential URL (Low-Confidence) Found: " + var_tmp_string_cln + "\n")
+                                            #base64_extract_write_txt_up.write("[URL-LOW]: REGEX HIT(S)" + var_tmp_string_cln + "\n")
+                                            #print("[URL-LOW] REGEX HIT(S)" + var_tmp_string_cln)
                                             var_chain_v2_count = var_chain_v2_count + 1
                                         else:
                                             var_chain_v2_count = var_chain_v2_count + 1
@@ -660,11 +693,15 @@ def func_large_scale_regex():
                             else:
                                 var_chain_count = var_chain_count + 1
 
+                    var_med_conf_check = 0
                     ### REGEX NEEDS WORK ###
                     apk_content_extract_medconf_url = re.findall(r"^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$", var_directory_file_object_line)
                     apk_content_extract_medconf_len = len(apk_content_extract_medconf_url)
                     var_chain_count = 0
                     if apk_content_extract_medconf_url:
+                        var_med_conf_check = 1
+                        print("[URL-MED] SOURCE FILE: " + var_ref_filepath)
+                        print("[URL-MED] SOURCE LINE: " + var_directory_file_object_line)
                         while var_chain_count < apk_content_extract_medconf_len:
                             if apk_content_extract_medconf_url[var_chain_count]:
                                 var_tmp_string = apk_content_extract_medconf_url[var_chain_count]
@@ -674,7 +711,8 @@ def func_large_scale_regex():
                                     while var_chain_v2_count < var_tmp_string_len:
                                         if var_tmp_string[var_chain_v2_count]:
                                             var_tmp_string_cln = var_tmp_string[var_chain_v2_count]
-                                            med_conf_URL_extract_write_txt_up.write("[URL_MOD]: Potential URL (Moderate-Confidence) Found: " + var_tmp_string_cln + "\n")
+                                            #med_conf_URL_extract_write_txt_up.write("[URL_MOD]: REGEX HIT(S)" + var_tmp_string_cln + "\n")
+                                            #print("[URL_MOD] REGEX HIT(S)" + var_tmp_string_cln)
                                             var_chain_v2_count = var_chain_v2_count + 1
                                         else:
                                             var_chain_v2_count = var_chain_v2_count + 1
@@ -683,29 +721,35 @@ def func_large_scale_regex():
                                 var_chain_count = var_chain_count + 1
                             else:
                                 var_chain_count = var_chain_count + 1
-
-                    apk_content_extract_email = re.findall(r'(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))', var_directory_file_object_line)
-                    apk_content_extract_email_len = len(apk_content_extract_email)
-                    var_chain_count = 0
-                    if apk_content_extract_email:
-                        while var_chain_count < apk_content_extract_email_len:   
-                            if apk_content_extract_email[var_chain_count]:     
-                                var_tmp_string = apk_content_extract_email[var_chain_count]
-                                var_tmp_string_len = len(var_tmp_string)                            
-                                if var_tmp_string_len != 0:
-                                    var_chain_v2_count = 0
-                                    while var_chain_v2_count < var_tmp_string_len:
-                                        if var_tmp_string[var_chain_v2_count]:
-                                            var_tmp_string_cln = var_tmp_string[var_chain_v2_count]
-                                            email_extract_write_txt_up.write("[EMAIL]: Potential Email Address Found: " + var_tmp_string_cln + "\n")
-                                            var_chain_v2_count = var_chain_v2_count + 1
+                    if var_med_conf_check == 0:
+                        apk_content_extract_email = re.findall(r'(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))', var_directory_file_object_line)
+                        apk_content_extract_email_len = len(apk_content_extract_email)
+                        var_chain_count = 0
+                        if apk_content_extract_email:
+                            print("[EMAIL] SOURCE FILE: " + var_ref_filepath)
+                            print("[EMAIL] SOURCE LINE: " + var_directory_file_object_line)
+                            while var_chain_count < apk_content_extract_email_len:   
+                                if apk_content_extract_email[var_chain_count]:     
+                                    var_tmp_string = apk_content_extract_email[var_chain_count]
+                                    var_tmp_string_len = len(var_tmp_string)                            
+                                    if var_tmp_string_len != 0:
+                                        var_chain_v2_count = 0
+                                        while var_chain_v2_count < var_tmp_string_len:
+                                            if var_tmp_string[var_chain_v2_count]:
+                                                var_tmp_string_cln = var_tmp_string[var_chain_v2_count]
+                                                #email_extract_write_txt_up.write("[EMAIL]: REGEX HIT(S)" + var_tmp_string_cln + "\n")
+                                                #print("[EMAIL] REGEX HIT(S)" + var_tmp_string_cln)
+                                                var_chain_v2_count = var_chain_v2_count + 1
+                                            else:
+                                                var_chain_v2_count = var_chain_v2_count + 1
                                         else:
-                                            var_chain_v2_count = var_chain_v2_count + 1
-                                    else:
-                                        null_var = 0
-                                var_chain_count = var_chain_count + 1
-                            else:
-                                var_chain_count = var_chain_count + 1
+                                            null_var = 0
+                                    var_chain_count = var_chain_count + 1
+                                else:
+                                    var_chain_count = var_chain_count + 1
+                    else:
+                        if arg_verbose_output == 1:
+                            print("[URL-LOW] Already Matched on [URL-MED] Regex. Skipping This Check.")
 
 def func_clean_up():
 ########################################################################################################################################
@@ -735,6 +779,9 @@ def func_permission_checks():
     var_manifest_location = apk_extract_directory + "\\AndroidManifest.xml"
     if os.path.exists(var_manifest_location):
         try:        
+            if arg_verbose_output == 1:
+                print("")
+                print("[MANIFEST] ################################# RUNNING STRINGS AGAINST JADX OUTPUT ##################################")
             os.system(".\\win\\strings.exe /accepteula " + var_manifest_location + " >> " + apk_results_directory + "\\" + apk + "_manifest_tmp_str.txt")
         except:            
             if var_forensic_case_bool == 1:
@@ -945,6 +992,11 @@ def main(argv):
 ########################################################################################################################################
 ########################################################## CASE DIRECTORY CREATION #####################################################
 ########################################################################################################################################
+    
+    print("########################################################################################################################################")
+    print("######################################################## RIPPER STARTED AT: " + timestr_dir + " ###################################################")
+    print("########################################################################################################################################")
+    print("")
 
     inputdirectory = os.path.dirname(inputdirectory_var)
     if var_forensic_case_bool == 1:
@@ -967,6 +1019,7 @@ def main(argv):
             log_txt_update.write("[INFO]: Searching for APKs in: " + directory_search_pattern + "\n")
         if arg_verbose_output == 1:
             print("[INFO]: Searching for APKs in: " + directory_search_pattern)
+            print("")
 
     else:
         directory_search_pattern = (inputdirectory+"\\*.apk")
@@ -976,6 +1029,9 @@ def main(argv):
             print("[INFO]: Searching for APKs in: " + directory_search_pattern)
 
     for apk_full_path in glob.glob(directory_search_pattern):
+        if arg_verbose_output == 1:
+            print("############################################ RIPPING OF APK: " + os.path.basename(apk_full_path) + " STARTED. ##############################")
+            print("")
         apk_with_extension = os.path.basename(apk_full_path)
         apk, discard_ext = os.path.splitext(apk_with_extension)
         if var_forensic_case_bool == 1:
@@ -1127,7 +1183,7 @@ def main(argv):
             for byte_block in iter(lambda: f.read(4096),b""):
                 md5_hash.update(byte_block)
             apk_md5_hash = md5_hash.hexdigest()
-            var_information_md5hash_write = ("[RESULTS]: MD5 Hash for: " + apk + ".apk is: " + apk_md5_hash + "\n")
+            var_information_md5hash_write = ("[HASH]: MD5 Hash for: " + apk + ".apk is: " + apk_md5_hash + "\n")
             file_txt_update.write(var_information_md5hash_write)
 
         sha1_hash = hashlib.sha1()
@@ -1135,7 +1191,7 @@ def main(argv):
             for byte_block in iter(lambda: f.read(4096),b""):
                 sha1_hash.update(byte_block)
             apk_sha1_hash = sha1_hash.hexdigest()
-            var_information_sha1hash_write = ("[RESULTS]: SHA1 Hash for: " + apk + ".apk is: " + apk_sha1_hash + "\n")
+            var_information_sha1hash_write = ("[HASH]: SHA1 Hash for: " + apk + ".apk is: " + apk_sha1_hash + "\n")
             file_txt_update.write(var_information_sha1hash_write)
 
         sha256_hash = hashlib.sha256()
@@ -1143,7 +1199,7 @@ def main(argv):
             for byte_block in iter(lambda: f.read(4096),b""):
                 sha256_hash.update(byte_block)
             apk_sha256_hash = sha256_hash.hexdigest()
-            var_information_sha256hash_write = ("[RESULTS]: SHA256 Hash for: " + apk + ".apk is: " + apk_sha256_hash + "\n")
+            var_information_sha256hash_write = ("[HASH]: SHA256 Hash for: " + apk + ".apk is: " + apk_sha256_hash + "\n")
             file_txt_update.write(var_information_sha256hash_write)
 
         sha512_hash = hashlib.sha512()
@@ -1151,7 +1207,7 @@ def main(argv):
             for byte_block in iter(lambda: f.read(4096),b""):
                 sha512_hash.update(byte_block)
             apk_sha512_hash = sha512_hash.hexdigest()
-            var_information_sha512hash_write = ("[RESULTS]: SHA512 Hash for: " + apk + ".apk is: " + apk_sha512_hash + "\n")
+            var_information_sha512hash_write = ("[HASH]: SHA512 Hash for: " + apk + ".apk is: " + apk_sha512_hash + "\n")
             file_txt_update.write(var_information_sha512hash_write)
 
 ########################################################################################################################################
@@ -1161,7 +1217,10 @@ def main(argv):
         if var_forensic_case_bool == 1:
             log_txt_update.write("[INFO]: Starting JADX Decompiling of: " + apk_full_path + ".\n")   
         if arg_verbose_output == 1:
-            print("[INFO]: Starting JADX Decompiling of: " + apk_full_path + ".")    
+            print("")
+            print("[JADX] ##################################### JADX DECOMPILING STARTED #############################################")
+            print("")
+            print("[JADX]: Started JADX Decompiling of: " + apk_full_path + ".")                                                                
         try:        
             os.system(".\\win\\bin\\jadx.bat -d " + apk_decomp_directory + "\\" + apk + "_source " + apk_full_path)
         except:    
@@ -1224,19 +1283,19 @@ def main(argv):
             func_large_scale_regex()
         else:
             if var_forensic_case_bool == 1:
-                log_txt_update.write("Skipping REGEX Functionality, Python Version: " + var_python_version_info + " is unsupported." + "\n") 
+                log_txt_update.write("[WARN] Skipping REGEX Functionality, Python Version: " + var_python_version_info + " is unsupported." + "\n") 
             if arg_verbose_output == 1:
-                print("Skipping REGEX Functionality, Python Version: " + var_python_version_info + " is unsupported.")
+                print("[WARN] Skipping REGEX Functionality, Python Version: " + var_python_version_info + " is unsupported.")
 
 ########################################################################################################################################
 ############################################################# Per APK Clean-Up #########################################################
 ########################################################################################################################################     
 
         apk_move_cleanup_loc = apk_source_directory + "\\" + apk_with_extension
-        try:
-            shutil.move(apk_full_path, apk_move_cleanup_loc)
-        except:
-            log_txt_update.write("[WARN]: Error Moving APK: " + apk_full_path + " to: " + apk_move_cleanup_loc + "\n")
+        #try:
+            #shutil.move(apk_full_path, apk_move_cleanup_loc)
+        #except:
+        #    log_txt_update.write("[WARN]: Error Moving APK: " + apk_full_path + " to: " + apk_move_cleanup_loc + "\n")
         file_txt_update.close()
     func_clean_up()
 
