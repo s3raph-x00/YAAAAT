@@ -1,7 +1,7 @@
 ### Author: s3raph
 ### Purpose: To Pass the Butter
-### Version: .07
-### Date Since I Remebered to Update: 2021117
+### Version: .065
+### Date Since I Remebered to Update: 2021122
 
 import os
 import time
@@ -9,7 +9,7 @@ import subprocess
 import shutil
 import sys
 import json
-import urlparse
+#import urlparse
 import getopt
 import glob
 import hashlib
@@ -114,12 +114,17 @@ def func_fail_whale():
 
 ### Checking Python Version - Initial ###
 def func_python_version_check():
+    global var_python_version_info
+    global var_python_version2_check
+    global var_python_version3_check
     var_current_function = "func_python_version_check"
-    if sys.version_info >= (2, 7, 0):
-        var_python_version_check = "TRUE"
+    if sys.version_info >= (2, 7, 0) and sys.version_info < (3, 0, 0):
+        var_python_version2_check = "TRUE"
+        var_python_version3_check = "FALSE"
         var_python_version_info = "2.7+"
-    if sys.version_info >= (3, 0, 0):
-        var_python_version_check = "TRUE"
+    elif sys.version_info >= (3, 0, 0):
+        var_python_version2_check = "FALSE"
+        var_python_version3_check = "TRUE"
         var_python_version_info = "3.0+"   
     else:
         print("Python Version Does Not Appear to Be Supported")
@@ -144,10 +149,9 @@ def func_determine_operating_system():
         print("Additional Python Details: " + var_PY_ver_C)
     except:
         var_manual_error_code = 1
-        print("Operating System Determination Failed")
-        print("//Missing Core Python libraries or Permissions may be the issue//")
+        print("[WARN]: Operating System Determination Failed")
         time.sleep(.5)
-        func_fail_whale()
+        #func_fail_whale()
 
 ### Console/Error Text Color ###
 def func_set_console_color_for_errors():
@@ -468,7 +472,12 @@ def func_base64_decode(var_string_decode_req_base64):
             var_base64_decode = base64.b64decode(var_string_decode_req_base64)
             var_decoded_base64 = str(var_base64_decode)
         except:
-            log_txt_update.write("[INFO]: Error Decoding Potential Base64 String: " + var_string_decode_req_base64 + "\n")
+            if var_forensic_case_bool == 1:
+                var_null_null = 0
+                #log_txt_update.write("[INFO]: Error Decoding Potential Base64 String: " + var_string_decode_req_base64 + "\n")
+            if arg_verbose_output == 1:
+                var_null_null = 0
+                #print("[INFO]: Error Decoding Potential Base64 String: " + var_string_decode_req_base64 + "\n")
 
 def func_android_cert_pull():
     global var_path_to_android_xml
@@ -483,7 +492,10 @@ def func_android_cert_pull():
             var_keytool_command = "\"" + var_jdk_keytool_location + "\"" + " -printcert -file " + var_cert_RSA_location + " >> " + apk_results_directory + "\\" + apk + "_cert_keytool_out.txt"
             os.system(var_keytool_command)
         except:
-            log_txt_update.write("[WARN]: Error Running Keytool against Certificate File Located At: " + var_cert_RSA_location + "\n")
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[WARN]: Error Running Keytool against Certificate File Located At: " + var_cert_RSA_location + "\n")
+            if arg_verbose_output == 1:
+                print("[WARN]: Error Running Keytool against Certificate File Located At: " + var_cert_RSA_location + "\n")
 
     temp_certificate_keytxt_file = apk_results_directory + "\\" + apk + "_cert_keytool_out.txt"
     var_bool_keytxt_file = os.path.exists(temp_certificate_keytxt_file)
@@ -510,7 +522,10 @@ def func_android_cert_pull():
     try:
         os.system(".\\win\\openssl.exe pkcs7 -inform DER -in " + var_cert_RSA_location + " -noout -print_certs -text" + " >> " + apk_results_directory + "\\" + apk + "_cert_meth_1.txt")
     except:
-        log_txt_update.write("[WARN]: [Method 1] Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + ", Trying [Method 2]\n")
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[WARN]: Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + " with [Method 1]\n")
+        if arg_verbose_output == 1:
+            print("[WARN]: Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + " with [Method 1]\n")
     
     temp_certificate_txt_file = apk_results_directory + "\\" + apk + "_cert_meth_1.txt"
     if os.path.exists(temp_certificate_txt_file):
@@ -544,7 +559,10 @@ def func_android_cert_pull():
             cert_unproc_txt_update.write("[Method 2]: APK Certificate Subject: " + cert_content_extract_subject + "\n")
             cert_unproc_txt_update.write("[Method 2]: APK Certificate Algorithm: " + cert_content_extract_algorithm + "\n")
         except:
-            log_txt_update.write("[WARN]: Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + " with [Method 2]\n")
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[WARN]: Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + " with [Method 2]\n")
+            if arg_verbose_output == 1:
+                print("[WARN]: Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + " with [Method 2]\n")
 
 def func_large_scale_regex():
     for var_path, var_directory, var_files in os.walk(os.path.abspath(apk_decomp_directory)):
@@ -553,6 +571,7 @@ def func_large_scale_regex():
             if os.path.isfile(var_ref_filepath):
                 var_directory_file_object = open(var_ref_filepath)
                 for var_directory_file_object_line in var_directory_file_object:
+                    ### NEEDS POST REGEX CHECK ###
                     apk_content_extract_ipv4 = re.findall(r'^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$', var_directory_file_object_line)
                     apk_content_extract_ipv4_tup_len = len(apk_content_extract_ipv4)
                     var_chain_count = 0
@@ -563,7 +582,8 @@ def func_large_scale_regex():
                                 var_chain_count = var_chain_count + 1
                             else:
                                 var_chain_count = var_chain_count + 1
-
+                    
+                    ### NEEDS POST REGEX CHECK ###
                     apk_content_extract_ipv6 = re.findall(r'(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))', var_directory_file_object_line)
                     apk_content_extract_ipv6_len = len(apk_content_extract_ipv6)
                     var_chain_count = 0
@@ -587,11 +607,13 @@ def func_large_scale_regex():
                             else:
                                 var_chain_count = var_chain_count + 1
 
+                    ### REGEX NEEDS WORK ###
                     apk_content_extract_base64 = re.findall(r'^@(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$', var_directory_file_object_line)
                     apk_content_extract_base64_len = len(apk_content_extract_base64)
                     global var_string_decode_req_base64
                     var_chain_count = 0
                     if apk_content_extract_base64:
+                        print(apk_content_extract_base64)
                         while var_chain_count < apk_content_extract_base64_len:
                             if apk_content_extract_base64[var_chain_count]:
                                 var_tmp_string = apk_content_extract_base64[var_chain_count]
@@ -604,8 +626,7 @@ def func_large_scale_regex():
                                             if var_tmp_string_cln:
                                                 var_string_decode_req_base64 = var_tmp_string_cln
                                                 func_base64_decode(var_string_decode_req_base64)
-                                            #print(var_tmp_string_cln)
-                                            #base64_extract_write_txt_up.write("[BASE64]: Potential Base64 String Found: " + var_tmp_string_cln + "\n")
+                                            base64_extract_write_txt_up.write("[BASE64]: Potential Base64 String Found: " + var_tmp_string_cln + "\n")
                                             var_chain_v2_count = var_chain_v2_count + 1
                                         else:
                                             var_chain_v2_count = var_chain_v2_count + 1
@@ -615,13 +636,14 @@ def func_large_scale_regex():
                             else:
                                 var_chain_count = var_chain_count + 1
 
-                    apk_content_extract_midconf_url = re.findall(r'https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)', var_directory_file_object_line)
-                    apk_content_extract_midconf_len = len(apk_content_extract_midconf_url)
+                    ### MOSTLY OK WITH CURRENT REGEX ###
+                    apk_content_extract_loconf_url = re.findall(r'https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)', var_directory_file_object_line)
+                    apk_content_extract_loconf_len = len(apk_content_extract_loconf_url)
                     var_chain_count = 0
-                    if apk_content_extract_midconf_url:
-                        while var_chain_count < apk_content_extract_midconf_len:
-                            if apk_content_extract_midconf_url[var_chain_count]:
-                                var_tmp_string = apk_content_extract_midconf_url[var_chain_count]
+                    if apk_content_extract_loconf_url:
+                        while var_chain_count < apk_content_extract_loconf_len:
+                            if apk_content_extract_loconf_url[var_chain_count]:
+                                var_tmp_string = apk_content_extract_loconf_url[var_chain_count]
                                 var_tmp_string_len = len(var_tmp_string)
                                 if var_tmp_string_len != 0:
                                     var_chain_v2_count = 0
@@ -638,30 +660,92 @@ def func_large_scale_regex():
                             else:
                                 var_chain_count = var_chain_count + 1
 
+                    ### REGEX NEEDS WORK ###
+                    apk_content_extract_medconf_url = re.findall(r"^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$", var_directory_file_object_line)
+                    apk_content_extract_medconf_len = len(apk_content_extract_medconf_url)
+                    var_chain_count = 0
+                    if apk_content_extract_medconf_url:
+                        while var_chain_count < apk_content_extract_medconf_len:
+                            if apk_content_extract_medconf_url[var_chain_count]:
+                                var_tmp_string = apk_content_extract_medconf_url[var_chain_count]
+                                var_tmp_string_len = len(var_tmp_string)
+                                if var_tmp_string_len != 0:
+                                    var_chain_v2_count = 0
+                                    while var_chain_v2_count < var_tmp_string_len:
+                                        if var_tmp_string[var_chain_v2_count]:
+                                            var_tmp_string_cln = var_tmp_string[var_chain_v2_count]
+                                            med_conf_URL_extract_write_txt_up.write("[URL_MOD]: Potential URL (Moderate-Confidence) Found: " + var_tmp_string_cln + "\n")
+                                            var_chain_v2_count = var_chain_v2_count + 1
+                                        else:
+                                            var_chain_v2_count = var_chain_v2_count + 1
+                                    else:
+                                        null_var = 0
+                                var_chain_count = var_chain_count + 1
+                            else:
+                                var_chain_count = var_chain_count + 1
+
+                    apk_content_extract_email = re.findall(r'(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))', var_directory_file_object_line)
+                    apk_content_extract_email_len = len(apk_content_extract_email)
+                    var_chain_count = 0
+                    if apk_content_extract_email:
+                        while var_chain_count < apk_content_extract_email_len:   
+                            if apk_content_extract_email[var_chain_count]:     
+                                var_tmp_string = apk_content_extract_email[var_chain_count]
+                                var_tmp_string_len = len(var_tmp_string)                            
+                                if var_tmp_string_len != 0:
+                                    var_chain_v2_count = 0
+                                    while var_chain_v2_count < var_tmp_string_len:
+                                        if var_tmp_string[var_chain_v2_count]:
+                                            var_tmp_string_cln = var_tmp_string[var_chain_v2_count]
+                                            email_extract_write_txt_up.write("[EMAIL]: Potential Email Address Found: " + var_tmp_string_cln + "\n")
+                                            var_chain_v2_count = var_chain_v2_count + 1
+                                        else:
+                                            var_chain_v2_count = var_chain_v2_count + 1
+                                    else:
+                                        null_var = 0
+                                var_chain_count = var_chain_count + 1
+                            else:
+                                var_chain_count = var_chain_count + 1
+
 def func_clean_up():
-    ### Final Cleanup ###
+########################################################################################################################################
+######################################################### Post-Run Clean Up Function ###################################################
+########################################################################################################################################
     log_txt_update.close()
     #cert_unproc_txt_update.close()
     os.system('color 07')
     func_goodbye()
 
 def func_initial_logging():
+########################################################################################################################################
+########################################################## Inital Log File Creation ####################################################
+########################################################################################################################################
     case_log_file_txt = var_case_delivery_directory + "\\log.txt"
     global log_txt_update
     log_txt_update = open(case_log_file_txt, "a")
-    log_txt_update.write("--- APK Ripper Script Started ---\n")
+    log_txt_update.write("--- YAAAAT APK Ripper ---\n")
+    log_txt_update.write("[LOG]: Tool Started on: " + timestr_case + " at " + timestr_dir + "\n")  
 
 def func_permission_checks():
+########################################################################################################################################
+###################################################### APK Manifest Permission Function ################################################
+########################################################################################################################################
     global var_manifest_location
     global permission_check_manifest_text
     var_manifest_location = apk_extract_directory + "\\AndroidManifest.xml"
     if os.path.exists(var_manifest_location):
         try:        
             os.system(".\\win\\strings.exe /accepteula " + var_manifest_location + " >> " + apk_results_directory + "\\" + apk + "_manifest_tmp_str.txt")
-        except:
-            log_txt_update.write("[WARN]: Error Running Strings against Manifest File Located At: " + var_manifest_location + "\n")
+        except:            
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[WARN]: Error Running Strings against Manifest File Located At: " + var_manifest_location + "\n")
+            if arg_verbose_output == 1:
+                print("[WARN]: Error Running Strings against Manifest File Located At: " + var_manifest_location + "\n")   
     else:
-        log_txt_update.write("[WARN]: Manifest File Was Not Located At: " + var_manifest_location + "\n") 
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[WARN]: Manifest File Was Not Located At: " + var_manifest_location + "\n") 
+        if arg_verbose_output == 1:
+            print("[WARN]: Manifest File Was Not Located At: " + var_manifest_location + "\n") 
 
     temp_manifest_temp_file = apk_results_directory + "\\" + apk + "_manifest_tmp_str.txt"
     if os.path.exists(temp_manifest_temp_file):
@@ -676,6 +760,9 @@ def func_permission_checks():
                 mani_unproc_write_txt_update.write("[MANIFEST]: APK Hardware Reference Found: " + var_each_mani_permission + "\n")       
 
 def func_hash_all_files():
+########################################################################################################################################
+####################################################### Hash Extracted Files Function ##################################################
+########################################################################################################################################
     for var_path, var_directory, var_files in os.walk(os.path.abspath(apk_decomp_directory)):
         for var_each_file in var_files:
             var_ref_filepath = os.path.join(var_path, var_each_file)
@@ -712,7 +799,6 @@ def func_hash_all_files():
                     var_information_sha512hash_write = ("[RESULTS]: SHA512 Hash for: " + var_each_file + " is: " + file_sha512_hash + "\n")
                     file_hashes_post_zip_extract_update.write(var_information_sha512hash_write)
 
-
 def main(argv):
 ########################################################################################################################################
 ######################################################## Global Variable Definitions ###################################################
@@ -725,17 +811,22 @@ def main(argv):
     global arg_autopsy_plugin
     global arg_verbose_output
     global arg_gucci_output
+    global var_forensic_case_bool
     global timestr_dir
+    global timestr_case
+    global var_output_directory
     global apk
     timestr_dir = time.strftime("%H-%M-%S")
     timestr_case = time.strftime("%Y-%m-%d")
     inputdirectory_var = ''
+    var_output_directory = ''
     arg_autopsy_plugin = 0
     arg_verbose_output = 0
     arg_gucci_output = 0
+    var_forensic_case_bool = 0
 
 ########################################################################################################################################
-################################################################ STAGE SETTING #########################################################
+############################################################### STAGE SETTING ##########################################################
 ########################################################################################################################################
 
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -744,64 +835,126 @@ def main(argv):
 ########################################################################################################################################
 ############################################################## HELP AND ARGUMENT #######################################################
 ########################################################################################################################################
-                       
+
     try:
-        opts, args = getopt.getopt(argv,"hafgvi:",["idir="])
+        opts, args = getopt.getopt(argv,"hacbfgvo:i:",["idir="])
     except getopt.GetoptError:
         var_manual_error_code = (1)
         func_fail_whale()
-        print("YAAAAT_apk_ripper.py -i <directory_to_scan_for_apks>")
-        print("Optional Arguments:  -v (for verbose output) -a (RTFM)")
+        print("YAAAAT_apk_ripper.py -i <Directory_To_Scan_For_APKs>")
+        print("Optional Arguments:  -v (For Verbose Output) -a (RTFC)")
+        print("                     -b (Forensic Case)")
+        print("                     -f (Fix My Terminal Color x.x)")
         os.system('color 07')
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print("YAAAAT_apk_ripper.py -i <directory_to_scan_for_apks>")
-            print("Optional Arguments:  -v (for verbose output) -a (RTFC)")
-            print("                     -f (fix my terminal color x.x)")
+            print("YAAAAT_apk_ripper.py -i <Directory_To_Scan_For_APKs>")
+            print("Optional Arguments:  -v (For Verbose Output) -a (RTFC)")
+            print("                     -b (Forensic Case Logging)")
+            print("                     -f (Fix My Terminal Color x.x)")
             os.system('color 07')
             sys.exit()
         if opt == '-f':
-            ### Fixes the Terminal (In Any Color, As Long as You Want It Black) ###
+            ############################################################
+            ###                     [Not Required]                   ###
+            ### Name:    Terminal Color Black                        ###
+            ### Arg:     -f                                          ###
+            ### Info:    This Argument is Used To Fix Terminal Color ###
+            ###          After Crashing/Ending This Application      ###
+            ###          Ungracefully in Gucci Mode.                 ###
+            ### Note:    In Any Color, As Long as You Want It Black  ###
+            ### Default: Disabled                                    ###
+            ############################################################
             os.system('color 07')
             sys.exit()
         if opt == '-a':
-            ### This Argument is Used To String Prepended Characters Added During the Associated Autopsy Plugin Process. ###
+            ############################################################
+            ###                     [Not Required]                   ###
+            ### Name:    Post-Autopsy File Normalization             ###
+            ### Arg:     -a                                          ###
+            ### Info:    This Argument is Used To Remove Characters  ###
+            ###          Prepended To Filename During The Autopsy    ###
+            ###          Extraction Process.                         ###
+            ### Default: Disabled                                    ###
+            ############################################################
             arg_autopsy_plugin = 1
         if opt == '-v':
-            ### Sets the Verbosity to Debug, Normal is Silent Operation ###
+            ############################################################
+            ###                     [Not Required]                   ###
+            ### Name:    Verbosity                                   ###
+            ### Arg:     -v                                          ###
+            ### Info:    Sets the Verbosity to Debug                 ###
+            ### Default: Silent                                      ###
+            ############################################################
             arg_verbose_output = 1
         if opt == '-g':
+            ############################################################
+            ###              [Absolutely Not Required]               ###
+            ### Name:    Gucci Mode                                  ###
+            ### Arg:     -g                                          ###
+            ### Info:    Original G. <! Epilepsy Warning !>          ###
+            ### Note:    Why the F*** Did I Code This?               ###
+            ### Default: Disabled                                    ###
+            ############################################################
             arg_gucci_output = 1
+        if opt == '-b':
+            ############################################################
+            ###                     [Not Required]                   ###
+            ### Name:    Forensic Case Logging                       ###
+            ### Arg:     -b                                          ###
+            ### Info:    Outputs Verbose Logging And Forensic System ###
+            ###          Information To Log File in Output Directory.### 
+            ### Default: Disabled                                    ###
+            ############################################################
+            var_forensic_case_bool = 1
+        if opt == '-o':
+            ############################################################
+            ###                     [Not Required]                   ###
+            ### Name:    Output Directory                            ###
+            ### Arg:     -o                                          ###
+            ### Info:    Sets the Output Directory If Defined.       ###
+            ### Default: <Input_Directory>                           ###
+            ############################################################
+            var_output_directory = arg
         elif opt in ("-i", "--idir"):
-            ### Sets the Input Directory 
+            ############################################################
+            ###                       [Required]                     ###
+            ### Name:    Input Directory                             ###
+            ### Arg:     -i                                          ###
+            ### Info:    Sets the Input Directory.                   ###
+            ### Default: <No Value>                                  ###
+            ############################################################
             inputdirectory_var = arg
 
-    print(inputdirectory_var)
     if not inputdirectory_var:
         print("")
         print("[ERROR]: MUST SPECIFY DIRECTORY")
         print("")
-        print("YAAAAT_apk_ripper.py -i <directory_to_scan_for_apks>")
-        print("Optional Arguments:  -v (for verbose output) -a (RTFC)")
+        print("YAAAAT_apk_ripper.py -i <Directory_To_Scan_For_APKs>")
+        print("Optional Arguments:  -v (For Verbose Output) -a (RTFC)")
+        print("                     -b (Forensic Case)")
+        print("                     -f (Fix My Terminal Color x.x)")
         os.system('color 07')
         sys.exit()
 
     func_gu_st()
     func_global_var_declare()
+    func_python_version_check()
 
 ########################################################################################################################################
 ########################################################## CASE DIRECTORY CREATION #####################################################
 ########################################################################################################################################
 
     inputdirectory = os.path.dirname(inputdirectory_var)
-    var_case_delivery_directory = inputdirectory + "\\" + timestr_case + "_case_info"
-    try:
-        os.mkdir(var_case_delivery_directory)
-    except:
-        print("[WARN]: Error Making Main Case Directory, likely already exists: " + var_case_delivery_directory)
-
-    func_initial_logging()
+    if var_forensic_case_bool == 1:
+        var_case_delivery_directory = inputdirectory + "\\" + timestr_case + "_case_info"
+        try:
+            os.mkdir(var_case_delivery_directory)
+        except:
+            print("[WARN]: Error Making Main Case Directory: " + var_case_delivery_directory + "likely already exists")
+        func_initial_logging()
+        func_determine_operating_system()
 
 ########################################################################################################################################
 ################################################################# APK SEARCH ###########################################################
@@ -810,69 +963,99 @@ def main(argv):
     directory_search_pattern_check = (inputdirectory + "\\apk_storage\\")
     if os.path.isdir(directory_search_pattern_check):
         directory_search_pattern = (inputdirectory + "\\apk_storage\\*.apk")
-        log_txt_update.write("[INFO]: Searching for APKs in: " + directory_search_pattern + "\n")
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[INFO]: Searching for APKs in: " + directory_search_pattern + "\n")
+        if arg_verbose_output == 1:
+            print("[INFO]: Searching for APKs in: " + directory_search_pattern)
+
     else:
         directory_search_pattern = (inputdirectory+"\\*.apk")
-        log_txt_update.write("[INFO]: Searching for APKs in: " + directory_search_pattern + "\n")
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[INFO]: Searching for APKs in: " + directory_search_pattern + "\n")
+        if arg_verbose_output == 1:
+            print("[INFO]: Searching for APKs in: " + directory_search_pattern)
 
     for apk_full_path in glob.glob(directory_search_pattern):
         apk_with_extension = os.path.basename(apk_full_path)
         apk, discard_ext = os.path.splitext(apk_with_extension)
-        log_txt_update.write("[INFO]: Found The APK: " + apk_with_extension + " - Processing Now\n")
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[INFO]: Found The APK: " + apk_with_extension + " - Processing Now\n")
+        if arg_verbose_output == 1:
+            print("[INFO]: Found The APK: " + apk_with_extension + " - Processing Now")
 
 ########################################################################################################################################
 ####################################################### EXTRACTION DIRECTORY CREATION ##################################################
 ########################################################################################################################################
-
 
         global apk_main_pre_dir
         apk_main_pre_dir = inputdirectory + "\\apk_post_run\\"
         try:
             os.mkdir(apk_main_pre_dir)
         except:
-            log_txt_update.write("[WARN]: Error Making APK Post-Run Directory, likely already exists: " + apk_main_pre_dir + "\n")
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[WARN]: Error Making APK Results Directory: " + apk_main_pre_dir + ". Directory likely exists.\n")
+            if arg_verbose_output == 1:
+                print("[WARN]: Error Making APK Results Directory: " + apk_main_pre_dir + ". Directory likely exists.")
 
         global apk_main_dir
         apk_main_dir = apk_main_pre_dir + "\\" + timestr_dir
         try:
             os.mkdir(apk_main_dir)
         except:
-            log_txt_update.write("[WARN]: Error Making APK Post-Run Main Directory, likely already exists: " + apk_main_dir + "\n")
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[WARN]: Error Making APK Results Directory: " + apk_main_dir + ". Directory likely exists.\n")
+            if arg_verbose_output == 1:
+                print("[WARN]: Error Making APK Results Directory: " + apk_main_dir + ". Directory likely exists.")
 
         global apk_main_dir_apk
         apk_main_dir_apk = apk_main_dir + "\\" + apk
         try:
             os.mkdir(apk_main_dir_apk)
         except:
-            log_txt_update.write("[WARN]: Error Making APK Main Directory, likely already exists: " + apk_main_dir_apk + "\n")
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[WARN]: Error Making APK Results Directory: " + apk_main_dir_apk + ". Directory likely exists.\n")
+            if arg_verbose_output == 1:
+                print("[WARN]: Error Making APK Results Directory: " + apk_main_dir_apk + ". Directory likely exists.")
         
         global apk_source_directory
         apk_source_directory = apk_main_dir_apk + "\\" + "_0_source"
         try:
             os.mkdir(apk_source_directory)
         except:
-            log_txt_update.write("[WARN]: Error Making APK Source Directory, likely already exists: " + apk_source_directory + "\n")
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[WARN]: Error Making APK Results Directory: " + apk_source_directory + ". Directory likely exists.\n")
+            if arg_verbose_output == 1:
+                print("[WARN]: Error Making APK Results Directory: " + apk_source_directory + ". Directory likely exists.")
         
         global apk_decomp_directory
         apk_decomp_directory = apk_main_dir_apk + "\\" + "_1_decomp"
         try:
             os.mkdir(apk_decomp_directory)
         except:
-            log_txt_update.write("[WARN]: Error Making APK Decomp Directory, likely already exists: " + apk_decomp_directory + "\n")
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[WARN]: Error Making APK Results Directory: " + apk_decomp_directory + ". Directory likely exists.\n")
+            if arg_verbose_output == 1:
+                print("[WARN]: Error Making APK Results Directory: " + apk_decomp_directory + ". Directory likely exists.")
 
         global apk_results_directory
         apk_results_directory = apk_main_dir_apk + "\\" + "_2_results"
         try:
             os.mkdir(apk_results_directory)
         except:
-            log_txt_update.write("[WARN]: Error Making APK Results Directory, likely already exists: " + apk_results_directory + "\n")
-
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[WARN]: Error Making APK Results Directory: " + apk_results_directory + ". Directory likely exists.\n")
+            if arg_verbose_output == 1:
+                print("[WARN]: Error Making APK Results Directory: " + apk_results_directory + ". Directory likely exists.")
+                
         global apk_extract_directory
         apk_extract_directory = apk_main_dir_apk + "\\" + "_3_extract"
         try:
             os.mkdir(apk_extract_directory)
         except:
-            log_txt_update.write("[WARN]: Error Making APK Extract Directory, likely already exists: " + apk_extract_directory + "\n")
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[WARN]: Error Making APK Results Directory: " + apk_extract_directory + ". Directory likely exists.\n")
+            if arg_verbose_output == 1:
+                print("[WARN]: Error Making APK Results Directory: " + apk_extract_directory + ". Directory likely exists.")
         
         if arg_autopsy_plugin == 1:
             var_information_true_filename = apk_with_extension[9:]
@@ -892,6 +1075,9 @@ def main(argv):
         global file_hashes_post_zip_extract
         global base64_extract_write_txt
         global ipv6_extract_write_txt
+        global med_conf_URL_extract_write_txt
+        global ip_extract_write_txt
+        global email_extract_write_txt
         ipv6_extract_write_txt = apk_results_directory + "\\" + apk + "_regex_IPv6.txt"
         mani_unproc_write_txt = apk_results_directory + "\\" + apk + "_manifest_info_unproc.txt"
         hashes_file_dump_txt = apk_results_directory + "\\" + apk + "_hash_info.txt"
@@ -902,6 +1088,8 @@ def main(argv):
         hi_conf_URL_extract_write_txt = apk_results_directory + "\\" + apk + "_hi_conf_URL.txt"
         file_hashes_post_zip_extract = apk_results_directory + "\\" + apk + "_hash_extract.txt"
         base64_extract_write_txt = apk_results_directory + "\\" + apk + "_base64_extract.txt"
+        med_conf_URL_extract_write_txt = apk_results_directory + "\\" + apk + "_med_conf_URL.txt"
+        email_extract_write_txt = apk_results_directory + "\\" + apk + "_email_addr.txt"
         
         global base64_extract_write_txt_up
         global mani_unproc_write_txt_update  
@@ -911,7 +1099,9 @@ def main(argv):
         global file_txt_update
         global file_hashes_post_zip_extract_update
         global ipv6_extract_write_txt_up
-        ip_extract_write_txt_update = (ip_extract_write_txt, "a")
+        global med_conf_URL_extract_write_txt_up
+        global email_extract_write_txt_up
+        ip_extract_write_txt_update = open(ip_extract_write_txt, "a")
         cert_unproc_txt_update = open(cert_unproc_write_txt, "a")
         low_conf_URL_extract_write_txt_up = open(low_conf_URL_extract_write_txt, "a")
         mani_unproc_write_txt_update = open(mani_unproc_write_txt, "a")
@@ -919,9 +1109,14 @@ def main(argv):
         file_hashes_post_zip_extract_update = open(file_hashes_post_zip_extract, "a")
         base64_extract_write_txt_up = open(base64_extract_write_txt, "a")
         ipv6_extract_write_txt_up = open(ipv6_extract_write_txt, "a")
+        med_conf_URL_extract_write_txt_up = open(med_conf_URL_extract_write_txt, "a")
+        email_extract_write_txt_up = open(email_extract_write_txt, "a")
 
         var_information_filename_write = ("[INFO]: True APK Filename is: " + var_information_true_filename + "\n")
-        log_txt_update.write("[INFO]: True APK Filename is: " + var_information_true_filename + "\n")
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[INFO]: True APK Filename is: " + var_information_true_filename + "\n")
+        if arg_verbose_output == 1:
+            print("[INFO]: True APK Filename is: " + var_information_true_filename)
 
 ########################################################################################################################################
 ########################################################### APK HASHING FUNCTIONS ######################################################
@@ -963,10 +1158,17 @@ def main(argv):
 ############################################################### JADX FUNCTIONS #########################################################
 ########################################################################################################################################
 
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[INFO]: Starting JADX Decompiling of: " + apk_full_path + ".\n")   
+        if arg_verbose_output == 1:
+            print("[INFO]: Starting JADX Decompiling of: " + apk_full_path + ".")    
         try:        
             os.system(".\\win\\bin\\jadx.bat -d " + apk_decomp_directory + "\\" + apk + "_source " + apk_full_path)
-        except:
-            log_txt_update.write("[WARN]: Error Decompiling: " + apk_full_path + " with JADX \n")            
+        except:    
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[WARN]: Error Decompiling: " + apk_full_path + " with JADX.\n")  
+            if arg_verbose_output == 1:
+                print("[WARN]: Error Decompiling: " + apk_full_path + " with JADX.")  
 
 ########################################################################################################################################
 ####################################################### POST-Extraction File Locations #################################################
@@ -989,7 +1191,10 @@ def main(argv):
                 var_apk_unzip.extractall(apk_extract_directory + "\\")
                 var_zip_success = 1
         except:
-            log_txt_update.write("[WARN]: Error Extracting: " + apk_full_path + "\n")
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[WARN]: Error Extracting: " + apk_full_path + "\n") 
+            if arg_verbose_output == 1:
+                print("[WARN]: Error Extracting: " + apk_full_path) 
 
         if var_zip_success == 1:
             func_hash_all_files()
@@ -1014,18 +1219,24 @@ def main(argv):
 ########################################################################################################################################
 ##################################################### Extracted File Analysis Function #################################################
 ########################################################################################################################################    
-        
-        func_large_scale_regex()
+    
+        if var_python_version2_check == "TRUE":
+            func_large_scale_regex()
+        else:
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("Skipping REGEX Functionality, Python Version: " + var_python_version_info + " is unsupported." + "\n") 
+            if arg_verbose_output == 1:
+                print("Skipping REGEX Functionality, Python Version: " + var_python_version_info + " is unsupported.")
 
 ########################################################################################################################################
 ############################################################# Per APK Clean-Up #########################################################
 ########################################################################################################################################     
 
         apk_move_cleanup_loc = apk_source_directory + "\\" + apk_with_extension
-        try:
-            shutil.move(apk_full_path, apk_move_cleanup_loc)
-        except:
-            log_txt_update.write("[WARN]: Error Moving APK: " + apk_full_path + " to: " + apk_move_cleanup_loc + "\n")
+        #try:
+            #shutil.move(apk_full_path, apk_move_cleanup_loc)
+        #except:
+        #    log_txt_update.write("[WARN]: Error Moving APK: " + apk_full_path + " to: " + apk_move_cleanup_loc + "\n")
         file_txt_update.close()
     func_clean_up()
 
