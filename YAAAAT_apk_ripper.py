@@ -1,7 +1,7 @@
 ### Author: s3raph
 ### Purpose: To Pass the Butter
 ### Version: .065
-### Date Since I Remebered to Update: 2021122
+### Date Since I Remembered to Update: 2021122
 
 import os
 import time
