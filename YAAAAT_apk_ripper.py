@@ -1,7 +1,7 @@
 ########################################################################################################################################
 #################################################### Author:      s3raph                ################################################
 #################################################### Purpose:     To Pass the Butter    ################################################
-#################################################### Version:     -.071                  ###############################################
+#################################################### Version:     .0711                 ################################################
 #################################################### Last Update: 2021123               ################################################
 ########################################################################################################################################
 
@@ -33,7 +33,6 @@ try:
 except:
     global yara_check_flag
     yara_check_flag = 0
-
 
 def func_fail_whale():
 ########################################################################################################################################
@@ -356,26 +355,26 @@ def func_apk_json_map():
     	"PERM- BLUETOOTH_ADMIN": FALSE,
     	"PERM- BLUETOOTH_ADVERTISE": FALSE,
         "PERM- BLUETOOTH_CONNECT": FALSE,
-	    "PERM- BLUETOOTH_PRIVILEGED": FALSE,
+	"PERM- BLUETOOTH_PRIVILEGED": FALSE,
         "PERM- BLUETOOTH_SCAN": FALSE,
         "PERM- BODY_SENSORS": FALSE,
         "PERM- BROADCAST_PACKAGE_REMOVED": FALSE,
     	"PERM- BROADCAST_SMS": FALSE,
         "PERM- BROADCAST_STICKY": FALSE,
-	    "PERM- BROADCAST_WAP_PUSH": FALSE,
-	    "PERM- CALL_COMPANION_APP": FALSE,
+	"PERM- BROADCAST_WAP_PUSH": FALSE,
+	"PERM- CALL_COMPANION_APP": FALSE,
         "PERM- CALL_PHONE": FALSE,
         "PERM- CALL_PRIVILEGED": FALSE,
         "PERM- CAMERA": FALSE,
-	    "PERM- CAPTURE_AUDIO_OUTPUT": FALSE,
-	    "PERM- CHANGE_COMPONENT_ENABLED_STATE": FALSE,
+	"PERM- CAPTURE_AUDIO_OUTPUT": FALSE,
+	"PERM- CHANGE_COMPONENT_ENABLED_STATE": FALSE,
         "PERM- CHANGE_CONFIGURATION": FALSE,
         "PERM- CHANGE_NETWORK_STATE": FALSE,
         "PERM- CHANGE_WIFI_MULTICAST_STATE": FALSE,
-	    "PERM- CHANGE_WIFI_STATE": FALSE,
-	    "PERM- CLEAR_APP_CACHE": FALSE,
+	"PERM- CHANGE_WIFI_STATE": FALSE,
+	"PERM- CLEAR_APP_CACHE": FALSE,
         "PERM- CONTROL_LOCATION_UPDATES": FALSE,
-	    "PERM- DELETE_CACHE_FILES": FALSE,
+	"PERM- DELETE_CACHE_FILES": FALSE,
         "PERM- DELETE_PACKAGES": FALSE,
     	"PERM- DIAGNOSTIC": FALSE,
         "PERM- DISABLE_KEYGUARD": FALSE,
@@ -385,110 +384,110 @@ def func_apk_json_map():
     	"PERM- FOREGROUND_SERVICE": FALSE,
     	"PERM- GET_ACCOUNTS": FALSE,
         "PERM- GET_ACCOUNTS_PRIVILEGED": FALSE,
-	    "PERM- GET_PACKAGE_SIZE": FALSE,
-	    "PERM- GET_TASKS": FALSE,
-	    "PERM- GLOBAL_SEARCH": FALSE,
-	    "PERM- HIDE_OVERLAY_WINDOWS": FALSE,
-	    "PERM- HIGH_SAMPLING_RATE_SENSORS": FALSE,
-	    "PERM- INSTALL_LOCATION_PROVIDER": FALSE,
-	    "PERM- INSTALL_PACKAGES": FALSE,
-	    "PERM- INSTALL_SHORTCUT": FALSE,
-	    "PERM- INSTANT_APP_FOREGROUND_SERVICE": FALSE,
+	"PERM- GET_PACKAGE_SIZE": FALSE,
+	"PERM- GET_TASKS": FALSE,
+	"PERM- GLOBAL_SEARCH": FALSE,
+	"PERM- HIDE_OVERLAY_WINDOWS": FALSE,
+	"PERM- HIGH_SAMPLING_RATE_SENSORS": FALSE,
+	"PERM- INSTALL_LOCATION_PROVIDER": FALSE,
+	"PERM- INSTALL_PACKAGES": FALSE,
+	"PERM- INSTALL_SHORTCUT": FALSE,
+	"PERM- INSTANT_APP_FOREGROUND_SERVICE": FALSE,
         "PERM- INTERACT_ACROSS_PROFILES": FALSE,
-	    "PERM- INTERNET": FALSE,
+	"PERM- INTERNET": FALSE,
         "PERM- KILL_BACKGROUND_PROCESSES": FALSE,
-	    "PERM- LAUNCH_TWO_PANE_SETTINGS_DEEP_LINK": FALSE,
+	"PERM- LAUNCH_TWO_PANE_SETTINGS_DEEP_LINK": FALSE,
         "PERM- LOADER_USAGE_STATS": FALSE,
-	    "PERM- LOCATION_HARDWARE": FALSE,
-	    "PERM- MANAGE_DOCUMENTS": FALSE,
+	"PERM- LOCATION_HARDWARE": FALSE,
+	"PERM- MANAGE_DOCUMENTS": FALSE,
         "PERM- MANAGE_EXTERNAL_STORAGE": FALSE,
         "PERM- MANAGE_MEDIA": FALSE,
-	    "PERM- MANAGE_ONGOING_CALLS": FALSE,
+	"PERM- MANAGE_ONGOING_CALLS": FALSE,
         "PERM- MANAGE_OWN_CALLS": FALSE,
-	    "PERM- MASTER_CLEAR": FALSE, # Unusual Call
-	    "PERM- MEDIA_CONTENT_CONTROL": FALSE,
-	    "PERM- MODIFY_AUDIO_SETTINGS": FALSE,
-	    "PERM- MODIFY_PHONE_STATE": FALSE,
-	    "PERM- MOUNT_FORMAT_FILESYSTEMS": FALSE,
+	"PERM- MASTER_CLEAR": FALSE, # Unusual Call
+	"PERM- MEDIA_CONTENT_CONTROL": FALSE,
+	"PERM- MODIFY_AUDIO_SETTINGS": FALSE,
+	"PERM- MODIFY_PHONE_STATE": FALSE,
+	"PERM- MOUNT_FORMAT_FILESYSTEMS": FALSE,
         "PERM- MOUNT_UNMOUNT_FILESYSTEMS": FALSE,
         "PERM- NFC": FALSE,
-	    "PERM- NFC_PREFERRED_PAYMENT_INFO": FALSE,
-	    "PERM- NFC_TRANSACTION_EVENT": FALSE,
+	"PERM- NFC_PREFERRED_PAYMENT_INFO": FALSE,
+	"PERM- NFC_TRANSACTION_EVENT": FALSE,
         "PERM- PACKAGE_USAGE_STATS": FALSE,
-	    "PERM- PERSISTENT_ACTIVITY": FALSE,
-	    "PERM- PROCESS_OUTGOING_CALLS": FALSE,
-	    "PERM- QUERY_ALL_PACKAGES": FALSE,
-	    "PERM- READ_CALENDAR": FALSE,
-	    "PERM- READ_CALL_LOG": FALSE,
+	"PERM- PERSISTENT_ACTIVITY": FALSE,
+	"PERM- PROCESS_OUTGOING_CALLS": FALSE,
+	"PERM- QUERY_ALL_PACKAGES": FALSE,
+	"PERM- READ_CALENDAR": FALSE,
+	"PERM- READ_CALL_LOG": FALSE,
         "PERM- READ_CONTACTS": FALSE,
-	    "PERM- READ_EXTERNAL_STORAGE": FALSE,
-	    "PERM- READ_INPUT_STATE": FALSE,
+	"PERM- READ_EXTERNAL_STORAGE": FALSE,
+	"PERM- READ_INPUT_STATE": FALSE,
         "PERM- READ_LOGS": FALSE,
-	    "PERM- READ_PHONE_NUMBERS": FALSE,
-	    "PERM- READ_PHONE_STATE": FALSE,
-	    "PERM- READ_PRECISE_PHONE_STATE": FALSE,
-	    "PERM- READ_SMS": FALSE,
+	"PERM- READ_PHONE_NUMBERS": FALSE,
+	"PERM- READ_PHONE_STATE": FALSE,
+	"PERM- READ_PRECISE_PHONE_STATE": FALSE,
+	"PERM- READ_SMS": FALSE,
         "PERM- READ_SYNC_SETTINGS": FALSE,
         "PERM- READ_SYNC_STATS": FALSE,
         "PERM- READ_VOICEMAIL": FALSE,
-	    "PERM- REBOOT": FALSE,
-	    "PERM- RECEIVE_BOOT_COMPLETED": FALSE,
+	"PERM- REBOOT": FALSE,
+	"PERM- RECEIVE_BOOT_COMPLETED": FALSE,
         "PERM- RECEIVE_MMS": FALSE,
-	    "PERM- RECEIVE_SMS": FALSE,
-	    "PERM- RECEIVE_WAP_PUSH": FALSE,
-	    "PERM- RECORD_AUDIO": FALSE,
-	    "PERM- REORDER_TASKS": FALSE,
+	"PERM- RECEIVE_SMS": FALSE,
+	"PERM- RECEIVE_WAP_PUSH": FALSE,
+	"PERM- RECORD_AUDIO": FALSE,
+	"PERM- REORDER_TASKS": FALSE,
         "PERM- REQUEST_COMPANION_PROFILE_WATCH": FALSE,
-	    "PERM- REQUEST_COMPANION_RUN_IN_BACKGROUND": FALSE,
+	"PERM- REQUEST_COMPANION_RUN_IN_BACKGROUND": FALSE,
         "PERM- REQUEST_COMPANION_START_FOREGROUND_SERVICES_FROM_BACKGROUND": FALSE,
         "PERM- REQUEST_COMPANION_USE_DATA_IN_BACKGROUND": FALSE,
-	    "PERM- REQUEST_DELETE_PACKAGES": FALSE,
-	    "PERM- REQUEST_IGNORE_BATTERY_OPTIMIZATIONS": FALSE,
-	    "PERM- REQUEST_INSTALL_PACKAGES": FALSE,
+	"PERM- REQUEST_DELETE_PACKAGES": FALSE,
+	"PERM- REQUEST_IGNORE_BATTERY_OPTIMIZATIONS": FALSE,
+	"PERM- REQUEST_INSTALL_PACKAGES": FALSE,
         "PERM- REQUEST_OBSERVE_COMPANION_DEVICE_PRESENCE": FALSE,
         "PERM- REQUEST_PASSWORD_COMPLEXITY": FALSE,
-	    "PERM- RESTART_PACKAGES": FALSE,
-	    "PERM- SCHEDULE_EXACT_ALARM": FALSE,
+	"PERM- RESTART_PACKAGES": FALSE,
+	"PERM- SCHEDULE_EXACT_ALARM": FALSE,
         "PERM- SEND_RESPOND_VIA_MESSAGE": FALSE,
-	    "PERM- SEND_SMS": FALSE,
-	    "PERM- SET_ALARM": FALSE,
+	"PERM- SEND_SMS": FALSE,
+	"PERM- SET_ALARM": FALSE,
         "PERM- SET_ALWAYS_FINISH": FALSE,
-	    "PERM- SET_ANIMATION_SCALE": FALSE,
-	    "PERM- SET_DEBUG_APP": FALSE,
+	"PERM- SET_ANIMATION_SCALE": FALSE,
+	"PERM- SET_DEBUG_APP": FALSE,
         "PERM- SET_PREFERRED_APPLICATIONS": FALSE,
         "PERM- SET_PROCESS_LIMIT": FALSE,
-	    "PERM- SET_TIME": FALSE,
-	    "PERM- SET_TIME_ZONE": FALSE,
-	    "PERM- SET_WALLPAPER": FALSE,
-	    "PERM- SET_WALLPAPER_HINTS": FALSE,
+	"PERM- SET_TIME": FALSE,
+	"PERM- SET_TIME_ZONE": FALSE,
+	"PERM- SET_WALLPAPER": FALSE,
+	"PERM- SET_WALLPAPER_HINTS": FALSE,
         "PERM- SIGNAL_PERSISTENT_PROCESSES": FALSE,
-	    "PERM- SMS_FINANCIAL_TRANSACTIONS": FALSE,
+	"PERM- SMS_FINANCIAL_TRANSACTIONS": FALSE,
         "PERM- START_FOREGROUND_SERVICES_FROM_BACKGROUND": FALSE,
-	    "PERM- START_VIEW_PERMISSION_USAGE": FALSE,
-	    "PERM- STATUS_BAR": FALSE,
+	"PERM- START_VIEW_PERMISSION_USAGE": FALSE,
+	"PERM- STATUS_BAR": FALSE,
         "PERM- SYSTEM_ALERT_WINDOW": FALSE,
         "PERM- TRANSMIT_IR": FALSE,
-	    "PERM- UNINSTALL_SHORTCUT": FALSE, # Odd
-	    "PERM- UPDATE_DEVICE_STATS": FALSE,
+	"PERM- UNINSTALL_SHORTCUT": FALSE, # Odd
+	"PERM- UPDATE_DEVICE_STATS": FALSE,
         "PERM- UPDATE_PACKAGES_WITHOUT_USER_ACTION": FALSE,
         "PERM- USE_BIOMETRIC": FALSE,
-	    "PERM- USE_FINGERPRINT": FALSE,
-	    "PERM- USE_FULL_SCREEN_INTENT": FALSE,
+	"PERM- USE_FINGERPRINT": FALSE,
+	"PERM- USE_FULL_SCREEN_INTENT": FALSE,
         "PERM- USE_ICC_AUTH_WITH_DEVICE_IDENTIFIER": FALSE,
-	    "PERM- USE_SIP": FALSE,
-	    "PERM- UWB_RANGING": FALSE,
-	    "PERM- VIBRATE": FALSE,
-	    "PERM- WAKE_LOCK": FALSE,
-	    "PERM- WRITE_APN_SETTINGS": FALSE,
+	"PERM- USE_SIP": FALSE,
+	"PERM- UWB_RANGING": FALSE,
+	"PERM- VIBRATE": FALSE,
+	"PERM- WAKE_LOCK": FALSE,
+	"PERM- WRITE_APN_SETTINGS": FALSE,
         "PERM- WRITE_CALENDAR": FALSE,
-	    "PERM- WRITE_CALL_LOG": FALSE,
-	    "PERM- WRITE_CONTACTS": FALSE,
-	    "PERM- WRITE_EXTERNAL_STORAGE": FALSE,
-	    "PERM- WRITE_GSERVICES": FALSE,
+	"PERM- WRITE_CALL_LOG": FALSE,
+	"PERM- WRITE_CONTACTS": FALSE,
+	"PERM- WRITE_EXTERNAL_STORAGE": FALSE,
+	"PERM- WRITE_GSERVICES": FALSE,
         "PERM- WRITE_SECURE_SETTINGS": FALSE,
-	    "PERM- WRITE_SETTINGS": FALSE,
-	    "PERM- WRITE_SYNC_SETTINGS": FALSE,
-	    "PERM- WRITE_VOICEMAIL": FALSE
+	"PERM- WRITE_SETTINGS": FALSE,
+	"PERM- WRITE_SYNC_SETTINGS": FALSE,
+	"PERM- WRITE_VOICEMAIL": FALSE
     }
 
 def func_find_javahome():
@@ -513,11 +512,9 @@ def func_base64_decode(var_string_decode_req_base64):
             var_decoded_base64 = str(var_base64_decode)
         except:
             if var_forensic_case_bool == 1:
-                var_null_null = 0
-                #log_txt_update.write("[INFO]: Error Decoding Potential Base64 String: " + var_string_decode_req_base64 + "\n")
+                log_txt_update.write("[INFO]: Error Decoding Potential Base64 String: " + var_string_decode_req_base64 + "\n")
             if arg_verbose_output == 1:
-                var_null_null = 0
-                #print("[INFO]: Error Decoding Potential Base64 String: " + var_string_decode_req_base64 + "\n")
+                print("[INFO]: Error Decoding Potential Base64 String: " + var_string_decode_req_base64 + "\n")
 
 def func_android_cert_pull():
 ########################################################################################################################################
@@ -535,7 +532,10 @@ def func_android_cert_pull():
             var_keytool_command = "\"" + var_jdk_keytool_location + "\"" + " -printcert -file " + var_cert_RSA_location + " >> " + apk_results_directory + "\\" + apk + "_cert_keytool_out.txt"
             os.system(var_keytool_command)
         except:
-            log_txt_update.write("[WARN]: Error Running Keytool against Certificate File Located At: " + var_cert_RSA_location + "\n")
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[WARN]: Error Running Keytool against Certificate File Located At: " + var_cert_RSA_location + "\n")
+            if arg_verbose_output == 1:
+                print("[WARN]: Error Running Keytool against Certificate File Located At: " + var_cert_RSA_location)
 
     temp_certificate_keytxt_file = apk_results_directory + "\\" + apk + "_cert_keytool_out.txt"
     var_bool_keytxt_file = os.path.exists(temp_certificate_keytxt_file)
@@ -562,7 +562,10 @@ def func_android_cert_pull():
     try:
         os.system(".\\win\\openssl.exe pkcs7 -inform DER -in " + var_cert_RSA_location + " -noout -print_certs -text" + " >> " + apk_results_directory + "\\" + apk + "_cert_meth_1.txt")
     except:
-        log_txt_update.write("[WARN]: [Method 1] Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + ", Trying [Method 2]\n")
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[WARN]: [Method 1] Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + ", Trying [Method 2]\n")
+        if arg_verbose_output == 1:
+            print("[WARN]: [Method 1] Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + ", Trying [Method 2]")
     
     temp_certificate_txt_file = apk_results_directory + "\\" + apk + "_cert_meth_1.txt"
     if os.path.exists(temp_certificate_txt_file):
@@ -596,7 +599,10 @@ def func_android_cert_pull():
             cert_unproc_txt_update.write("[Method 2]: APK Certificate Subject: " + cert_content_extract_subject + "\n")
             cert_unproc_txt_update.write("[Method 2]: APK Certificate Algorithm: " + cert_content_extract_algorithm + "\n")
         except:
-            log_txt_update.write("[WARN]: Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + " with [Method 2]\n")
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[WARN]: Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + " with [Method 2]\n")
+            if arg_verbose_output == 1:
+                print("[WARN]: Error Running OpenSSL against Certificate File Located At: " + var_cert_RSA_location + " with [Method 2]")
 
 def func_large_scale_regex():
 ########################################################################################################################################
@@ -821,7 +827,8 @@ def func_clean_up():
 ########################################################################################################################################
 ######################################################### Post-Run Clean Up Function ###################################################
 ########################################################################################################################################
-    log_txt_update.close()
+    if var_forensic_case_bool == 1:
+        log_txt_update.close()
     #cert_unproc_txt_update.close()
     os.system('color 07')
     func_goodbye()
@@ -830,11 +837,12 @@ def func_initial_logging():
 ########################################################################################################################################
 ########################################################## Inital Log File Creation ####################################################
 ########################################################################################################################################
-    case_log_file_txt = var_case_delivery_directory + "\\log.txt"
-    global log_txt_update
-    log_txt_update = open(case_log_file_txt, "a")
-    log_txt_update.write("--- YAAAAT APK Ripper ---\n")
-    log_txt_update.write("[LOG]: Tool Started on: " + timestr_case + " at " + timestr_dir + "\n")  
+    if var_forensic_case_bool == 1:
+        case_log_file_txt = var_case_delivery_directory + "\\log.txt"
+        global log_txt_update
+        log_txt_update = open(case_log_file_txt, "a")
+        log_txt_update.write("--- YAAAAT APK Ripper ---\n")
+        log_txt_update.write("[LOG]: Tool Started on: " + timestr_case + " at " + timestr_dir + "\n")  
 
 def func_permission_checks():
 ########################################################################################################################################
@@ -1457,10 +1465,10 @@ def main(argv):
 ########################################################################################################################################     
 
         apk_move_cleanup_loc = apk_source_directory + "\\" + apk_with_extension
-        #try:
-            #shutil.move(apk_full_path, apk_move_cleanup_loc)
-        #except:
-        #    log_txt_update.write("[WARN]: Error Moving APK: " + apk_full_path + " to: " + apk_move_cleanup_loc + "\n")
+        try:
+            shutil.move(apk_full_path, apk_move_cleanup_loc)
+        except:
+            log_txt_update.write("[WARN]: Error Moving APK: " + apk_full_path + " to: " + apk_move_cleanup_loc + "\n")
         file_txt_update.close()
     func_clean_up()
 
