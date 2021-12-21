@@ -1,8 +1,8 @@
 ########################################################################################################################################
 #################################################### Author:      s3raph                ################################################
 #################################################### Purpose:     To Pass the Butter    ################################################
-#################################################### Version:     .0711                 ################################################
-#################################################### Last Update: 2021123               ################################################
+#################################################### Version:     .0713                 ################################################
+#################################################### Last Update: 2021220               ################################################
 ########################################################################################################################################
 
 import os
@@ -25,14 +25,6 @@ if sys.version_info >= (2, 7, 0) and sys.version_info < (3, 0, 0):
     import urlparse
 if sys.version_info >= (3, 0, 0):
     import urllib.parse
-
-try:
-    import yara
-    global yara_check_flag 
-    yara_check_flag = 1
-except:
-    global yara_check_flag
-    yara_check_flag = 0
 
 def func_fail_whale():
 ########################################################################################################################################
@@ -529,7 +521,7 @@ def func_android_cert_pull():
 
     if var_jdk_keytool_location:
         try:
-            var_keytool_command = "\"" + var_jdk_keytool_location + "\"" + " -printcert -file " + var_cert_RSA_location + " >> " + apk_results_directory + "\\" + apk + "_cert_keytool_out.txt"
+            var_keytool_command = "\"" + var_jdk_keytool_location + " -printcert -file " + var_cert_RSA_location + " >> " + apk_results_directory + "\\" + apk + "_cert_keytool_out.txt" + "\""
             os.system(var_keytool_command)
         except:
             if var_forensic_case_bool == 1:
@@ -608,8 +600,26 @@ def func_large_scale_regex():
 ########################################################################################################################################
 ########################################################## REGEX PER LINE FUNCTION #####################################################
 ########################################################################################################################################
+
+    global var_url_high_count
+    global var_url_med_count
+    global var_url_low_count
+    global var_IPv4_count
+    global var_IPv6_low_count
+    global var_IPv6_high_count
+    global var_search_hits
+    global var_email_count
+
+    var_url_high_count = 0
+    var_url_med_count = 0
+    var_url_low_count = 0
+    var_IPv4_count = 0
+    var_IPv6_low_count = 0
+    var_IPv6_high_count = 0
+    var_search_hits = 0
+    var_email_count = 0
+        
     if arg_verbose_output == 1:
-        print("")
         print("[REGEX] #################################### RUNNING REGEX AGAINST JADX OUTPUT ####################################")
         print("")
     for var_path, var_directory, var_files in os.walk(os.path.abspath(apk_decomp_directory)):
@@ -622,6 +632,7 @@ def func_large_scale_regex():
                     apk_content_extract_ipv4_tup_len = len(apk_content_extract_ipv4)
                     var_chain_count = 0
                     if apk_content_extract_ipv4:
+                        var_IPv4_count = var_IPv4_count + 1
                         if arg_verbose_output == 1:
                             print("[IPV4]: SOURCE FILE: " + var_ref_filepath)
                             print("[IPV4]: SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())
@@ -641,6 +652,7 @@ def func_large_scale_regex():
                     apk_content_extract_ipv6_test = re.findall(r'^((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)::((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)$', var_directory_file_object_line)
                     var_chain_count = 0
                     if apk_content_extract_ipv6_test:
+                        var_IPv6_high_count = var_IPv6_high_count + 1
                         if arg_verbose_output == 1:
                             print("[IPv6-MOD]: SOURCE FILE: " + var_ref_filepath)
                             print("[IPv6-MOD]: SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())
@@ -666,13 +678,14 @@ def func_large_scale_regex():
                                 var_chain_count = var_chain_count + 1
                             else:
                                 var_chain_count = var_chain_count + 1
-                    
+
                     ### NEEDS POST REGEX CHECK ###
                     if var_med_IPv6_conf_check == 0:
                         apk_content_extract_ipv6 = re.findall(r'(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))', var_directory_file_object_line)
                         apk_content_extract_ipv6_len = len(apk_content_extract_ipv6)
                         var_chain_count = 0
                         if apk_content_extract_ipv6:
+                            var_IPv6_low_count = var_IPv6_low_count + 1
                             if arg_verbose_output == 1:
                                 print("[IPv6-LOW]: SOURCE FILE: " + var_ref_filepath)
                                 print("[IPv6-LOW]: SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())
@@ -703,13 +716,14 @@ def func_large_scale_regex():
                         if arg_debug_output == 1:
                             if arg_verbose_output == 1:
                                 print("IPV6-LOW]: Already Matched on IPV6-MED] Regex. Skipping This Check.")
-
+                    
                     var_high_conf_check = 0
                     apk_content_extract_hiconf_url = re.findall(r"^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$", var_directory_file_object_line)
                     apk_content_extract_hiconf_len = len(apk_content_extract_hiconf_url)
                     var_chain_count = 0
                     if apk_content_extract_hiconf_url:
                         var_high_conf_check = 1
+                        var_url_high_count = var_url_high_count + 1
                         if arg_verbose_output == 1:
                             print("[URL-HI]:   SOURCE FILE: " + var_ref_filepath)
                             print("[URL-HI]:   SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())
@@ -734,13 +748,16 @@ def func_large_scale_regex():
                                     else:
                                         null_var = 0
                                 var_chain_count = var_chain_count + 1
-                                
+
+                    var_med_conf_check = 1
                     if var_high_conf_check == 0:
-                    ### MOSTLY OK WITH CURRENT REGEX ###
+                    ### MOSTLY OK WITH CURRENT REGEX ###                    
                         apk_content_extract_loconf_url = re.findall(r'https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)', var_directory_file_object_line)
                         apk_content_extract_loconf_len = len(apk_content_extract_loconf_url)
                         var_chain_count = 0
                         if apk_content_extract_loconf_url:
+                            var_med_conf_check = 1
+                            var_url_med_count = var_url_med_count + 1
                             if arg_verbose_output == 1:
                                 print("[URL-MED]:  SOURCE FILE: " + var_ref_filepath)
                                 print("[URL-MED]:  SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())
@@ -772,10 +789,54 @@ def func_large_scale_regex():
                             if arg_verbose_output == 1:
                                 print("[URL-MED]:  Already Matched on [URL-HI] Regex. Skipping This Check.")
 
+                    if var_med_conf_check == 0:
+                        if var_high_conf_check == 0:
+                            ### MOSTLY OK WITH CURRENT REGEX ###                    
+                                apk_content_extract_lowconf_url = re.findall(r'^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$', var_directory_file_object_line)
+                                apk_content_extract_lowconf_len = len(apk_content_extract_lowconf_url)
+                                var_chain_count = 0
+                                if apk_content_extract_lowconf_url:
+                                    var_url_low_count = var_url_low_count + 1
+                                    if arg_verbose_output == 1:
+                                        print("[URL-LOW]:  SOURCE FILE: " + var_ref_filepath)
+                                        print("[URL-LOW]:  SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())
+                                    low_conf_URL_extract_write_txt_up.write("[URL-LOW]:  SOURCE FILE: " + var_ref_filepath + "\n")
+                                    low_conf_URL_extract_write_txt_up.write("[URL-LOW]:  SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip() + "\n")
+                                    while var_chain_count < apk_content_extract_lowconf_len:
+                                        if apk_content_extract_lowconf_url[var_chain_count]:
+                                            var_tmp_string = apk_content_extract_lowconf_url[var_chain_count]
+                                            var_tmp_string_len = len(var_tmp_string)
+                                            if var_tmp_string_len != 0:
+                                                var_chain_v2_count = 0
+                                                while var_chain_v2_count < var_tmp_string_len:
+                                                    if var_tmp_string[var_chain_v2_count]:
+                                                        var_tmp_string_cln = var_tmp_string[var_chain_v2_count]
+                                                        if arg_debug_output == 1:
+                                                            low_conf_URL_extract_write_txt_up.write("[URL-LOW]:  REGEX HIT(S): " + var_tmp_string_cln + "\n")
+                                                            if arg_verbose_output == 1:
+                                                                print("[URL-LOW]:  REGEX HIT(S): " + var_tmp_string_cln)
+                                                        var_chain_v2_count = var_chain_v2_count + 1
+                                                    else:
+                                                        var_chain_v2_count = var_chain_v2_count + 1
+                                                else:
+                                                    null_var = 0
+                                            var_chain_count = var_chain_count + 1
+                                        else:
+                                            var_chain_count = var_chain_count + 1
+                        else:
+                            if arg_debug_output == 1:
+                                if arg_verbose_output == 1:
+                                    print("[URL-LOW]:  Already Matched on [URL-HI] Regex. Skipping This Check.")
+                    else:
+                        if arg_debug_output == 1:
+                            if arg_verbose_output == 1:
+                                print("[URL-LOW]:  Already Matched on [URL-MED] Regex. Skipping This Check.")
+
                     apk_content_extract_email = re.findall(r'(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))', var_directory_file_object_line)
                     apk_content_extract_email_len = len(apk_content_extract_email)
                     var_chain_count = 0
                     if apk_content_extract_email:
+                        var_email_count = var_email_count + 1
                         if arg_verbose_output == 1:
                             print("[EMAIL]:    SOURCE FILE: " + var_ref_filepath)
                             print("[EMAIL]:    SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())
@@ -805,18 +866,23 @@ def func_large_scale_regex():
 
                     if arg_custom_search == 1:
                         if arg_string_search.lower() in var_directory_file_object_line.lower():
+                            var_search_hits = var_search_hits + 1
+                            custom_search_write_up.write("[SEARCH]:   SOURCE FILE: " + var_ref_filepath + "\n")
+                            custom_search_write_up.write("[SEARCH]:   SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip() + "\n")                                 
                             if arg_verbose_output == 1:
                                 print("[SEARCH]:   SOURCE FILE: " + var_ref_filepath)
-                                print("[SEARCH]:   SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())                            
+                                print("[SEARCH]:   SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())    
 
                     if arg_custom_search == 2:
                         with open(arg_string_file_search,"r") as var_file_search_strings_file:
                             for var_file_search_string_line in var_file_search_strings_file:
                                 if var_file_search_string_line.lower().strip('\n') in var_directory_file_object_line.lower():
+                                    var_search_hits = var_search_hits + 1
                                     custom_search_write_up.write("[SEARCH]:   SOURCE FILE: " + var_ref_filepath + "\n")
                                     custom_search_write_up.write("[SEARCH]:   SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip() + "\n") 
                                     if arg_verbose_output == 1:
                                         print("[SEARCH]:   SOURCE FILE: " + var_ref_filepath)
+                                        print("[SEARCH]:   SOURCE WORD: " + var_file_search_string_line.lower().strip('\n'))
                                         print("[SEARCH]:   SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())        
                                     if arg_debug_output == 1:
                                         custom_search_write_up.write("[SEARCH]:   SOURCE HIT:  " + var_file_search_string_line.strip('\n') + "\n") 
@@ -844,6 +910,42 @@ def func_initial_logging():
         log_txt_update.write("--- YAAAAT APK Ripper ---\n")
         log_txt_update.write("[LOG]: Tool Started on: " + timestr_case + " at " + timestr_dir + "\n")  
 
+def function_statistic_write():
+########################################################################################################################################
+######################################################### APK Extraction Statistics ####################################################
+########################################################################################################################################
+
+    var_url_high_count_str = str(var_url_high_count)
+    var_url_med_count_str = str(var_url_med_count)
+    var_url_low_count_str = str(var_url_low_count)
+    var_IPv6_high_count_str = str(var_IPv6_high_count)
+    var_IPv6_low_count_str = str(var_IPv6_low_count)
+    var_IPv4_count_str = str(var_IPv4_count)
+    var_email_count_str = str(var_email_count)
+    var_embed_file_hits_str = str(var_embed_file_hits)
+    var_search_hits_str = str(var_search_hits)
+    
+    count_stats_write_txt_up.write("[URL-HIGH]  Count: " + var_url_high_count_str + "\n")
+    count_stats_write_txt_up.write("[URL-MED]   Count: " + var_url_med_count_str + "\n")
+    count_stats_write_txt_up.write("[URL-LOW]   Count: " + var_url_low_count_str + "\n")
+    count_stats_write_txt_up.write("[IPv6-HIGH] Count: " + var_IPv6_high_count_str + "\n")
+    count_stats_write_txt_up.write("[IPv6-LOW]  Count: " + var_IPv6_low_count_str + "\n")
+    count_stats_write_txt_up.write("[IPv4]      Count: " + var_IPv4_count_str + "\n")
+    count_stats_write_txt_up.write("[EMAIL]     Count: " + var_email_count_str + "\n")
+    count_stats_write_txt_up.write("[EMAIL]     Count: " + var_embed_file_hits_str + "\n")
+    count_stats_write_txt_up.write("[SEARCH]    Count: " + var_search_hits_str + "\n")
+    
+    if arg_verbose_output == 1:
+        print("[URL-HIGH]  Count: " + var_url_high_count_str)
+        print("[URL-MED]   Count: " + var_url_med_count_str)
+        print("[URL-LOW]   Count: " + var_url_low_count_str)
+        print("[IPv6-HIGH] Count: " + var_IPv6_high_count_str)
+        print("[IPv6-LOW]  Count: " + var_IPv6_low_count_str)
+        print("[IPv4]      Count: " + var_IPv4_count_str)
+        print("[EMAIL]     Count: " + var_email_count_str)
+        print("[EMBEDFILE] Count: " + var_embed_file_hits_str)
+        print("[SEARCH]    Count: " + var_search_hits_str)
+
 def func_permission_checks():
 ########################################################################################################################################
 ###################################################### APK Manifest Permission Function ################################################
@@ -854,6 +956,7 @@ def func_permission_checks():
     if os.path.exists(var_manifest_location):
         try:        
             if arg_verbose_output == 1:
+                print("")
                 print("[MANIFEST] ################################# RUNNING STRINGS AGAINST JADX OUTPUT ##################################")
             os.system(".\\win\\strings.exe /accepteula " + var_manifest_location + " >> " + apk_results_directory + "\\" + apk + "_manifest_tmp_str.txt")
         except:            
@@ -883,8 +986,11 @@ def func_hash_all_files():
 ########################################################################################################################################
 ####################################################### Hash Extracted Files Function ##################################################
 ########################################################################################################################################
+    global var_embed_file_hits
+    var_embed_file_hits = 0
     for var_path, var_directory, var_files in os.walk(os.path.abspath(apk_decomp_directory)):
         for var_each_file in var_files:
+            var_embed_file_hits = var_embed_file_hits + 1
             var_ref_filepath = os.path.join(var_path, var_each_file)
             if os.path.isfile(var_ref_filepath):
                 md5_hash = hashlib.md5()
@@ -942,7 +1048,6 @@ def main(argv):
     global arg_custom_search
     global var_sys_complete_flag
     global var_py_complete_flag
-    global arg_yara_output
 
     timestr_dir = time.strftime("%H-%M-%S")
     timestr_case = time.strftime("%Y-%m-%d")
@@ -958,7 +1063,6 @@ def main(argv):
     arg_string_file_search = ""
     var_sys_complete_flag = 0
     var_py_complete_flag = 0
-    arg_yara_output = 0
     
     global var_current_function
     var_current_function = "func_main"
@@ -1081,16 +1185,6 @@ def main(argv):
             ############################################################
             arg_custom_search = 1
             arg_string_search = arg
-        if yara_check_flag == 1:
-            if opt == '-y':
-                ############################################################
-                ###                     [Not Required]                   ###
-                ### Name:    YARA Functionality                          ###
-                ### Arg:     -Y                                          ###
-                ### Info:    YARA Rule Check Against JADX Output.        ###
-                ### Default: <Disabled>                                  ###
-                ############################################################
-                arg_yara_output = 1
         if opt == '-S':
             ############################################################
             ###                     [Not Required]                   ###
@@ -1101,8 +1195,12 @@ def main(argv):
             ###          JADX output.                                ###
             ### Default: ""                                          ###
             ############################################################
-            arg_custom_search = 2
+            if not os.path.isfile(arg):
+                func_fail_whale()
+                print("Search String File Not Found: " + arg)
+                sys.exit()
             arg_string_file_search = arg
+            arg_custom_search = 2
         elif opt in ("-i", "--idir"):
             ############################################################
             ###                       [Required]                     ###
@@ -1111,7 +1209,7 @@ def main(argv):
             ### Info:    Sets the Input Directory.                   ###
             ### Default: <No Value>                                  ###
             ############################################################
-            inputdirectory_var = arg
+            inputdirectory_var = arg + "\\"
 
     if not inputdirectory_var:
         print("")
@@ -1139,11 +1237,6 @@ def main(argv):
     print("######################################################## RIPPER STARTED AT: " + timestr_dir + " ###################################################")
     print("########################################################################################################################################")
     print("")
-
-    if yara_check_flag == 1:
-        print("[INFO] Yara Python Module Was Located. Functionality Enabled")
-    if yara_check_flag == 0:
-        print("[INFO] Yara Python Module Not Located. Functionality Disabled")
 
     inputdirectory = os.path.dirname(inputdirectory_var)
     if var_forensic_case_bool == 1:
@@ -1209,7 +1302,6 @@ def main(argv):
 ########################################################################################################################################
 ####################################################### EXTRACTION DIRECTORY CREATION ##################################################
 ########################################################################################################################################
-
         global apk_main_pre_dir
         apk_main_pre_dir = var_output_directory + "\\apk_post_run\\"
         try:
@@ -1294,6 +1386,7 @@ def main(argv):
         global hashes_file_dump_txt
         global med_conf_URL_extract_write_txt
         global mod_conf_URL_extract_write_txt
+        global low_conf_URL_extract_write_txt
         global hi_conf_URL_extract_write_txt
         global file_hashes_post_zip_extract
         global base64_extract_write_txt
@@ -1302,32 +1395,37 @@ def main(argv):
         global ip_extract_write_txt
         global email_extract_write_txt
         global custom_search_write
+        global count_stats_write_txt
         
         ipv6_extract_write_txt = apk_results_directory + "\\" + apk + "_regex_IPv6.txt"
         mani_unproc_write_txt = apk_results_directory + "\\" + apk + "_manifest_info_unproc.txt"
         hashes_file_dump_txt = apk_results_directory + "\\" + apk + "_hash_info.txt"
         cert_unproc_write_txt = apk_results_directory + "\\" + apk + "_cert_unproc.txt"
         ip_extract_write_txt = apk_results_directory + "\\" + apk + "_regex_IPv4.txt"
-        med_conf_URL_extract_write_txt = apk_results_directory + "\\" + apk + "_low_conf_URL.txt"
+        med_conf_URL_extract_write_txt = apk_results_directory + "\\" + apk + "_med_conf_URL.txt"
         mod_conf_URL_extract_write_txt = apk_results_directory + "\\" + apk + "_mod_conf_URL.txt"
+        low_conf_URL_extract_write_txt = apk_results_directory + "\\" + apk + "_low_conf_URL.txt"
         hi_conf_URL_extract_write_txt = apk_results_directory + "\\" + apk + "_hi_conf_URL.txt"
         file_hashes_post_zip_extract = apk_results_directory + "\\" + apk + "_hash_extract.txt"
         base64_extract_write_txt = apk_results_directory + "\\" + apk + "_base64_extract.txt"
         hi_conf_URL_extract_write_txt = apk_results_directory + "\\" + apk + "_med_conf_URL.txt"
         email_extract_write_txt = apk_results_directory + "\\" + apk + "_email_addr.txt"
         custom_search_write = apk_results_directory + "\\" + apk + "_search_hits.txt"
+        count_stats_write_txt = apk_results_directory + "\\" + apk + "_stats.txt"
         
         global base64_extract_write_txt_up
         global mani_unproc_write_txt_update  
         global cert_unproc_txt_update
         global ip_extract_write_txt_update
         global med_conf_URL_extract_write_txt_up
+        global low_conf_URL_extract_write_txt_up
         global file_txt_update
         global file_hashes_post_zip_extract_update
         global ipv6_extract_write_txt_up
         global hi_conf_URL_extract_write_txt_up
         global email_extract_write_txt_up
         global custom_search_write_up
+        global count_stats_write_txt_up
         
         ip_extract_write_txt_update = open(ip_extract_write_txt, "a")
         cert_unproc_txt_update = open(cert_unproc_write_txt, "a")
@@ -1340,12 +1438,15 @@ def main(argv):
         hi_conf_URL_extract_write_txt_up = open(hi_conf_URL_extract_write_txt, "a")
         email_extract_write_txt_up = open(email_extract_write_txt, "a")
         custom_search_write_up = open(custom_search_write, "a")
+        low_conf_URL_extract_write_txt_up = open(low_conf_URL_extract_write_txt, "a")
+        count_stats_write_txt_up = open(count_stats_write_txt, "a")
 
         var_information_filename_write = ("[INFO]: True APK Filename is: " + var_information_true_filename + "\n")
         if var_forensic_case_bool == 1:
             log_txt_update.write("[INFO]: True APK Filename is: " + var_information_true_filename + "\n")
         if arg_verbose_output == 1:
             print("[INFO]: True APK Filename is: " + var_information_true_filename)
+
 
 ########################################################################################################################################
 ########################################################### APK HASHING FUNCTIONS ######################################################
@@ -1394,9 +1495,13 @@ def main(argv):
             print("[JADX] ##################################### JADX DECOMPILING STARTED #############################################")
             print("")
             print("[JADX]: Started JADX Decompiling of: " + apk_full_path + ".")                                                                
-        try:        
-            os.system(".\\win\\bin\\jadx.bat -d " + apk_decomp_directory + "\\" + apk + "_source " + apk_full_path)
-        except:    
+        try:
+            var_jadx_decomp = "\"" + apk_decomp_directory + "\\" + apk + "_source" + "\"" + " "
+            jadx_apk_full_path = "\"" + apk_full_path + "\""
+            var_jadx_command = '.\\win\\bin\\jadx.bat -d ' + var_jadx_decomp + " " + jadx_apk_full_path
+            var_jadx_command_split = var_jadx_command.split()
+            subprocess.check_call(var_jadx_command)
+        except:
             if var_forensic_case_bool == 1:
                 log_txt_update.write("[WARN]: Error Decompiling: " + apk_full_path + " with JADX.\n")  
             if arg_verbose_output == 1:
@@ -1434,13 +1539,38 @@ def main(argv):
 ########################################################################################################################################
 ####################################################### Certificate Analysis Function ##################################################
 ########################################################################################################################################            
-            
+
+
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[CERT]: Started Certificate Processing of: " + apk_full_path + ".\n")   
+        if arg_verbose_output == 1:
+            print("")
+            print("[CERT] ##################################### CERTIFICATE PROCESSING STARTED #############################################")
+            print("")
+            print("[CERT]: Started Certificate Processing of: " + apk_full_path + ".")         
+
+        global var_bool_rsa_exists
+        var_bool_rsa_exists = 0
+        
         if os.path.exists(var_cert_RSA_location_dir):
             for var_files_rsa in os.listdir(var_cert_RSA_location_dir):
                 if var_files_rsa.endswith(".RSA"):
+                    var_bool_rsa_exists = var_bool_rsa_exists + 1
                     global var_cert_RSA_location
                     var_cert_RSA_location = var_cert_RSA_location_dir + "\\" + var_files_rsa
-                    func_android_cert_pull() 
+                    func_android_cert_pull()
+                    
+        if var_bool_rsa_exists == 0:
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[CERT]: No Certificate Found For: " + apk_full_path + "\n") 
+            if arg_verbose_output == 1:
+                print("[CERT]: No Certificate Found For: " + apk_full_path)
+                
+        if var_bool_rsa_exists >= 2:
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[CERT]: More Than One Certificate Found In: " + apk_full_path + "\n") 
+            if arg_verbose_output == 1:
+                print("[CERT]: More Than One Certificate Found In: " + apk_full_path)
 
 ########################################################################################################################################
 ######################################################## Manifest Analysis Function ####################################################
@@ -1460,9 +1590,28 @@ def main(argv):
             if arg_verbose_output == 1:
                 print("[WARN]: Skipping REGEX Functionality, Python Version: " + var_python_version_info + " is unsupported.")
 
+
+########################################################################################################################################
+######################################################## POST-Extraction Statistics  ###################################################
+########################################################################################################################################
+
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[INFO]: Post-Extraction Statistics For: " + apk + "\n")  
+        if arg_verbose_output == 1:      
+            print("")
+            print("[STATS] #################################### APK STATISTICS ####################################")
+            print("")
+            print("[INFO]: Post-Extraction Statistics Collection Started: " + apk)  
+        function_statistic_write()
+
 ########################################################################################################################################
 ############################################################# Per APK Clean-Up #########################################################
 ########################################################################################################################################     
+
+        if arg_verbose_output == 1:
+            print("")
+            print("[FIN] ###################################### FIN ######################################")
+            print("")
 
         apk_move_cleanup_loc = apk_source_directory + "\\" + apk_with_extension
         try:
