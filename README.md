@@ -4,7 +4,7 @@
 
 ##### Because it is still in pre-alpha, there are alot of bugs. Please let me know if you run into any issues and I'll try my best to knock them out. Additionally this project will later be nested under the Battlefield Triage Project. #####
 
-##### At this time, Python 2.7 is the primary supported implementation. This is primarily because Autopsy is still using Python 2, part of this project is having the script be version aware (you'll notice some functions are properly switched), but most of the functionality is broken in Python 3 and will be fixed in later versions. #####
+##### At this time, Python 2.7 is the primary supported implementation. This is primarily because Autopsy is still using Python 2. Part of this project is having the script be version aware (you'll notice some functions are properly switched), but most of the functionality is broken in Python 3 and will be fixed in later versions. #####
 
 ### Background: 
 
