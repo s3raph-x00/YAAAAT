@@ -1,8 +1,8 @@
 ########################################################################################################################################
 #################################################### Author:      s3raph                ################################################
 #################################################### Purpose:     To Pass the Butter    ################################################
-#################################################### Version:     .0713                 ################################################
-#################################################### Last Update: 2021220               ################################################
+#################################################### Version:     .0715                 ################################################
+#################################################### Last Update: 20220815              ################################################
 ########################################################################################################################################
 
 import os
@@ -521,7 +521,7 @@ def func_android_cert_pull():
 
     if var_jdk_keytool_location:
         try:
-            var_keytool_command = "\"" + var_jdk_keytool_location + " -printcert -file " + var_cert_RSA_location + " >> " + apk_results_directory + "\\" + apk + "_cert_keytool_out.txt" + "\""
+            var_keytool_command = '"\\" + var_jdk_keytool_location + " -printcert -file " + var_cert_RSA_location + " >> " + apk_results_directory + "\\" + apk + "_cert_keytool_out.txt" + "\\"'
             os.system(var_keytool_command)
         except:
             if var_forensic_case_bool == 1:
@@ -1209,7 +1209,7 @@ def main(argv):
             ### Info:    Sets the Input Directory.                   ###
             ### Default: <No Value>                                  ###
             ############################################################
-            inputdirectory_var = arg + "\\"
+            inputdirectory_var = arg
 
     if not inputdirectory_var:
         print("")
@@ -1225,6 +1225,7 @@ def main(argv):
         os.system('color 07')
         sys.exit()
 
+    inputdirectory_var = inputdirectory_var.replace('\"', '') + "\\"	
     func_gu_st()
     func_global_var_declare()
     func_python_version_check()
