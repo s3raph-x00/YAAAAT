@@ -35,7 +35,9 @@ Note: Store Binaries (And Their Associated DLLs/Files) In The Following Folder S
 #         ./win/openssl.exe (and associated dlls)<br/>
 #         ./win/lib/(jadx classes)<br/>
 #         ./win/bin/jadx.bat<br/>
-#         ./win/bin/jadx<br/>
+#         ./win/bin/jadx.exe<br/>
+#         ./win/bin/yarac64.exe<br/>
+#         ./win/bin/yara64.exe<br/>
 </blockquote>
     
 ### Current Development Status 
