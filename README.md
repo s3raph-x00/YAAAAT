@@ -92,3 +92,4 @@ When updating various binaries, ensure the name matches what is currently in the
 strings: https://docs.microsoft.com/en-us/sysinternals/downloads/strings <br />
 openssl: https://www.openssl.org/source/ <br />
 jadx:    https://github.com/skylot/jadx/releases <br />
+yara:    https://github.com/VirusTotal/yara/releases <br />
