@@ -1,1 +1,1 @@
-Storage Linux Libaries Here (Also Well As JADX .jar files)
+Store Linux Libaries Here (Also Well As JADX .jar files)
