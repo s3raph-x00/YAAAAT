@@ -100,18 +100,20 @@ class YAAAATDataSourceIngestModule(DataSourceIngestModule):
         var_rand_max = 8
         var_rand_string_format = ascii_letters + digits
 
+        var_username = os.environ.get('USERNAME')
+        var_case_extract_directory = "C:\\Users\\" + var_username + "\\Desktop\\case_extract\\"
+
         try:
-            os.mkdir("C:\\Users\\administrator\\Desktop\\case_extract\\")
+            os.mkdir(var_case_extract_directory)
         except:
-		    self.log(Level.INFO, "Case Extract Directory already exists.")            
-            
-        Temp_Dir = os.path.join("C:\\Users\\administrator\\Desktop\\case_extract\\", TimeString)
+            self.log(Level.INFO, "Case Extract Directory already exists.")            
+
+	Temp_Dir = os.path.join(var_case_extract_directory, TimeString)
         try:
             os.mkdir(Temp_Dir)
         except:
-		    self.log(Level.INFO, "Temp Directory already exists: " + Temp_Dir)
+            self.log(Level.INFO, "Temp Directory already exists: " + Temp_Dir)
 
-		
         ### APK Extract Folder Creation ###
         apk_temp_dir = os.path.join(Temp_Dir, "apk_storage")
         try:
