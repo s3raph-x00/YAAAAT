@@ -1,0 +1,51 @@
+cpio,30 37 30 37 30,cpio archive
+XAPK,50 4B,Android Application
+APK,50 4B,Android Application
+7Z,37 7A BC AF 27 1C,7-Zip compressed file
+ABA,00 01 42 41,Palm Address Book Archive
+AIN,21 12,AIN Compressed Archive
+ARC,1A 02,LH archive (old vers.|type 1)
+ARC,1A 03,LH archive (old vers.|type 2)
+ARC,1A 04,LH archive (old vers.|type 3)
+ARC,1A 08,LH archive (old vers.|type 4)
+ARC,1A 09,LH archive (old vers.|type 5)
+ARJ,60 EA,ARJ Compressed archive file
+BZ2,42 5A 68,bzip2 compressed archive
+CRU,43 52 55 53 48 20 76,Crush compressed archive
+DBA,00 01 42 44,Palm DateBook Archive
+DMS,44 4D 53 21,Amiga DiskMasher compressed archive
+GZ,1F 8B 08,GZIP archive file
+HAP,91 33 48 46,Hamarsoft compressed archive
+HQX,28 54 68 69 73 20 66 69,BinHex 4 Compressed Archive
+JAR,50 4B 03 04,Java archive_1
+JAR,5F 27 A8 89,Jar archive
+JAR,4A 41 52 43 53 00,JARCS compressed archive
+JAR,50 4B 03 04 14 00 08 00,Java archive_2
+KGB,4B 47 42 5F 61 72 63 68,KGB archive
+LHA,2D 6C 68,Compressed archive
+LIB,21 3C 61 72 63 68 3E 0A,Unix archiver (ar)|MS Program Library Common Object File Format (COFF)
+LZH,2D 6C 68,Compressed archive
+MAR,4D 41 72 30 00,MAr compressed archive
+MAR,4D 41 52 43,Microsoft|MSN MARC archive
+MAR,4D 41 52 31 00,Mozilla archive
+PAK,1A 0B,PAK Compressed archive file
+PAK,50 41 43 4B,Quake archive file
+RAR,52 61 72 21 1A 07 00,WinRAR compressed archive
+SIT,53 49 54 21 00,StuffIt archive
+SIT,53 74 75 66 66 49 74 20,StuffIt compressed archive
+TAR,75 73 74 61 72,Tape Archive
+TAR.BZ2,42 5A 68,bzip2 compressed archive
+TAR.Z,1F 9D 90,Compressed tape archive_1
+TAR.Z,1F A0,Compressed tape archive_2
+TB2,42 5A 68,bzip2 compressed archive
+TBZ2,42 5A 68,bzip2 compressed archive
+UFA,55 46 41 C6 D2 C1,UFA compressed archive
+XPI,50 4B 03 04,Mozilla Browser Archive
+ZIP,50 4B 03 04,PKZIP archive_1
+ZIP,50 4B 4C 49 54 45,PKLITE archive
+ZIP,50 4B 53 70 58,PKSFX self-extracting archive
+ZIP,50 4B 05 06,PKZIP archive_2
+ZIP,50 4B 07 08,PKZIP archive_3
+ZIP,57 69 6E 5A 69 70,WinZip compressed archive
+ZIP,50 4B 03 04 14 00 01 00,ZLock Pro encrypted ZIP
+ZOO,5A 4F 4F 20,ZOO compressed archive
