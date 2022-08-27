@@ -488,11 +488,12 @@ def func_find_javahome():
 ########################################################################################################################################
 ############################################################ Find JDK Function #########################################################
 ########################################################################################################################################
+    global var_jdk_keytool_location
+    var_jdk_keytool_location = ''
     if 'JAVA_HOME' in os.environ:
         var_jdk_loc_1 = os.environ['JAVA_HOME']
         if "jdk" in var_jdk_loc_1:
-            global var_jdk_keytool_location
-            var_jdk_keytool_location = var_jdk_loc_1 + "\\bin\\keytool.exe"
+                        var_jdk_keytool_location = var_jdk_loc_1 + "\\bin\\keytool.exe"
 
 def func_base64_decode(var_string_decode_req_base64):
 ########################################################################################################################################
@@ -521,7 +522,7 @@ def func_android_cert_pull():
 
     var_x_int = 0
 
-    if var_jdk_keytool_location:
+    if var_jdk_keytool_location != '':
         try:
             var_keytool_command = '"\\" + var_jdk_keytool_location + " -printcert -file " + var_cert_RSA_location + " >> " + apk_results_directory + "\\" + apk + "_cert_keytool_out.txt" + "\\"'
             os.system(var_keytool_command)
@@ -1414,6 +1415,7 @@ def main(argv):
         global email_extract_write_txt
         global custom_search_write
         global count_stats_write_txt
+        global var_yara_log_txt
         
         ipv6_extract_write_txt = apk_results_directory + "\\" + apk + "_regex_IPv6.txt"
         mani_unproc_write_txt = apk_results_directory + "\\" + apk + "_manifest_info_unproc.txt"
@@ -1430,6 +1432,7 @@ def main(argv):
         email_extract_write_txt = apk_results_directory + "\\" + apk + "_email_addr.txt"
         custom_search_write = apk_results_directory + "\\" + apk + "_search_hits.txt"
         count_stats_write_txt = apk_results_directory + "\\" + apk + "_stats.txt"
+        var_yara_log_txt = apk_results_directory + "\\" + apk + "_yara_hits.txt"
         
         global base64_extract_write_txt_up
         global mani_unproc_write_txt_update  
@@ -1444,6 +1447,7 @@ def main(argv):
         global email_extract_write_txt_up
         global custom_search_write_up
         global count_stats_write_txt_up
+        global var_yara_log_write_txt_up
         
         ip_extract_write_txt_update = open(ip_extract_write_txt, "a")
         cert_unproc_txt_update = open(cert_unproc_write_txt, "a")
@@ -1458,6 +1462,7 @@ def main(argv):
         custom_search_write_up = open(custom_search_write, "a")
         low_conf_URL_extract_write_txt_up = open(low_conf_URL_extract_write_txt, "a")
         count_stats_write_txt_up = open(count_stats_write_txt, "a")
+        var_yara_log_write_txt_up = open(var_yara_log_txt, "a")
 
         var_information_filename_write = ("[INFO]: True APK Filename is: " + var_information_true_filename + "\n")
         if var_forensic_case_bool == 1:
@@ -1531,17 +1536,17 @@ def main(argv):
 
         if var_yara_flag == 1:
             if var_forensic_case_bool == 1:
-                log_txt_update.write("[INFO]: Starting YARA search of: " + apk_full_path + ".\n")   
+                log_txt_update.write("[INFO]: Starting YARA Pattern Match of: " + apk_full_path + ".\n")   
             if arg_verbose_output == 1:
                 print("")
-                print("[YARA] ######################################## YARA SEARCH STARTED ###############################################")
+                print("[YARA] #################################### YARA Pattern Match STARTED ####################################")
                 print("")
-                print("[YARA]: Started YARA search within: " + apk_full_path + ".")                                                                
+                print("[YARA]: Started YARA Pattern Match within: " + apk_full_path + ".")                                                               
             try:
                 var_yara_decomp = "\"" + apk_decomp_directory + "\\" + apk + "yara" + "\"" + " "
                 
                 yara_apk_full_path = "\"" + apk_full_path + "\""
-                var_yara_command = '.\\win\\bin\\yara64.exe -s ' + " --recursive " + jadx_apk_full_path
+                var_yara_command = '.\\win\\bin\\yara64.exe -s ' + "master_index.yar" + " --recursive " + jadx_apk_full_path + " >> " + var_yara_log_write_txt_up
                 var_yara_command_split = var_yara_command.split()
                 subprocess.check_call(var_yara_command)
             except:
