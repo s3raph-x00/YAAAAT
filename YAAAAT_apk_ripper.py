@@ -1,8 +1,8 @@
 ########################################################################################################################################
 #################################################### Author:      s3raph                ################################################
 #################################################### Purpose:     To Pass the Butter    ################################################
-#################################################### Version:     .07153                ################################################
-#################################################### Last Update: 20220815              ################################################
+#################################################### Version:     .07155                ################################################
+#################################################### Last Update: 20220825              ################################################
 ########################################################################################################################################
 
 import os
@@ -1257,9 +1257,17 @@ def main(argv):
     print("########################################################################################################################################")
     print("")
 
-    inputdirectory = os.path.dirname(inputdirectory_var)
+    inputdirectory = inputdirectory_var
+    if var_output_directory == '':
+        var_output_directory = inputdirectory
+        if arg_verbose_output == 1:
+            print("[INFO]: Output Directory is: " + var_output_directory)
+    if arg_verbose_output == 1:
+        print("[INFO]: Input Directory is: " + inputdirectory)
+
+    outputdirectory = os.path.dirname(var_output_directory)
     if var_forensic_case_bool == 1:
-        var_case_delivery_directory = inputdirectory + "\\" + timestr_case + "_case_info"
+        var_case_delivery_directory = outputdirectory + "\\" + timestr_case + "_case_info"
         if os.path.exists(var_case_delivery_directory):
             print("[INFO]: Case Directory: " + var_case_delivery_directory + " Already Exists")
         else:
@@ -1269,6 +1277,11 @@ def main(argv):
                 print("[WARN]: Error Making Main Case Directory: " + var_case_delivery_directory)
         func_initial_logging()
         func_determine_operating_system()
+
+    if var_forensic_case_bool == 1:
+        log_txt_update.write("[INFO]: Input Directory is: " + inputdirectory + "\n")
+    if arg_verbose_output == 1:
+        print("[INFO]: Output Directory is: " + var_output_directory)
 
     if var_sys_complete_flag == 1:
         if var_forensic_case_bool == 1:
@@ -1283,12 +1296,6 @@ def main(argv):
 ########################################################################################################################################
 ################################################################# APK SEARCH ###########################################################
 ########################################################################################################################################
-    
-    if var_output_directory == '':
-        var_output_directory = inputdirectory
-        print("[INFO]: Output Directory is: " + var_output_directory)
-    else:
-        print("[INFO]: Output Directory is: " + var_output_directory)
     
     directory_search_pattern_check = (inputdirectory + "\\apk_storage\\")
     if os.path.isdir(directory_search_pattern_check):
