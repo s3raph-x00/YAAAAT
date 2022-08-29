@@ -1,8 +1,8 @@
 ########################################################################################################################################
 #################################################### Author:      s3raph                ################################################
-#################################################### Purpose:     To Buy the Butter     ################################################
-#################################################### Version:     .07153                ################################################
-#################################################### Last Update: 20220825              ################################################
+#################################################### Purpose:     To Pass the Butter    ################################################
+#################################################### Version:     .07155                ################################################
+#################################################### Last Update: 20220815              ################################################
 ########################################################################################################################################
 
 
@@ -258,9 +258,241 @@ def func_command_call():
                 var_core_command = var_core_command + " " + "-v "
             if arg_autopsy_plugin == 1:
                 var_core_command = var_core_command + " " + "-a "
+            if var_output_directory_empty != "":
+                var_core_command = var_core_command + " " + "-o " + var_case_delivery_directory
             var_core_command = var_core_command + " -i " + inputdirectory_var + " "
-            
-            print(var_core_command)
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[LOG]: CLI passing the following command to APK Ripper: " + var_core_command + "\n")
+            if arg_verbose_output == 1:
+                print("[LOG]: CLI passing the following command to APK Ripper: " + var_core_command)
+            var_command_setup_split = var_core_command.split()
+        else:  
+            var_command_setup_split = "x-terminal-emulator -e".split()
+        echo = [sys.executable, "-c",randomFunction()
+                ]
+        processes = [Popen(var_command_setup_split)]
+        for proc in processes:
+            proc.wait()
+    if script_ext_location_check == 2:
+        if platform.system() == "Windows":
+            var_core_command = "cmd.exe /c python ./YAAAAT_1_xapk_ripper.py "
+            if arg_custom_search == 2:
+                if arg_string_file_search != "":
+                    var_core_command = var_core_command + " " + "-S " + arg_string_file_search + " "
+                else:
+                    print("error")
+            if var_yara_flag == 1:
+                var_core_command = var_core_command + " " + "-y "
+            if arg_custom_search == 1:
+                if arg_string_search != "":
+                    var_core_command = var_core_command + " " + "-s " + arg_string_search + " "
+            if arg_debug_output == 1:
+                var_core_command = var_core_command + " " + "-r "
+            if var_forensic_case_bool == 1:
+                var_core_command = var_core_command + " " + "-l "
+            if arg_gucci_output == 1:
+                var_core_command = var_core_command + " " + "-g "
+            if arg_verbose_output == 1:
+                var_core_command = var_core_command + " " + "-v "
+            if arg_autopsy_plugin == 1:
+                var_core_command = var_core_command + " " + "-a "
+            if var_output_directory_empty != "":
+                var_core_command = var_core_command + " " + "-o " + var_case_delivery_directory
+            var_core_command = var_core_command + " -i " + inputdirectory_var + " "
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[LOG]: CLI passing the following command to xAPK Ripper: " + var_core_command + "\n")
+            if arg_verbose_output == 1:
+                print("[LOG]: CLI passing the following command to xAPK Ripper: " + var_core_command)
+            var_command_setup_split = var_core_command.split()
+        else:  
+            var_command_setup_split = "x-terminal-emulator -e".split()
+        echo = [sys.executable, "-c",randomFunction()
+                ]
+        processes = [Popen(var_command_setup_split)]
+        for proc in processes:
+            proc.wait()
+    if script_ext_location_check == 3:
+        if platform.system() == "Windows":
+            var_core_command = "cmd.exe /c python ./YAAAAT_1_oat_ripper.py "
+            if arg_custom_search == 2:
+                if arg_string_file_search != "":
+                    var_core_command = var_core_command + " " + "-S " + arg_string_file_search + " "
+                else:
+                    print("error")
+            if var_yara_flag == 1:
+                var_core_command = var_core_command + " " + "-y "
+            if arg_custom_search == 1:
+                if arg_string_search != "":
+                    var_core_command = var_core_command + " " + "-s " + arg_string_search + " "
+            if arg_debug_output == 1:
+                var_core_command = var_core_command + " " + "-r "
+            if var_forensic_case_bool == 1:
+                var_core_command = var_core_command + " " + "-l "
+            if arg_gucci_output == 1:
+                var_core_command = var_core_command + " " + "-g "
+            if arg_verbose_output == 1:
+                var_core_command = var_core_command + " " + "-v "
+            if arg_autopsy_plugin == 1:
+                var_core_command = var_core_command + " " + "-a "
+            if var_output_directory_empty != "":
+                var_core_command = var_core_command + " " + "-o " + var_case_delivery_directory
+            var_core_command = var_core_command + " -i " + inputdirectory_var + " "
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[LOG]: CLI passing the following command to OAT Ripper: " + var_core_command + "\n")
+            if arg_verbose_output == 1:
+                print("[LOG]: CLI passing the following command to OAT Ripper: " + var_core_command)
+            var_command_setup_split = var_core_command.split()
+        else:  
+            var_command_setup_split = "x-terminal-emulator -e".split()
+        echo = [sys.executable, "-c",randomFunction()
+                ]
+        processes = [Popen(var_command_setup_split)]
+        for proc in processes:
+            proc.wait()
+    if script_ext_location_check == 4:
+        if platform.system() == "Windows":
+            var_core_command = "cmd.exe /c python ./YAAAAT_1_dex_ripper.py "
+            if arg_custom_search == 2:
+                if arg_string_file_search != "":
+                    var_core_command = var_core_command + " " + "-S " + arg_string_file_search + " "
+                else:
+                    print("error")
+            if var_yara_flag == 1:
+                var_core_command = var_core_command + " " + "-y "
+            if arg_custom_search == 1:
+                if arg_string_search != "":
+                    var_core_command = var_core_command + " " + "-s " + arg_string_search + " "
+            if arg_debug_output == 1:
+                var_core_command = var_core_command + " " + "-r "
+            if var_forensic_case_bool == 1:
+                var_core_command = var_core_command + " " + "-l "
+            if arg_gucci_output == 1:
+                var_core_command = var_core_command + " " + "-g "
+            if arg_verbose_output == 1:
+                var_core_command = var_core_command + " " + "-v "
+            if arg_autopsy_plugin == 1:
+                var_core_command = var_core_command + " " + "-a "
+            if var_output_directory_empty != "":
+                var_core_command = var_core_command + " " + "-o " + var_case_delivery_directory
+            var_core_command = var_core_command + " -i " + inputdirectory_var + " "
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[LOG]: CLI passing the following command to DEX Ripper: " + var_core_command + "\n")
+            if arg_verbose_output == 1:
+                print("[LOG]: CLI passing the following command to DEX ripper: " + var_core_command)
+            var_command_setup_split = var_core_command.split()
+        else:  
+            var_command_setup_split = "x-terminal-emulator -e".split()
+        echo = [sys.executable, "-c",randomFunction()
+                ]
+        processes = [Popen(var_command_setup_split)]
+        for proc in processes:
+            proc.wait()
+    if script_ext_location_check == 5:
+        if platform.system() == "Windows":
+            var_core_command = "cmd.exe /c python ./YAAAAT_1_so_ripper.py "
+            if arg_custom_search == 2:
+                if arg_string_file_search != "":
+                    var_core_command = var_core_command + " " + "-S " + arg_string_file_search + " "
+                else:
+                    print("error")
+            if var_yara_flag == 1:
+                var_core_command = var_core_command + " " + "-y "
+            if arg_custom_search == 1:
+                if arg_string_search != "":
+                    var_core_command = var_core_command + " " + "-s " + arg_string_search + " "
+            if arg_debug_output == 1:
+                var_core_command = var_core_command + " " + "-r "
+            if var_forensic_case_bool == 1:
+                var_core_command = var_core_command + " " + "-l "
+            if arg_gucci_output == 1:
+                var_core_command = var_core_command + " " + "-g "
+            if arg_verbose_output == 1:
+                var_core_command = var_core_command + " " + "-v "
+            if arg_autopsy_plugin == 1:
+                var_core_command = var_core_command + " " + "-a "
+            if var_output_directory_empty != "":
+                var_core_command = var_core_command + " " + "-o " + var_case_delivery_directory
+            var_core_command = var_core_command + " -i " + inputdirectory_var + " "
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[LOG]: CLI passing the following command to SO Ripper: " + var_core_command + "\n")
+            if arg_verbose_output == 1:
+                print("[LOG]: CLI passing the following command to SO Ripper: " + var_core_command)
+            var_command_setup_split = var_core_command.split()
+        else:  
+            var_command_setup_split = "x-terminal-emulator -e".split()
+        echo = [sys.executable, "-c",randomFunction()
+                ]
+        processes = [Popen(var_command_setup_split)]
+        for proc in processes:
+            proc.wait()
+    if script_ext_location_check == 6:
+        if platform.system() == "Windows":
+            var_core_command = "cmd.exe /c python ./YAAAAT_1_elf_ripper.py "
+            if arg_custom_search == 2:
+                if arg_string_file_search != "":
+                    var_core_command = var_core_command + " " + "-S " + arg_string_file_search + " "
+                else:
+                    print("error")
+            if var_yara_flag == 1:
+                var_core_command = var_core_command + " " + "-y "
+            if arg_custom_search == 1:
+                if arg_string_search != "":
+                    var_core_command = var_core_command + " " + "-s " + arg_string_search + " "
+            if arg_debug_output == 1:
+                var_core_command = var_core_command + " " + "-r "
+            if var_forensic_case_bool == 1:
+                var_core_command = var_core_command + " " + "-l "
+            if arg_gucci_output == 1:
+                var_core_command = var_core_command + " " + "-g "
+            if arg_verbose_output == 1:
+                var_core_command = var_core_command + " " + "-v "
+            if arg_autopsy_plugin == 1:
+                var_core_command = var_core_command + " " + "-a "
+            if var_output_directory_empty != "":
+                var_core_command = var_core_command + " " + "-o " + var_case_delivery_directory
+            var_core_command = var_core_command + " -i " + inputdirectory_var + " "
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[LOG]: CLI passing the following command to ELF Ripper: " + var_core_command + "\n")
+            if arg_verbose_output == 1:
+                print("[LOG]: CLI passing the following command to ELF Ripper: " + var_core_command)
+            var_command_setup_split = var_core_command.split()
+        else:  
+            var_command_setup_split = "x-terminal-emulator -e".split()
+        echo = [sys.executable, "-c",randomFunction()
+                ]
+        processes = [Popen(var_command_setup_split)]
+        for proc in processes:
+            proc.wait()
+    if script_ext_location_check == 7:
+        if platform.system() == "Windows":
+            var_core_command = "cmd.exe /c python ./YAAAAT_1_jar_ripper.py "
+            if arg_custom_search == 2:
+                if arg_string_file_search != "":
+                    var_core_command = var_core_command + " " + "-S " + arg_string_file_search + " "
+                else:
+                    print("error")
+            if var_yara_flag == 1:
+                var_core_command = var_core_command + " " + "-y "
+            if arg_custom_search == 1:
+                if arg_string_search != "":
+                    var_core_command = var_core_command + " " + "-s " + arg_string_search + " "
+            if arg_debug_output == 1:
+                var_core_command = var_core_command + " " + "-r "
+            if var_forensic_case_bool == 1:
+                var_core_command = var_core_command + " " + "-l "
+            if arg_gucci_output == 1:
+                var_core_command = var_core_command + " " + "-g "
+            if arg_verbose_output == 1:
+                var_core_command = var_core_command + " " + "-v "
+            if arg_autopsy_plugin == 1:
+                var_core_command = var_core_command + " " + "-a "
+            if var_output_directory_empty != "":
+                var_core_command = var_core_command + " " + "-o " + var_case_delivery_directory
+            var_core_command = var_core_command + " -i " + inputdirectory_var + " "
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[LOG]: CLI passing the following command to JAR Ripper: " + var_core_command + "\n")
+            if arg_verbose_output == 1:
+                print("[LOG]: CLI passing the following command to JAR Ripper: " + var_core_command)
             var_command_setup_split = var_core_command.split()
         else:  
             var_command_setup_split = "x-terminal-emulator -e".split()
@@ -302,11 +534,13 @@ def main(argv):
     global var_elf_ripper_flag
     global var_jar_ripper_flag
     global inputdirectory_var
+    global var_output_directory_empty
     
     timestr_dir = time.strftime("%H-%M-%S")
     timestr_case = time.strftime("%Y-%m-%d")
     inputdirectory_var = ''
     var_output_directory = ''
+    var_output_directory_empty = ''
     arg_autopsy_plugin = 0
     arg_verbose_output = 0
     arg_gucci_output = 0
@@ -348,11 +582,11 @@ def main(argv):
         print("YAAAAT_apk_ripper.py    -i <Directory_To_Scan_For_APKs>")
         print("At Least One File Type: -A (.apk)")
         print("                        -X (.xapk)")
-        #print("                        -O (.oat)")
-        #print("                        -D (.*dex)")
-        #print("                        -B (.so)")
-        #print("                        -E (.elf)")
-        #print("                        -J (.jar)")
+        print("                        -O (.oat)")
+        print("                        -D (.*dex)")
+        print("                        -B (.so)")
+        print("                        -E (.elf)")
+        print("                        -J (.jar)")
         print("Optional Arguments:     -v (For Verbose Output) ")
         print("                        -a (RTFC) ")        
         print("                        -l (Forensic Case)")
@@ -369,11 +603,11 @@ def main(argv):
             print("YAAAAT_apk_ripper.py    -i <Directory_To_Scan_For_APKs>")
             print("At Least One File Type: -A (.apk)")
             print("                        -X (.xapk)")
-            #print("                        -O (.oat)")
-            #print("                        -D (.*dex)")
-            #print("                        -B (.so)")
-            #print("                        -E (.elf)")
-            #print("                        -J (.jar)")
+            print("                        -O (.oat)")
+            print("                        -D (.*dex)")
+            print("                        -B (.so)")
+            print("                        -E (.elf)")
+            print("                        -J (.jar)")
             print("Optional Arguments:     -v (For Verbose Output) ")
             print("                        -a (RTFC) ")        
             print("                        -l (Forensic Case)")
@@ -588,11 +822,11 @@ def main(argv):
         print("YAAAAT_apk_ripper.py    -i <Directory_To_Scan_For_APKs>")
         print("At Least One File Type: -A (.apk)")
         print("                        -X (.xapk)")
-        #print("                        -O (.oat)")
-        #print("                        -D (.*dex)")
-        #print("                        -B (.so)")
-        #print("                        -E (.elf)")
-        #print("                        -J (.jar)")
+        print("                        -O (.oat)")
+        print("                        -D (.*dex)")
+        print("                        -B (.so)")
+        print("                        -E (.elf)")
+        rint("                        -J (.jar)")
         print("Optional Arguments:     -v (For Verbose Output) ")
         print("                        -a (RTFC) ")        
         print("                        -l (Forensic Case)")
@@ -606,6 +840,7 @@ def main(argv):
         sys.exit()
 
     inputdirectory_var = inputdirectory_var.replace('\"', '') + "\\"	
+    var_output_directory = var_output_directory.replace('\"', '') + "\\"	
     func_gu_st()
     func_python_version_check()
 
@@ -618,9 +853,16 @@ def main(argv):
     print("########################################################################################################################################")
     print("")
 
-    inputdirectory = os.path.dirname(inputdirectory_var)
+    if var_output_directory == '':
+        var_output_directory = inputdirectory
+        print("[INFO]: Output Directory is: " + var_output_directory)
+    else:
+        var_output_directory_empty = var_output_directory
+        print("[INFO]: Output Directory is: " + var_output_directory)
+    
+    outputdirectory = os.path.dirname(var_output_directory)
     if var_forensic_case_bool == 1:
-        var_case_delivery_directory = inputdirectory + "\\" + timestr_case + "_case_info"
+        var_case_delivery_directory = outputdirectory + "\\" + timestr_case + "_case_info"
         if os.path.exists(var_case_delivery_directory):
             print("[INFO]: Case Directory: " + var_case_delivery_directory + " Already Exists")
         else:
@@ -642,22 +884,12 @@ def main(argv):
             print("[SYS]: Full Python Info is: " + var_PY_ver_B)
 
 ########################################################################################################################################
-################################################################# APK SEARCH ###########################################################
-########################################################################################################################################
-    
-    if var_output_directory == '':
-        var_output_directory = inputdirectory
-        print("[INFO]: Output Directory is: " + var_output_directory)
-    else:
-        print("[INFO]: Output Directory is: " + var_output_directory)
-    
-########################################################################################################################################
 ####################################################### EXTRACTION DIRECTORY CREATION ##################################################
 ########################################################################################################################################
 
     if var_apk_ripper_flag == 1:
         global apk_main_pre_dir
-        apk_main_pre_dir = var_output_directory + "\\apk_post_run\\"
+        apk_main_pre_dir = var_case_delivery_directory + "\\apk_post_run\\"
         try:
             os.mkdir(apk_main_pre_dir)
         except:
@@ -668,7 +900,7 @@ def main(argv):
 
     if var_xapk_ripper_flag == 1:
         global xapk_main_pre_dir
-        xapk_main_pre_dir = var_output_directory + "\\xapk_post_run\\"
+        xapk_main_pre_dir = var_case_delivery_directory + "\\xapk_post_run\\"
         try:
             os.mkdir(xapk_main_pre_dir)
         except:
@@ -679,7 +911,7 @@ def main(argv):
                 
     if var_oat_ripper_flag == 1:
         global oat_main_pre_dir
-        oat_main_pre_dir = var_output_directory + "\\oat_post_run\\"
+        oat_main_pre_dir = var_case_delivery_directory + "\\oat_post_run\\"
         try:
             os.mkdir(oat_main_pre_dir)
         except:
@@ -690,7 +922,7 @@ def main(argv):
     
     if var_dex_ripper_flag == 1:
         global dex_main_pre_dir
-        dex_main_pre_dir = var_output_directory + "\\dex_post_run\\"
+        dex_main_pre_dir = var_case_delivery_directory + "\\dex_post_run\\"
         try:
             os.mkdir(dex_main_pre_dir)
         except:
@@ -701,7 +933,7 @@ def main(argv):
 
     if var_so_ripper_flag == 1:
         global so_main_pre_dir
-        so_main_pre_dir = var_output_directory + "\\so_post_run\\"
+        so_main_pre_dir = var_case_delivery_directory + "\\so_post_run\\"
         try:
             os.mkdir(so_main_pre_dir)
         except:
@@ -712,7 +944,7 @@ def main(argv):
 
     if var_elf_ripper_flag == 1:
         global elf_main_pre_dir
-        so_main_pre_dir = var_output_directory + "\\elf_post_run\\"
+        so_main_pre_dir = var_case_delivery_directory + "\\elf_post_run\\"
         try:
             os.mkdir(elf_main_pre_dir)
         except:
@@ -723,7 +955,7 @@ def main(argv):
 
     if var_jar_ripper_flag == 1:
         global jar_main_pre_dir
-        jar_main_pre_dir = var_output_directory + "\\jar_post_run\\"
+        jar_main_pre_dir = var_case_delivery_directory + "\\jar_post_run\\"
         try:
             os.mkdir(jar_main_pre_dir)
         except:
@@ -744,7 +976,7 @@ def main(argv):
         func_command_call()
     if var_xapk_ripper_flag == 1:
         script_ext_location_check = 2
-        print("test")
+        func_command_call()
     if var_oat_ripper_flag == 1:
         script_ext_location_check = 3
         if arg_verbose_output == 1:
