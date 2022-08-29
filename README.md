@@ -2,7 +2,7 @@
 
 ## Yet Another Android Analysis Tool (YAAAAT) ###
 
-##### Because it is still in pre-alpha, there are alot of bugs. Please let me know if you run into any issues and I'll try my best to knock them out. Additionally this project will later be nested under the Battlefield Triage Project. #####
+##### Because it is still in pre-alpha, there are alot of bugs. Please let me know if you run into any issues and I'll try my best to knock them out. #####
 
 ##### At this time, Python 2.7 is the primary supported implementation. This is primarily because Autopsy is still using Python 2. #####
 
@@ -25,6 +25,13 @@
 
 The core functionality of the tool requires the associated binaries to be in the ./ directory. Plan accordingly prior to running. 
 - Test software and script prior to using in a live enviorment
+
+Each script is intended on being ran individually if required (i.e. APK Ripper can be ran as a stand alone script). 
+However, the current intent is to run one of the following:
+# YAAAAT_0_AUT.py // Autopsy Plugin (Currently in Active Development and Testing)
+# YAAAAT_0_CLI.py // Command Line Version (Currently in Active Development and Testing)
+# YAAAAT_0_WEB.py // Local webpage (Currently Being Developed)
+# YAAAAT_0_GUI.py // Graphical User Interface (Planned)
 
 ### REQUIREMENTS: <br />
 Note: Store Binaries (And Their Associated DLLs/Files) In The Following Folder Structure:<br/>
