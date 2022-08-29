@@ -29,10 +29,10 @@ The core functionality of the tool requires the associated binaries to be in the
 Each script is intended on being ran individually if required (i.e. APK Ripper can be ran as a stand alone script). 
 However, the current intent is to run one of the following:
 <blockquote>
-# YAAAAT_0_AUT.py // Autopsy Plugin (Currently in Active Development and Testing)
-# YAAAAT_0_CLI.py // Command Line Version (Currently in Active Development and Testing)
-# YAAAAT_0_WEB.py // Local webpage (Currently Being Developed)
-# YAAAAT_0_GUI.py // Graphical User Interface (Planned)
+# YAAAAT_0_AUT.py // Autopsy Plugin (Currently in Active Development and Testing)<br/>
+# YAAAAT_0_CLI.py // Command Line Version (Currently in Active Development and Testing)<br/>
+# YAAAAT_0_WEB.py // Local webpage (Currently Being Developed)<br/>
+# YAAAAT_0_GUI.py // Graphical User Interface (Planned)<br/>
 </blockquote>
     
 ### REQUIREMENTS: <br />
