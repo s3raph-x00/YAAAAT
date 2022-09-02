@@ -1,10 +1,12 @@
 ########################################################################################################################################
 #################################################### Author:      s3raph                ################################################
 #################################################### Purpose:     To Pass the Butter    ################################################
-#################################################### Version:     .07155                ################################################
-#################################################### Last Update: 20220825              ################################################
+#################################################### Version:     .07153                ################################################
+#################################################### Last Update: 20220815              ################################################
 ########################################################################################################################################
 
+import sys
+import platform
 import os
 import time
 import subprocess
@@ -16,7 +18,7 @@ import glob
 import hashlib
 import re
 import base64
-import platform
+from subprocess import Popen
 from zipfile import ZipFile
 from struct import pack, unpack
 from xml.sax.saxutils import escape
@@ -639,8 +641,8 @@ def func_large_scale_regex():
                         if arg_verbose_output == 1:
                             print("[IPV4]: SOURCE FILE: " + var_ref_filepath)
                             print("[IPV4]: SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())
-                        ip_extract_write_txt_update.write("[URL-MED] SOURCE FILE: " + var_ref_filepath + "\n")
-                        ip_extract_write_txt_update.write("[URL-MED] SOURCE LINE: " + var_directory_file_object_line.strip('\n') + "\n")                    
+                        ip_extract_write_txt_update.write("[IPV4] SOURCE FILE: " + var_ref_filepath + "\n")
+                        ip_extract_write_txt_update.write("[IPV4] SOURCE LINE: " + var_directory_file_object_line.strip('\n') + "\n")                    
                         while var_chain_count < apk_content_extract_ipv4_tup_len:
                             if apk_content_extract_ipv4[var_chain_count]:
                                 if arg_debug_output == 1:
@@ -1553,9 +1555,9 @@ def main(argv):
                 var_yara_decomp = "\"" + apk_decomp_directory + "\\" + apk + "yara" + "\"" + " "
                 
                 yara_apk_full_path = "\"" + apk_full_path + "\""
-                var_yara_command = '.\\win\\bin\\yara64.exe -s ' + "master_index.yar" + " --recursive " + jadx_apk_full_path + " >> " + var_yara_log_write_txt_up
+                var_yara_command = '.\\win\\yara64.exe -s -S -m ' + ' ".\\yara\\master_index.yar" ' + jadx_apk_full_path
                 var_yara_command_split = var_yara_command.split()
-                subprocess.check_call(var_yara_command)
+                subprocess.check_call(var_yara_command, stdout=var_yara_log_write_txt_up)
             except:
                 if var_forensic_case_bool == 1:
                     log_txt_update.write("[WARN]: Error Running YARA Against: " + apk_full_path + ".\n")  
