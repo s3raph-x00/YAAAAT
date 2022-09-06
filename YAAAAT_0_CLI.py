@@ -1,8 +1,8 @@
 ########################################################################################################################################
 #################################################### Author:      s3raph                ################################################
 #################################################### Purpose:     To Pass the Butter    ################################################
-#################################################### Version:     .07157                ################################################
-#################################################### Last Update: 20220902              ################################################
+#################################################### Version:     .07163                ################################################
+#################################################### Last Update: 20220906              ################################################
 ########################################################################################################################################
 
 
@@ -793,7 +793,7 @@ def main(argv):
             ###                                                      ###
             ### Default: ""                                          ###
             ############################################################
-            var_so_ripper_flag = 1
+            var_elf_ripper_flag = 1
         if opt == '-J':
             ############################################################
             ###               [One Filetype Required]                ###
@@ -804,7 +804,7 @@ def main(argv):
             ###                                                      ###
             ### Default: ""                                          ###
             ############################################################
-            var_so_ripper_flag = 1
+            var_jar_ripper_flag = 1
         elif opt in ("-i", "--idir"):
             ############################################################
             ###                       [Required]                     ###
@@ -944,7 +944,7 @@ def main(argv):
 
     if var_elf_ripper_flag == 1:
         global elf_main_pre_dir
-        so_main_pre_dir = var_case_delivery_directory + "\\elf_post_run\\"
+        elf_main_pre_dir = var_case_delivery_directory + "\\elf_post_run\\"
         try:
             os.mkdir(elf_main_pre_dir)
         except:
@@ -979,11 +979,7 @@ def main(argv):
         func_command_call()
     if var_oat_ripper_flag == 1:
         script_ext_location_check = 3
-        if arg_verbose_output == 1:
-            print("[ERROR]: Not Implemented Yet.\n")
-        if var_forensic_case_bool == 1:
-            log_txt_update.write("[ERROR]: Not Implemented Yet.\n")
-    
+        func_command_call()
     if var_dex_ripper_flag == 1:
         script_ext_location_check = 4
         func_command_call()
@@ -1004,10 +1000,7 @@ def main(argv):
     
     if var_jar_ripper_flag == 1:
         script_ext_location_check = 7
-        if arg_verbose_output == 1:
-            print("[ERROR]: Not Implemented Yet.\n")
-        if var_forensic_case_bool == 1:
-            log_txt_update.write("[ERROR]: Not Implemented Yet.\n")
+        func_command_call()
 
 ########################################################################################################################################
 ############################################################# Per APK Clean-Up #########################################################
