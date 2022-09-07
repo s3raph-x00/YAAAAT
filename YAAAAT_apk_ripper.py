@@ -1,8 +1,8 @@
 ########################################################################################################################################
 #################################################### Author:      s3raph                ################################################
 #################################################### Purpose:     To Pass the Butter    ################################################
-#################################################### Version:     .07153                ################################################
-#################################################### Last Update: 20220815              ################################################
+#################################################### Version:     .07170                ################################################
+#################################################### Last Update: 20220906              ################################################
 ########################################################################################################################################
 
 import sys
@@ -513,6 +513,38 @@ def func_base64_decode(var_string_decode_req_base64):
             if arg_verbose_output == 1:
                 print("[INFO]: Error Decoding Potential Base64 String: " + var_string_decode_req_base64 + "\n")
 
+
+def func_fileheader_check():
+########################################################################################################################################
+############################################################ Fileheader Function #######################################################
+########################################################################################################################################
+
+    global apk_file_header_check
+    global apk_file_header_check_data
+    global apk_file_header_sig
+    global apk_extract_continue
+    
+    apk_file_header_check = open(apk_full_path, "rb")
+    apk_file_header_check_data = apk_file_header_check.read(2)
+    apk_file_header_sig = "PK"
+
+    apk_extract_continue = 0
+        
+    if apk_file_header_sig in apk_file_header_check_data:
+        apk_extract_continue = 1
+        apk_file_header_check.close()
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[HEADER]: File Header: " + apk_full_path + " matches that of an APK.\n")
+        if arg_verbose_output == 1:
+            print("[HEADER]: File Header: " + apk_full_path + " matches that of an APK.")
+
+    else:
+        apk_file_header_check.close()
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[HEADER] File Header: " + apk_full_path + " does not match that of an APK. Skipping Processing.\n")
+        if arg_verbose_output == 1:
+            print("[HEADER] File Header: " + apk_full_path + " does not match that of an APK. Skipping Processing.")
+
 def func_android_cert_pull():
 ########################################################################################################################################
 ####################################################### APK Certificate Rip Function ###################################################
@@ -686,8 +718,7 @@ def func_large_scale_regex():
 
                     ### NEEDS POST REGEX CHECK ###
                     if var_med_IPv6_conf_check == 0:
-                        apk_content_extract_ipv6 = re.findall(r'(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))', var_directory_file_object_line)
-                        apk_content_extract_ipv6_len = len(apk_content_extract_ipv6)
+                        apk_content_extract_ipv6 = re.findall(r'((?:^|(?<=\s))(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(?=\s|$))', var_directory_file_object_line)
                         var_chain_count = 0
                         if apk_content_extract_ipv6:
                             var_IPv6_low_count = var_IPv6_low_count + 1
@@ -1054,6 +1085,7 @@ def main(argv):
     global var_sys_complete_flag
     global var_py_complete_flag
     global var_yara_flag
+    global apk_full_path
 
     timestr_dir = time.strftime("%H-%M-%S")
     timestr_case = time.strftime("%Y-%m-%d")
@@ -1316,6 +1348,9 @@ def main(argv):
             print("[INFO]: Searching for APKs in: " + directory_search_pattern)
 
     for apk_full_path in glob.glob(directory_search_pattern):
+        func_fileheader_check()
+        if apk_extract_continue == 0:
+            continue
         if arg_verbose_output == 1:
             print("")
             print("############################################ RIPPING OF APK: " + os.path.basename(apk_full_path) + " STARTED. ##############################")
@@ -1555,7 +1590,7 @@ def main(argv):
                 var_yara_decomp = "\"" + apk_decomp_directory + "\\" + apk + "yara" + "\"" + " "
                 
                 yara_apk_full_path = "\"" + apk_full_path + "\""
-                var_yara_command = '.\\win\\yara64.exe -s -S -m ' + ' ".\\yara\\master_index.yar" ' + jadx_apk_full_path
+                var_yara_command = '.\\win\\yara64.exe -s -S -m ' + ' ".\\yara\\master_index.yar" ' + jadx_dex_full_path
                 var_yara_command_split = var_yara_command.split()
                 subprocess.check_call(var_yara_command, stdout=var_yara_log_write_txt_up)
             except:
