@@ -1,8 +1,8 @@
 ########################################################################################################################################
 #################################################### Author:      s3raph                ################################################
 #################################################### Purpose:     To Pass the Butter    ################################################
-#################################################### Version:     .07153                ################################################
-#################################################### Last Update: 20220815              ################################################
+#################################################### Version:     .07176                ################################################
+#################################################### Last Update: 20220906              ################################################
 ########################################################################################################################################
 
 import sys
@@ -70,11 +70,11 @@ def func_hello():
     print("                                         / .-`                      \ \/ /                      `-. \    ")
     print("                                        /.`                          \/ /                          `.\    ")
     print("                                       |`                            / /\                            `|    ")
-    print("                               @@@@@@  @@@@@@@  @@@  @@@      @@@@@@@  @@@ @@@@@@@  @@@@@@@  @@@@@@@@ @@@@@@@ ")
-    print("                              @@!  @@@ @@!  @@@ @@!  !@@      @@!  @@@ @@! @@!  @@@ @@!  @@@ @@!      @@!  @@@")
-    print("                              @!@!@!@! @!@@!@!  @!@@!@!       @!@!!@!  !!@ @!@@!@!  @!@@!@!  @!!!:!   @!@!!@! ")
-    print("                              !!:  !!! !!:      !!: :!!       !!: :!!  !!: !!:      !!:      !!:      !!: :!! ")
-    print("                               :   : :  :        :   :::       :   : : :    :        :       : :: :::  :   : :")
+    print("                                                   @@@@@@@  @@@ @@@@@@@  @@@@@@@  @@@@@@@@ @@@@@@@ ")
+    print("                                                   @@!  @@@ @@! @@!  @@@ @@!  @@@ @@!      @@!  @@@")
+    print("                                                   @!@!!@!  !!@ @!@@!@!  @!@@!@!  @!!!:!   @!@!!@! ")
+    print("                                                   !!: :!!  !!: !!:      !!:      !!:      !!: :!! ")
+    print("                                                    :   : : :    :        :       : :: :::  :   : :")
 
 def func_goodbye():
 ########################################################################################################################################
@@ -203,6 +203,37 @@ def func_set_console_strobe():
     os.system('color 7C')
     time.sleep(.1)
 
+def func_fileheader_check():
+########################################################################################################################################
+############################################################ Fileheader Function #######################################################
+########################################################################################################################################
+
+    global jar_file_header_check
+    global jar_file_header_check_data
+    global jar_file_header_sig
+    global jar_extract_continue
+    
+    jar_file_header_check = open(jar_full_path, "rb")
+    jar_file_header_check_data = jar_file_header_check.read(2)
+    jar_file_header_sig = "PK"
+
+    jar_extract_continue = 0
+        
+    if jar_file_header_sig in jar_file_header_check_data:
+        jar_extract_continue = 1
+        jar_file_header_check.close()
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[HEADER]: File Header: " + jar_full_path + " matches that of a JAR.\n")
+        if arg_verbose_output == 1:
+            print("[HEADER]: File Header: " + jar_full_path + " matches that of a JAR.")
+
+    else:
+        jar_file_header_check.close()
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[HEADER] File Header: " + jar_full_path + " does not match that of a JAR. Skipping Processing.\n")
+        if arg_verbose_output == 1:
+            print("[HEADER] File Header: " + jar_full_path + " does not match that of a JAR. Skipping Processing.")
+
 def func_global_var_declare():
 ########################################################################################################################################
 ######################################################## GLOBAL VARIABLE FUNCTION ######################################################
@@ -247,11 +278,11 @@ def func_global_var_declare():
     var_ip_list_unscrubbed = []
     var_proto_list_unscrubbed = []
 
-def func_dex_json_map():
+def func_jar_json_map():
 ########################################################################################################################################
 ######################################################## JSON-PYTHON DICTIONARY MAP ####################################################
 ########################################################################################################################################
-    dex_json = {
+    jar_json = {
         "FILE- Filename": "",
         "FILE- True Filename": "",
         "FILE- Package Name": "",
@@ -311,44 +342,44 @@ def func_large_scale_regex():
     if arg_verbose_output == 1:
         print("[REGEX] #################################### RUNNING REGEX AGAINST JADX OUTPUT ####################################")
         print("")
-    for var_path, var_directory, var_files in os.walk(os.path.abspath(dex_decomp_directory)):
+    for var_path, var_directory, var_files in os.walk(os.path.abspath(jar_decomp_directory)):
         for var_each_file in var_files:
             var_ref_filepath = os.path.join(var_path, var_each_file)
             if os.path.isfile(var_ref_filepath):
                 var_directory_file_object = open(var_ref_filepath)
                 for var_directory_file_object_line in var_directory_file_object:
-                    dex_content_extract_ipv4 = re.findall(r'^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$', var_directory_file_object_line)
-                    dex_content_extract_ipv4_tup_len = len(dex_content_extract_ipv4)
+                    jar_content_extract_ipv4 = re.findall(r'^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$', var_directory_file_object_line)
+                    jar_content_extract_ipv4_tup_len = len(jar_content_extract_ipv4)
                     var_chain_count = 0
-                    if dex_content_extract_ipv4:
+                    if jar_content_extract_ipv4:
                         var_IPv4_count = var_IPv4_count + 1
                         if arg_verbose_output == 1:
                             print("[IPV4]: SOURCE FILE: " + var_ref_filepath)
                             print("[IPV4]: SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())
                         ip_extract_write_txt_update.write("[IPV4] SOURCE FILE: " + var_ref_filepath + "\n")
                         ip_extract_write_txt_update.write("[IPV4] SOURCE LINE: " + var_directory_file_object_line.strip('\n') + "\n")                    
-                        while var_chain_count < dex_content_extract_ipv4_tup_len:
-                            if dex_content_extract_ipv4[var_chain_count]:
+                        while var_chain_count < jar_content_extract_ipv4_tup_len:
+                            if jar_content_extract_ipv4[var_chain_count]:
                                 if arg_debug_output == 1:
-                                    ipv6_extract_write_txt_up.write("[IPV4]: Potential IPv4 Address Found: " + dex_content_extract_ipv4[var_chain_count] + "\n")
+                                    ipv6_extract_write_txt_up.write("[IPV4]: Potential IPv4 Address Found: " + jar_content_extract_ipv4[var_chain_count] + "\n")
                                     if arg_verbose_output == 1:
-                                        print("[IPV4]: Potential IPv4 Address Found: " + dex_content_extract_ipv4[var_chain_count])
+                                        print("[IPV4]: Potential IPv4 Address Found: " + jar_content_extract_ipv4[var_chain_count])
                                 var_chain_count = var_chain_count + 1
                             else:
                                 var_chain_count = var_chain_count + 1
 
                     var_med_IPv6_conf_check = 0
-                    dex_content_extract_ipv6_test = re.findall(r'^((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)::((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)$', var_directory_file_object_line)
+                    jar_content_extract_ipv6_test = re.findall(r'^((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)::((?:[0-9A-Fa-f]{1,4}(?::[0-9A-Fa-f]{1,4})*)?)$', var_directory_file_object_line)
                     var_chain_count = 0
-                    if dex_content_extract_ipv6_test:
+                    if jar_content_extract_ipv6_test:
                         var_IPv6_high_count = var_IPv6_high_count + 1
                         if arg_verbose_output == 1:
                             print("[IPv6-MOD]: SOURCE FILE: " + var_ref_filepath)
                             print("[IPv6-MOD]: SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())
-                        while var_chain_count < dex_content_extract_ipv6_len:
-                            if dex_content_extract_ipv6[var_chain_count]:
+                        while var_chain_count < jar_content_extract_ipv6_len:
+                            if jar_content_extract_ipv6[var_chain_count]:
                                 var_med_IPv6_conf_check = 1
-                                var_tmp_string = dex_content_extract_ipv6[var_chain_count]
+                                var_tmp_string = jar_content_extract_ipv6[var_chain_count]
                                 var_tmp_string_len = len(var_tmp_string)
                                 if var_tmp_string_len != 0:
                                     var_chain_v2_count = 0
@@ -370,19 +401,19 @@ def func_large_scale_regex():
 
                     ### NEEDS POST REGEX CHECK ###
                     if var_med_IPv6_conf_check == 0:
-                        dex_content_extract_ipv6 = re.findall(r'(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))', var_directory_file_object_line)
-                        dex_content_extract_ipv6_len = len(dex_content_extract_ipv6)
+                        jar_content_extract_ipv6 = re.findall(r'((?:^|(?<=\s))(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(?=\s|$))', var_directory_file_object_line)
+                        jar_content_extract_ipv6_len = len(jar_content_extract_ipv6)
                         var_chain_count = 0
-                        if dex_content_extract_ipv6:
+                        if jar_content_extract_ipv6:
                             var_IPv6_low_count = var_IPv6_low_count + 1
                             if arg_verbose_output == 1:
                                 print("[IPv6-LOW]: SOURCE FILE: " + var_ref_filepath)
                                 print("[IPv6-LOW]: SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())
                             ipv6_extract_write_txt_up.write("[IPv6-LOW]: SOURCE FILE: " + var_ref_filepath + "\n")
                             ipv6_extract_write_txt_up.write("[IPv6-LOW]: SOURCE LINE: " + var_directory_file_object_line.strip('\n') + "\n")         
-                            while var_chain_count < dex_content_extract_ipv6_len:
-                                if dex_content_extract_ipv6[var_chain_count]:
-                                    var_tmp_string = dex_content_extract_ipv6[var_chain_count]
+                            while var_chain_count < jar_content_extract_ipv6_len:
+                                if jar_content_extract_ipv6[var_chain_count]:
+                                    var_tmp_string = jar_content_extract_ipv6[var_chain_count]
                                     var_tmp_string_len = len(var_tmp_string)
                                     if var_tmp_string_len != 0:
                                         var_chain_v2_count = 0
@@ -407,10 +438,10 @@ def func_large_scale_regex():
                                 print("IPV6-LOW]: Already Matched on IPV6-MED] Regex. Skipping This Check.")
                     
                     var_high_conf_check = 0
-                    dex_content_extract_hiconf_url = re.findall(r"^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$", var_directory_file_object_line)
-                    dex_content_extract_hiconf_len = len(dex_content_extract_hiconf_url)
+                    jar_content_extract_hiconf_url = re.findall(r"^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$", var_directory_file_object_line)
+                    jar_content_extract_hiconf_len = len(jar_content_extract_hiconf_url)
                     var_chain_count = 0
-                    if dex_content_extract_hiconf_url:
+                    if jar_content_extract_hiconf_url:
                         var_high_conf_check = 1
                         var_url_high_count = var_url_high_count + 1
                         if arg_verbose_output == 1:
@@ -418,9 +449,9 @@ def func_large_scale_regex():
                             print("[URL-HI]:   SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())
                         hi_conf_URL_extract_write_txt_up.write("[URL-HI]:   SOURCE FILE: " + var_ref_filepath + "\n")
                         hi_conf_URL_extract_write_txt_up.write("[URL-HI]:   SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip() + "\n")
-                        while var_chain_count < dex_content_extract_hiconf_len:
-                            if dex_content_extract_hiconf_url[var_chain_count]:
-                                var_tmp_string = dex_content_extract_hiconf_url[var_chain_count]
+                        while var_chain_count < jar_content_extract_hiconf_len:
+                            if jar_content_extract_hiconf_url[var_chain_count]:
+                                var_tmp_string = jar_content_extract_hiconf_url[var_chain_count]
                                 var_tmp_string_len = len(var_tmp_string)
                                 if var_tmp_string_len != 0:
                                     var_chain_v2_count = 0
@@ -441,10 +472,10 @@ def func_large_scale_regex():
                     var_med_conf_check = 1
                     if var_high_conf_check == 0:
                     ### MOSTLY OK WITH CURRENT REGEX ###                    
-                        dex_content_extract_loconf_url = re.findall(r'https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)', var_directory_file_object_line)
-                        dex_content_extract_loconf_len = len(dex_content_extract_loconf_url)
+                        jar_content_extract_loconf_url = re.findall(r'https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()!@:%_\+.~#?&\/\/=]*)', var_directory_file_object_line)
+                        jar_content_extract_loconf_len = len(jar_content_extract_loconf_url)
                         var_chain_count = 0
-                        if dex_content_extract_loconf_url:
+                        if jar_content_extract_loconf_url:
                             var_med_conf_check = 1
                             var_url_med_count = var_url_med_count + 1
                             if arg_verbose_output == 1:
@@ -452,9 +483,9 @@ def func_large_scale_regex():
                                 print("[URL-MED]:  SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())
                             med_conf_URL_extract_write_txt_up.write("[URL-MED]:  SOURCE FILE: " + var_ref_filepath + "\n")
                             med_conf_URL_extract_write_txt_up.write("[URL-MED]:  SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip() + "\n")
-                            while var_chain_count < dex_content_extract_loconf_len:
-                                if dex_content_extract_loconf_url[var_chain_count]:
-                                    var_tmp_string = dex_content_extract_loconf_url[var_chain_count]
+                            while var_chain_count < jar_content_extract_loconf_len:
+                                if jar_content_extract_loconf_url[var_chain_count]:
+                                    var_tmp_string = jar_content_extract_loconf_url[var_chain_count]
                                     var_tmp_string_len = len(var_tmp_string)
                                     if var_tmp_string_len != 0:
                                         var_chain_v2_count = 0
@@ -481,19 +512,19 @@ def func_large_scale_regex():
                     if var_med_conf_check == 0:
                         if var_high_conf_check == 0:
                             ### MOSTLY OK WITH CURRENT REGEX ###                    
-                                dex_content_extract_lowconf_url = re.findall(r'^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$', var_directory_file_object_line)
-                                dex_content_extract_lowconf_len = len(dex_content_extract_lowconf_url)
+                                jar_content_extract_lowconf_url = re.findall(r'^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$', var_directory_file_object_line)
+                                jar_content_extract_lowconf_len = len(jar_content_extract_lowconf_url)
                                 var_chain_count = 0
-                                if dex_content_extract_lowconf_url:
+                                if jar_content_extract_lowconf_url:
                                     var_url_low_count = var_url_low_count + 1
                                     if arg_verbose_output == 1:
                                         print("[URL-LOW]:  SOURCE FILE: " + var_ref_filepath)
                                         print("[URL-LOW]:  SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())
                                     low_conf_URL_extract_write_txt_up.write("[URL-LOW]:  SOURCE FILE: " + var_ref_filepath + "\n")
                                     low_conf_URL_extract_write_txt_up.write("[URL-LOW]:  SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip() + "\n")
-                                    while var_chain_count < dex_content_extract_lowconf_len:
-                                        if dex_content_extract_lowconf_url[var_chain_count]:
-                                            var_tmp_string = dex_content_extract_lowconf_url[var_chain_count]
+                                    while var_chain_count < jar_content_extract_lowconf_len:
+                                        if jar_content_extract_lowconf_url[var_chain_count]:
+                                            var_tmp_string = jar_content_extract_lowconf_url[var_chain_count]
                                             var_tmp_string_len = len(var_tmp_string)
                                             if var_tmp_string_len != 0:
                                                 var_chain_v2_count = 0
@@ -521,19 +552,19 @@ def func_large_scale_regex():
                             if arg_verbose_output == 1:
                                 print("[URL-LOW]:  Already Matched on [URL-MED] Regex. Skipping This Check.")
 
-                    dex_content_extract_email = re.findall(r'(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))', var_directory_file_object_line)
-                    dex_content_extract_email_len = len(dex_content_extract_email)
+                    jar_content_extract_email = re.findall(r'(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))', var_directory_file_object_line)
+                    jar_content_extract_email_len = len(jar_content_extract_email)
                     var_chain_count = 0
-                    if dex_content_extract_email:
+                    if jar_content_extract_email:
                         var_email_count = var_email_count + 1
                         if arg_verbose_output == 1:
                             print("[EMAIL]:    SOURCE FILE: " + var_ref_filepath)
                             print("[EMAIL]:    SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip())
                         email_extract_write_txt_up.write("[EMAIL]:    SOURCE FILE: " + var_ref_filepath + "\n")
                         email_extract_write_txt_up.write("[EMAIL]:    SOURCE LINE: " + var_directory_file_object_line.strip('\n').strip() + "\n")
-                        while var_chain_count < dex_content_extract_email_len:   
-                            if dex_content_extract_email[var_chain_count]:     
-                                var_tmp_string = dex_content_extract_email[var_chain_count]
+                        while var_chain_count < jar_content_extract_email_len:   
+                            if jar_content_extract_email[var_chain_count]:     
+                                var_tmp_string = jar_content_extract_email[var_chain_count]
                                 var_tmp_string_len = len(var_tmp_string)                            
                                 if var_tmp_string_len != 0:
                                     var_chain_v2_count = 0
@@ -595,43 +626,12 @@ def func_initial_logging():
         case_log_file_txt = var_case_delivery_directory + "\\log.txt"
         global log_txt_update
         log_txt_update = open(case_log_file_txt, "a")
-        log_txt_update.write("--- YAAAAT dex Ripper ---\n")
+        log_txt_update.write("--- YAAAAT jar Ripper ---\n")
         log_txt_update.write("[LOG]: Tool Started on: " + timestr_case + " at " + timestr_dir + "\n")  
-
-def func_fileheader_check():
-########################################################################################################################################
-############################################################ Fileheader Function #######################################################
-########################################################################################################################################
-
-    global dex_file_header_check
-    global dex_file_header_check_data
-    global dex_file_header_sig
-    global dex_extract_continue
-    
-    dex_file_header_check = open(dex_full_path, "rb")
-    dex_file_header_check_data = dex_file_header_check.read(3)
-    dex_file_header_sig = "DEX"
-
-    dex_extract_continue = 0
-        
-    if dex_file_header_sig in dex_file_header_check_data:
-        dex_extract_continue = 1
-        dex_file_header_check.close()
-        if var_forensic_case_bool == 1:
-            log_txt_update.write("[HEADER]: File Header: " + dex_full_path + " matches that of a DEX file.\n")
-        if arg_verbose_output == 1:
-            print("[HEADER]: File Header: " + dex_full_path + " matches that of a DEX file.")
-
-    else:
-        apk_file_header_check.close()
-        if var_forensic_case_bool == 1:
-            log_txt_update.write("[HEADER] File Header: " + dex_full_path + " does not match that of a DEX file. Skipping Processing.\n")
-        if arg_verbose_output == 1:
-            print("[HEADER] File Header: " + dex_full_path + " does not match that of a DEX file. Skipping Processing.")
 
 def function_statistic_write():
 ########################################################################################################################################
-######################################################### dex Extraction Statistics ####################################################
+######################################################### jar Extraction Statistics ####################################################
 ########################################################################################################################################
 
     var_url_high_count_str = str(var_url_high_count)
@@ -671,7 +671,7 @@ def func_hash_all_files():
 ########################################################################################################################################
     global var_embed_file_hits
     var_embed_file_hits = 0
-    for var_path, var_directory, var_files in os.walk(os.path.abspath(dex_decomp_directory)):
+    for var_path, var_directory, var_files in os.walk(os.path.abspath(jar_decomp_directory)):
         for var_each_file in var_files:
             var_embed_file_hits = var_embed_file_hits + 1
             var_ref_filepath = os.path.join(var_path, var_each_file)
@@ -724,7 +724,7 @@ def main(argv):
     global timestr_dir
     global timestr_case
     global var_output_directory
-    global dex
+    global jar
     global arg_debug_output
     global arg_string_search
     global arg_string_file_search
@@ -732,6 +732,7 @@ def main(argv):
     global var_sys_complete_flag
     global var_py_complete_flag
     global var_yara_flag
+    global jar_full_path
 
     timestr_dir = time.strftime("%H-%M-%S")
     timestr_case = time.strftime("%Y-%m-%d")
@@ -768,7 +769,7 @@ def main(argv):
     except getopt.GetoptError:
         var_manual_error_code = (1)
         func_fail_whale()
-        print("YAAAAT_dex_ripper.py -i <Directory_To_Scan_For_dexs>")
+        print("YAAAAT_jar_ripper.py -i <Directory_To_Scan_For_jars>")
         print("Optional Arguments:  -v (For Verbose Output) -a (RTFC)")
         print("                     -l (Forensic Case)")
         print("                     -f (Fix My Terminal Color x.x)")
@@ -780,7 +781,7 @@ def main(argv):
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print("YAAAAT_dex_ripper.py -i <Directory_To_Scan_For_dexs>")
+            print("YAAAAT_jar_ripper.py -i <Directory_To_Scan_For_jars>")
             print("Optional Arguments:  -v (For Verbose Output) -a (RTFC)")
             print("                     -l (Forensic Case Logging)")
             print("                     -f (Fix My Terminal Color x.x)")
@@ -912,7 +913,7 @@ def main(argv):
         print("")
         print("[ERROR]: MUST SPECIFY DIRECTORY")
         print("")
-        print("YAAAAT_dex_ripper.py -i <Directory_To_Scan_For_dexs>")
+        print("YAAAAT_jar_ripper.py -i <Directory_To_Scan_For_jars>")
         print("Optional Arguments:  -v (For Verbose Output) -a (RTFC)")
         print("                     -l (Forensic Case)")
         print("                     -f (Fix My Terminal Color x.x)")
@@ -974,117 +975,117 @@ def main(argv):
             print("[SYS]: Full Python Info is: " + var_PY_ver_B)
 
 ########################################################################################################################################
-################################################################# dex SEARCH ###########################################################
+################################################################# jar SEARCH ###########################################################
 ########################################################################################################################################
     
-    directory_search_pattern_check = (inputdirectory + "\\dex_storage\\")
+    directory_search_pattern_check = (inputdirectory + "\\jar_storage\\")
     if os.path.isdir(directory_search_pattern_check):
-        directory_search_pattern = (inputdirectory + "\\dex_storage\\*.dex")
+        directory_search_pattern = (inputdirectory + "\\jar_storage\\*.jar")
         if var_forensic_case_bool == 1:
-            log_txt_update.write("[INFO]: Searching for dexs in: " + directory_search_pattern + "\n")
+            log_txt_update.write("[INFO]: Searching for jars in: " + directory_search_pattern + "\n")
         if arg_verbose_output == 1:
-            print("[INFO]: Searching for dexs in: " + directory_search_pattern)
+            print("[INFO]: Searching for jars in: " + directory_search_pattern)
             print("")
 
     else:
-        directory_search_pattern = (inputdirectory+"\\*.dex")
+        directory_search_pattern = (inputdirectory+"\\*.jar")
         if var_forensic_case_bool == 1:
-            log_txt_update.write("[INFO]: Searching for dexs in: " + directory_search_pattern + "\n")
+            log_txt_update.write("[INFO]: Searching for jars in: " + directory_search_pattern + "\n")
         if arg_verbose_output == 1:
-            print("[INFO]: Searching for dexs in: " + directory_search_pattern)
+            print("[INFO]: Searching for jars in: " + directory_search_pattern)
 
-    for dex_full_path in glob.glob(directory_search_pattern):
+    for jar_full_path in glob.glob(directory_search_pattern):
         func_fileheader_check()
-        if dex_extract_continue == 0:
+        if jar_extract_continue == 0:
             continue
         if arg_verbose_output == 1:
             print("")
-            print("############################################ RIPPING OF dex: " + os.path.basename(dex_full_path) + " STARTED. ##############################")
+            print("############################################ RIPPING OF jar: " + os.path.basename(jar_full_path) + " STARTED. ##############################")
             print("")
-        dex_with_extension = os.path.basename(dex_full_path)
-        dex, discard_ext = os.path.splitext(dex_with_extension)
+        jar_with_extension = os.path.basename(jar_full_path)
+        jar, discard_ext = os.path.splitext(jar_with_extension)
         if var_forensic_case_bool == 1:
-            log_txt_update.write("[INFO]: Found The dex: " + dex_with_extension + " - Processing Now\n")
+            log_txt_update.write("[INFO]: Found The jar: " + jar_with_extension + " - Processing Now\n")
         if arg_verbose_output == 1:
-            print("[INFO]: Found The dex: " + dex_with_extension + " - Processing Now")
+            print("[INFO]: Found The jar: " + jar_with_extension + " - Processing Now")
 
 ########################################################################################################################################
 ####################################################### EXTRACTION DIRECTORY CREATION ##################################################
 ########################################################################################################################################
-        global dex_main_pre_dir
-        dex_main_pre_dir = var_output_directory + "\\dex_post_run\\"
+        global jar_main_pre_dir
+        jar_main_pre_dir = var_output_directory + "\\jar_post_run\\"
         try:
-            os.mkdir(dex_main_pre_dir)
+            os.mkdir(jar_main_pre_dir)
         except:
             if var_forensic_case_bool == 1:
-                log_txt_update.write("[WARN]: Error Making dex Results Directory: " + dex_main_pre_dir + ". Directory likely exists.\n")
+                log_txt_update.write("[WARN]: Error Making jar Results Directory: " + jar_main_pre_dir + ". Directory likely exists.\n")
             if arg_verbose_output == 1:
-                print("[WARN]: Error Making dex Results Directory: " + dex_main_pre_dir + ". Directory likely exists.")
+                print("[WARN]: Error Making jar Results Directory: " + jar_main_pre_dir + ". Directory likely exists.")
 
-        global dex_main_dir
-        dex_main_dir = dex_main_pre_dir + "\\" + timestr_dir
+        global jar_main_dir
+        jar_main_dir = jar_main_pre_dir + "\\" + timestr_dir
         try:
-            os.mkdir(dex_main_dir)
+            os.mkdir(jar_main_dir)
         except:
             if var_forensic_case_bool == 1:
-                log_txt_update.write("[WARN]: Error Making dex Results Directory: " + dex_main_dir + ". Directory likely exists.\n")
+                log_txt_update.write("[WARN]: Error Making jar Results Directory: " + jar_main_dir + ". Directory likely exists.\n")
             if arg_verbose_output == 1:
-                print("[WARN]: Error Making dex Results Directory: " + dex_main_dir + ". Directory likely exists.")
+                print("[WARN]: Error Making jar Results Directory: " + jar_main_dir + ". Directory likely exists.")
 
-        global dex_main_dir_dex
-        dex_main_dir_dex = dex_main_dir + "\\" + dex
+        global jar_main_dir_jar
+        jar_main_dir_jar = jar_main_dir + "\\" + jar
         try:
-            os.mkdir(dex_main_dir_dex)
+            os.mkdir(jar_main_dir_jar)
         except:
             if var_forensic_case_bool == 1:
-                log_txt_update.write("[WARN]: Error Making dex Results Directory: " + dex_main_dir_dex + ". Directory likely exists.\n")
+                log_txt_update.write("[WARN]: Error Making jar Results Directory: " + jar_main_dir_jar + ". Directory likely exists.\n")
             if arg_verbose_output == 1:
-                print("[WARN]: Error Making dex Results Directory: " + dex_main_dir_dex + ". Directory likely exists.")
+                print("[WARN]: Error Making jar Results Directory: " + jar_main_dir_jar + ". Directory likely exists.")
         
-        global dex_source_directory
-        dex_source_directory = dex_main_dir_dex + "\\" + "_0_source"
+        global jar_source_directory
+        jar_source_directory = jar_main_dir_jar + "\\" + "_0_source"
         try:
-            os.mkdir(dex_source_directory)
+            os.mkdir(jar_source_directory)
         except:
             if var_forensic_case_bool == 1:
-                log_txt_update.write("[WARN]: Error Making dex Results Directory: " + dex_source_directory + ". Directory likely exists.\n")
+                log_txt_update.write("[WARN]: Error Making jar Results Directory: " + jar_source_directory + ". Directory likely exists.\n")
             if arg_verbose_output == 1:
-                print("[WARN]: Error Making dex Results Directory: " + dex_source_directory + ". Directory likely exists.")
+                print("[WARN]: Error Making jar Results Directory: " + jar_source_directory + ". Directory likely exists.")
         
-        global dex_decomp_directory
-        dex_decomp_directory = dex_main_dir_dex + "\\" + "_1_decomp"
+        global jar_decomp_directory
+        jar_decomp_directory = jar_main_dir_jar + "\\" + "_1_decomp"
         try:
-            os.mkdir(dex_decomp_directory)
+            os.mkdir(jar_decomp_directory)
         except:
             if var_forensic_case_bool == 1:
-                log_txt_update.write("[WARN]: Error Making dex Results Directory: " + dex_decomp_directory + ". Directory likely exists.\n")
+                log_txt_update.write("[WARN]: Error Making jar Results Directory: " + jar_decomp_directory + ". Directory likely exists.\n")
             if arg_verbose_output == 1:
-                print("[WARN]: Error Making dex Results Directory: " + dex_decomp_directory + ". Directory likely exists.")
+                print("[WARN]: Error Making jar Results Directory: " + jar_decomp_directory + ". Directory likely exists.")
 
-        global dex_results_directory
-        dex_results_directory = dex_main_dir_dex + "\\" + "_2_results"
+        global jar_results_directory
+        jar_results_directory = jar_main_dir_jar + "\\" + "_2_results"
         try:
-            os.mkdir(dex_results_directory)
+            os.mkdir(jar_results_directory)
         except:
             if var_forensic_case_bool == 1:
-                log_txt_update.write("[WARN]: Error Making dex Results Directory: " + dex_results_directory + ". Directory likely exists.\n")
+                log_txt_update.write("[WARN]: Error Making jar Results Directory: " + jar_results_directory + ". Directory likely exists.\n")
             if arg_verbose_output == 1:
-                print("[WARN]: Error Making dex Results Directory: " + dex_results_directory + ". Directory likely exists.")
+                print("[WARN]: Error Making jar Results Directory: " + jar_results_directory + ". Directory likely exists.")
                 
-        global dex_extract_directory
-        dex_extract_directory = dex_main_dir_dex + "\\" + "_3_extract"
+        global jar_extract_directory
+        jar_extract_directory = jar_main_dir_jar + "\\" + "_3_extract"
         try:
-            os.mkdir(dex_extract_directory)
+            os.mkdir(jar_extract_directory)
         except:
             if var_forensic_case_bool == 1:
-                log_txt_update.write("[WARN]: Error Making dex Results Directory: " + dex_extract_directory + ". Directory likely exists.\n")
+                log_txt_update.write("[WARN]: Error Making jar Results Directory: " + jar_extract_directory + ". Directory likely exists.\n")
             if arg_verbose_output == 1:
-                print("[WARN]: Error Making dex Results Directory: " + dex_extract_directory + ". Directory likely exists.")
+                print("[WARN]: Error Making jar Results Directory: " + jar_extract_directory + ". Directory likely exists.")
         
         if arg_autopsy_plugin == 1:
-            var_information_true_filename = dex_with_extension[9:]
+            var_information_true_filename = jar_with_extension[9:]
         else:
-            var_information_true_filename = dex_with_extension
+            var_information_true_filename = jar_with_extension
 
 ########################################################################################################################################
 ################################################## EXTRACTION FILE DEFINITION AND CREATION #############################################
@@ -1107,22 +1108,22 @@ def main(argv):
         global count_stats_write_txt
         global var_yara_log_txt
         
-        ipv6_extract_write_txt = dex_results_directory + "\\" + dex + "_regex_IPv6.txt"
-        mani_unproc_write_txt = dex_results_directory + "\\" + dex + "_manifest_info_unproc.txt"
-        hashes_file_dump_txt = dex_results_directory + "\\" + dex + "_hash_info.txt"
-        cert_unproc_write_txt = dex_results_directory + "\\" + dex + "_cert_unproc.txt"
-        ip_extract_write_txt = dex_results_directory + "\\" + dex + "_regex_IPv4.txt"
-        med_conf_URL_extract_write_txt = dex_results_directory + "\\" + dex + "_med_conf_URL.txt"
-        mod_conf_URL_extract_write_txt = dex_results_directory + "\\" + dex + "_mod_conf_URL.txt"
-        low_conf_URL_extract_write_txt = dex_results_directory + "\\" + dex + "_low_conf_URL.txt"
-        hi_conf_URL_extract_write_txt = dex_results_directory + "\\" + dex + "_hi_conf_URL.txt"
-        file_hashes_post_zip_extract = dex_results_directory + "\\" + dex + "_hash_extract.txt"
-        base64_extract_write_txt = dex_results_directory + "\\" + dex + "_base64_extract.txt"
-        hi_conf_URL_extract_write_txt = dex_results_directory + "\\" + dex + "_med_conf_URL.txt"
-        email_extract_write_txt = dex_results_directory + "\\" + dex + "_email_addr.txt"
-        custom_search_write = dex_results_directory + "\\" + dex + "_search_hits.txt"
-        count_stats_write_txt = dex_results_directory + "\\" + dex + "_stats.txt"
-        var_yara_log_txt = dex_results_directory + "\\" + dex + "_yara_hits.txt"
+        ipv6_extract_write_txt = jar_results_directory + "\\" + jar + "_regex_IPv6.txt"
+        mani_unproc_write_txt = jar_results_directory + "\\" + jar + "_manifest_info_unproc.txt"
+        hashes_file_dump_txt = jar_results_directory + "\\" + jar + "_hash_info.txt"
+        cert_unproc_write_txt = jar_results_directory + "\\" + jar + "_cert_unproc.txt"
+        ip_extract_write_txt = jar_results_directory + "\\" + jar + "_regex_IPv4.txt"
+        med_conf_URL_extract_write_txt = jar_results_directory + "\\" + jar + "_med_conf_URL.txt"
+        mod_conf_URL_extract_write_txt = jar_results_directory + "\\" + jar + "_mod_conf_URL.txt"
+        low_conf_URL_extract_write_txt = jar_results_directory + "\\" + jar + "_low_conf_URL.txt"
+        hi_conf_URL_extract_write_txt = jar_results_directory + "\\" + jar + "_hi_conf_URL.txt"
+        file_hashes_post_zip_extract = jar_results_directory + "\\" + jar + "_hash_extract.txt"
+        base64_extract_write_txt = jar_results_directory + "\\" + jar + "_base64_extract.txt"
+        hi_conf_URL_extract_write_txt = jar_results_directory + "\\" + jar + "_med_conf_URL.txt"
+        email_extract_write_txt = jar_results_directory + "\\" + jar + "_email_addr.txt"
+        custom_search_write = jar_results_directory + "\\" + jar + "_search_hits.txt"
+        count_stats_write_txt = jar_results_directory + "\\" + jar + "_stats.txt"
+        var_yara_log_txt = jar_results_directory + "\\" + jar + "_yara_hits.txt"
         
         global base64_extract_write_txt_up
         global mani_unproc_write_txt_update  
@@ -1154,47 +1155,66 @@ def main(argv):
         count_stats_write_txt_up = open(count_stats_write_txt, "a")
         var_yara_log_write_txt_up = open(var_yara_log_txt, "a")
 
-        var_information_filename_write = ("[INFO]: True dex Filename is: " + var_information_true_filename + "\n")
+        var_information_filename_write = ("[INFO]: True jar Filename is: " + var_information_true_filename + "\n")
         if var_forensic_case_bool == 1:
-            log_txt_update.write("[INFO]: True dex Filename is: " + var_information_true_filename + "\n")
+            log_txt_update.write("[INFO]: True jar Filename is: " + var_information_true_filename + "\n")
         if arg_verbose_output == 1:
-            print("[INFO]: True dex Filename is: " + var_information_true_filename)
-
+            print("[INFO]: True jar Filename is: " + var_information_true_filename)
 
 ########################################################################################################################################
-########################################################### dex HASHING FUNCTIONS ######################################################
+############################################################ UNZIP JAR Extraction ######################################################
+########################################################################################################################################
+        
+        global var_zip_success
+        var_zip_success = 0
+        
+        try:
+            with ZipFile(jar_full_path,"r") as var_jar_unzip:
+                var_jar_unzip.extractall(jar_extract_directory + "\\")
+                var_zip_success = 1
+        except:
+            if var_forensic_case_bool == 1:
+                log_txt_update.write("[WARN]: Error Extracting: " + jar_full_path + "\n") 
+            if arg_verbose_output == 1:
+                print("[WARN]: Error Extracting: " + jar_full_path) 
+
+        if var_zip_success == 1:
+            func_hash_all_files()
+
+########################################################################################################################################
+########################################################### jar HASHING FUNCTIONS ######################################################
 ########################################################################################################################################
 
         md5_hash = hashlib.md5()
-        with open(dex_full_path,"rb") as f:
+        with open(jar_full_path,"rb") as f:
             for byte_block in iter(lambda: f.read(4096),b""):
                 md5_hash.update(byte_block)
-            dex_md5_hash = md5_hash.hexdigest()
-            var_information_md5hash_write = ("[HASH]: MD5 Hash for: " + dex + ".dex is: " + dex_md5_hash + "\n")
+            jar_md5_hash = md5_hash.hexdigest()
+            var_information_md5hash_write = ("[HASH]: MD5 Hash for: " + jar + ".jar is: " + jar_md5_hash + "\n")
             file_txt_update.write(var_information_md5hash_write)
 
         sha1_hash = hashlib.sha1()
-        with open(dex_full_path,"rb") as f:
+        with open(jar_full_path,"rb") as f:
             for byte_block in iter(lambda: f.read(4096),b""):
                 sha1_hash.update(byte_block)
-            dex_sha1_hash = sha1_hash.hexdigest()
-            var_information_sha1hash_write = ("[HASH]: SHA1 Hash for: " + dex + ".dex is: " + dex_sha1_hash + "\n")
+            jar_sha1_hash = sha1_hash.hexdigest()
+            var_information_sha1hash_write = ("[HASH]: SHA1 Hash for: " + jar + ".jar is: " + jar_sha1_hash + "\n")
             file_txt_update.write(var_information_sha1hash_write)
 
         sha256_hash = hashlib.sha256()
-        with open(dex_full_path,"rb") as f:
+        with open(jar_full_path,"rb") as f:
             for byte_block in iter(lambda: f.read(4096),b""):
                 sha256_hash.update(byte_block)
-            dex_sha256_hash = sha256_hash.hexdigest()
-            var_information_sha256hash_write = ("[HASH]: SHA256 Hash for: " + dex + ".dex is: " + dex_sha256_hash + "\n")
+            jar_sha256_hash = sha256_hash.hexdigest()
+            var_information_sha256hash_write = ("[HASH]: SHA256 Hash for: " + jar + ".jar is: " + jar_sha256_hash + "\n")
             file_txt_update.write(var_information_sha256hash_write)
 
         sha512_hash = hashlib.sha512()
-        with open(dex_full_path,"rb") as f:
+        with open(jar_full_path,"rb") as f:
             for byte_block in iter(lambda: f.read(4096),b""):
                 sha512_hash.update(byte_block)
-            dex_sha512_hash = sha512_hash.hexdigest()
-            var_information_sha512hash_write = ("[HASH]: SHA512 Hash for: " + dex + ".dex is: " + dex_sha512_hash + "\n")
+            jar_sha512_hash = sha512_hash.hexdigest()
+            var_information_sha512hash_write = ("[HASH]: SHA512 Hash for: " + jar + ".jar is: " + jar_sha512_hash + "\n")
             file_txt_update.write(var_information_sha512hash_write)
 
 ########################################################################################################################################
@@ -1202,23 +1222,23 @@ def main(argv):
 ########################################################################################################################################
 
         if var_forensic_case_bool == 1:
-            log_txt_update.write("[INFO]: Starting JADX Decompiling of: " + dex_full_path + ".\n")   
+            log_txt_update.write("[INFO]: Starting JADX Decompiling of: " + jar_full_path + ".\n")   
         if arg_verbose_output == 1:
             print("")
             print("[JADX] ##################################### JADX DECOMPILING STARTED #############################################")
             print("")
-            print("[JADX]: Started JADX Decompiling of: " + dex_full_path + ".")                                                                
+            print("[JADX]: Started JADX Decompiling of: " + jar_full_path + ".")                                                                
         try:
-            var_jadx_decomp = "\"" + dex_decomp_directory + "\\" + dex + "_source" + "\"" + " "
-            jadx_dex_full_path = "\"" + dex_full_path + "\""
-            var_jadx_command = '.\\win\\bin\\jadx.bat -d ' + var_jadx_decomp + " " + jadx_dex_full_path
+            var_jadx_decomp = "\"" + jar_decomp_directory + "\\" + jar + "_source" + "\"" + " "
+            jadx_jar_full_path = "\"" + jar_full_path + "\""
+            var_jadx_command = '.\\win\\bin\\jadx.bat -d ' + var_jadx_decomp + " " + jadx_jar_full_path
             var_jadx_command_split = var_jadx_command.split()
             subprocess.check_call(var_jadx_command)
         except:
             if var_forensic_case_bool == 1:
-                log_txt_update.write("[WARN]: Error Decompiling: " + dex_full_path + " with JADX.\n")  
+                log_txt_update.write("[WARN]: Error Decompiling: " + jar_full_path + " with JADX.\n")  
             if arg_verbose_output == 1:
-                print("[WARN]: Error Decompiling: " + dex_full_path + " with JADX.")  
+                print("[WARN]: Error Decompiling: " + jar_full_path + " with JADX.")  
 
 ########################################################################################################################################
 ############################################################### YARA FUNCTIONS #########################################################
@@ -1226,24 +1246,25 @@ def main(argv):
 
         if var_yara_flag == 1:
             if var_forensic_case_bool == 1:
-                log_txt_update.write("[INFO]: Starting YARA Pattern Match of: " + dex_full_path + ".\n")   
+                log_txt_update.write("[INFO]: Starting YARA Pattern Match of: " + jar_full_path + ".\n")   
             if arg_verbose_output == 1:
                 print("")
                 print("[YARA] #################################### YARA Pattern Match STARTED ####################################")
                 print("")
-                print("[YARA]: Started YARA Pattern Match within: " + dex_full_path + ".")                                                               
+                print("[YARA]: Started YARA Pattern Match within: " + jar_full_path + ".")                                                               
             try:
-                var_yara_decomp = "\"" + dex_decomp_directory + "\\" + dex + "yara" + "\"" + " "
+                var_yara_decomp = "\"" + jar_decomp_directory + "\\" + jar + "yara" + "\"" + " "
                 
-                yara_dex_full_path = "\"" + dex_full_path + "\""
-                var_yara_command = '.\\win\\yara64.exe -s -S -m ' + ' ".\\yara\\master_index.yar" ' + jadx_dex_full_path
+                yara_jar_full_path = "\"" + jar_full_path + "\""
+                var_yara_command = '.\\win\\yara64.exe -s -S -m ' + ' ".\\yara\\master_index.yar" ' + jadx_jar_full_path
+                print(var_yara_command)
                 var_yara_command_split = var_yara_command.split()
                 subprocess.check_call(var_yara_command, stdout=var_yara_log_write_txt_up)
             except:
                 if var_forensic_case_bool == 1:
-                    log_txt_update.write("[WARN]: Error Running YARA Against: " + dex_full_path + ".\n")  
+                    log_txt_update.write("[WARN]: Error Running YARA Against: " + jar_full_path + ".\n")  
                 if arg_verbose_output == 1:
-                    print("[WARN]: Error Running YARA Against: " + dex_full_path + ".")
+                    print("[WARN]: Error Running YARA Against: " + jar_full_path + ".")
         
         print("")
         func_hash_all_files()
@@ -1266,16 +1287,16 @@ def main(argv):
 ########################################################################################################################################
 
         if var_forensic_case_bool == 1:
-            log_txt_update.write("[INFO]: Post-Extraction Statistics For: " + dex + "\n")  
+            log_txt_update.write("[INFO]: Post-Extraction Statistics For: " + jar + "\n")  
         if arg_verbose_output == 1:      
             print("")
-            print("[STATS] #################################### dex STATISTICS ####################################")
+            print("[STATS] #################################### jar STATISTICS ####################################")
             print("")
-            print("[INFO]: Post-Extraction Statistics Collection Started: " + dex)  
+            print("[INFO]: Post-Extraction Statistics Collection Started: " + jar)  
         function_statistic_write()
 
 ########################################################################################################################################
-############################################################# Per dex Clean-Up #########################################################
+############################################################# Per jar Clean-Up #########################################################
 ########################################################################################################################################     
 
         if arg_verbose_output == 1:
@@ -1283,11 +1304,11 @@ def main(argv):
             print("[FIN] ###################################### FIN ######################################")
             print("")
 
-        dex_move_cleanup_loc = dex_source_directory + "\\" + dex_with_extension
-        try:
-            shutil.move(dex_full_path, dex_move_cleanup_loc)
-        except:
-            log_txt_update.write("[WARN]: Error Moving dex: " + dex_full_path + " to: " + dex_move_cleanup_loc + "\n")
+        jar_move_cleanup_loc = jar_source_directory + "\\" + jar_with_extension
+        #try:
+        #    shutil.move(jar_full_path, jar_move_cleanup_loc)
+        #except:
+        #    log_txt_update.write("[WARN]: Error Moving jar: " + jar_full_path + " to: " + jar_move_cleanup_loc + "\n")
         file_txt_update.close()
     func_clean_up()
 
