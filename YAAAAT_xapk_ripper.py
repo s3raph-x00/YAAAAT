@@ -1,8 +1,8 @@
 ########################################################################################################################################
 #################################################### Author:      s3raph                ################################################
 #################################################### Purpose:     To Pass the Butter    ################################################
-#################################################### Version:     .01053                ################################################
-#################################################### Last Update: 20220830              ################################################
+#################################################### Version:     .01055                ################################################
+#################################################### Last Update: 20220906              ################################################
 ########################################################################################################################################
 
 import sys
@@ -283,6 +283,37 @@ def func_set_console_strobe():
     os.system('color 7C')
     time.sleep(.1)
 
+def func_fileheader_check():
+########################################################################################################################################
+############################################################ Fileheader Function #######################################################
+########################################################################################################################################
+
+    global xapk_file_header_check
+    global xapk_file_header_check_data
+    global xapk_file_header_sig
+    global xapk_extract_continue
+    
+    xapk_file_header_check = open(xapk_full_path, "rb")
+    xapk_file_header_check_data = xapk_file_header_check.read(2)
+    xapk_file_header_sig = "PK"
+
+    xapk_extract_continue = 0
+        
+    if xapk_file_header_sig in xapk_file_header_check_data:
+        xapk_extract_continue = 1
+        xapk_file_header_check.close()
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[HEADER]: File Header: " + xapk_full_path + " matches that of an xAPK.\n")
+        if arg_verbose_output == 1:
+            print("[HEADER]: File Header: " + xapk_full_path + " matches that of an xAPK.")
+
+    else:
+        xapk_file_header_check.close()
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[HEADER] File Header: " + xapk_full_path + " does not match that of an xAPK. Skipping Processing.\n")
+        if arg_verbose_output == 1:
+            print("[HEADER] File Header: " + xapk_full_path + " does not match that of an xAPK. Skipping Processing.")
+
 def func_hash_all_files():
 ########################################################################################################################################
 ####################################################### Hash Extracted Files Function ##################################################
@@ -423,6 +454,7 @@ def main(argv):
     global var_apk_ripper_flag
     global var_output_directory_empty
     global inputdirectory_var
+    global xapk_full_path
 
     timestr_dir = time.strftime("%H-%M-%S")
     timestr_case = time.strftime("%Y-%m-%d")
@@ -694,6 +726,9 @@ def main(argv):
             print("[INFO]: Searching for xAPKs in: " + directory_search_pattern)
 
     for xapk_full_path in glob.glob(directory_search_pattern):
+        func_fileheader_check()
+        if xapk_extract_continue == 0:
+            continue
         if arg_verbose_output == 1:
             print("")
             print("############################################ RIPPING OF xAPK: " + os.path.basename(xapk_full_path) + " STARTED. ##############################")
