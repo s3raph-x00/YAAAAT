@@ -1,8 +1,8 @@
 ########################################################################################################################################
 #################################################### Author:      s3raph                ################################################
 #################################################### Purpose:     To Pass the Butter    ################################################
-#################################################### Version:     .07157                ################################################
-#################################################### Last Update: 20220902              ################################################
+#################################################### Version:     .07153                ################################################
+#################################################### Last Update: 20220815              ################################################
 ########################################################################################################################################
 
 import sys
@@ -70,11 +70,11 @@ def func_hello():
     print("                                         / .-`                      \ \/ /                      `-. \    ")
     print("                                        /.`                          \/ /                          `.\    ")
     print("                                       |`                            / /\                            `|    ")
-    print("                               @@@@@@  @@@@@@@  @@@  @@@      @@@@@@@  @@@ @@@@@@@  @@@@@@@  @@@@@@@@ @@@@@@@ ")
-    print("                              @@!  @@@ @@!  @@@ @@!  !@@      @@!  @@@ @@! @@!  @@@ @@!  @@@ @@!      @@!  @@@")
-    print("                              @!@!@!@! @!@@!@!  @!@@!@!       @!@!!@!  !!@ @!@@!@!  @!@@!@!  @!!!:!   @!@!!@! ")
-    print("                              !!:  !!! !!:      !!: :!!       !!: :!!  !!: !!:      !!:      !!:      !!: :!! ")
-    print("                               :   : :  :        :   :::       :   : : :    :        :       : :: :::  :   : :")
+    print("                                                   @@@@@@@  @@@ @@@@@@@  @@@@@@@  @@@@@@@@ @@@@@@@ ")
+    print("                                                   @@!  @@@ @@! @@!  @@@ @@!  @@@ @@!      @@!  @@@")
+    print("                                                   @!@!!@!  !!@ @!@@!@!  @!@@!@!  @!!!:!   @!@!!@! ")
+    print("                                                   !!: :!!  !!: !!:      !!:      !!:      !!: :!! ")
+    print("                                                    :   : : :    :        :       : :: :::  :   : :")
 
 def func_goodbye():
 ########################################################################################################################################
@@ -370,7 +370,7 @@ def func_large_scale_regex():
 
                     ### NEEDS POST REGEX CHECK ###
                     if var_med_IPv6_conf_check == 0:
-                        dex_content_extract_ipv6 = re.findall(r'(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))', var_directory_file_object_line)
+                        dex_content_extract_ipv6 = re.findall(r'((?:^|(?<=\s))(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:)|fe80:(:[0-9a-fA-F]{0,4}){0,4}%[0-9a-zA-Z]{1,}|::(ffff(:0{1,4}){0,1}:){0,1}((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])|([0-9a-fA-F]{1,4}:){1,4}:((25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9])\.){3,3}(25[0-5]|(2[0-4]|1{0,1}[0-9]){0,1}[0-9]))(?=\s|$))', var_directory_file_object_line)
                         dex_content_extract_ipv6_len = len(dex_content_extract_ipv6)
                         var_chain_count = 0
                         if dex_content_extract_ipv6:
@@ -598,6 +598,37 @@ def func_initial_logging():
         log_txt_update.write("--- YAAAAT dex Ripper ---\n")
         log_txt_update.write("[LOG]: Tool Started on: " + timestr_case + " at " + timestr_dir + "\n")  
 
+def func_fileheader_check():
+########################################################################################################################################
+############################################################ Fileheader Function #######################################################
+########################################################################################################################################
+
+    global dex_file_header_check
+    global dex_file_header_check_data
+    global dex_file_header_sig
+    global dex_extract_continue
+    
+    dex_file_header_check = open(dex_full_path, "rb")
+    dex_file_header_check_data = dex_file_header_check.read(8)
+    dex_file_header_sig = "dex"
+
+    dex_extract_continue = 0
+        
+    if dex_file_header_sig in dex_file_header_check_data:
+        dex_extract_continue = 1
+        dex_file_header_check.close()
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[HEADER]: File Header: " + dex_full_path + " matches that of a DEX file.\n")
+        if arg_verbose_output == 1:
+            print("[HEADER]: File Header: " + dex_full_path + " matches that of a DEX file.")
+
+    else:
+        dex_file_header_check.close()
+        if var_forensic_case_bool == 1:
+            log_txt_update.write("[HEADER] File Header: " + dex_full_path + " does not match that of a DEX file. Skipping Processing.\n")
+        if arg_verbose_output == 1:
+            print("[HEADER] File Header: " + dex_full_path + " does not match that of a DEX file. Skipping Processing.")
+
 def function_statistic_write():
 ########################################################################################################################################
 ######################################################### dex Extraction Statistics ####################################################
@@ -701,6 +732,7 @@ def main(argv):
     global var_sys_complete_flag
     global var_py_complete_flag
     global var_yara_flag
+    global dex_full_path
 
     timestr_dir = time.strftime("%H-%M-%S")
     timestr_case = time.strftime("%Y-%m-%d")
@@ -963,6 +995,9 @@ def main(argv):
             print("[INFO]: Searching for dexs in: " + directory_search_pattern)
 
     for dex_full_path in glob.glob(directory_search_pattern):
+        func_fileheader_check()
+        if dex_extract_continue == 0:
+            continue
         if arg_verbose_output == 1:
             print("")
             print("############################################ RIPPING OF dex: " + os.path.basename(dex_full_path) + " STARTED. ##############################")
@@ -1203,7 +1238,6 @@ def main(argv):
                 
                 yara_dex_full_path = "\"" + dex_full_path + "\""
                 var_yara_command = '.\\win\\yara64.exe -s -S -m ' + ' ".\\yara\\master_index.yar" ' + jadx_dex_full_path
-                print(var_yara_command)
                 var_yara_command_split = var_yara_command.split()
                 subprocess.check_call(var_yara_command, stdout=var_yara_log_write_txt_up)
             except:
@@ -1251,10 +1285,10 @@ def main(argv):
             print("")
 
         dex_move_cleanup_loc = dex_source_directory + "\\" + dex_with_extension
-        #try:
-        #    shutil.move(dex_full_path, dex_move_cleanup_loc)
-        #except:
-        #    log_txt_update.write("[WARN]: Error Moving dex: " + dex_full_path + " to: " + dex_move_cleanup_loc + "\n")
+        try:
+            shutil.move(dex_full_path, dex_move_cleanup_loc)
+        except:
+            log_txt_update.write("[WARN]: Error Moving dex: " + dex_full_path + " to: " + dex_move_cleanup_loc + "\n")
         file_txt_update.close()
     func_clean_up()
 
