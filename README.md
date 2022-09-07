@@ -60,9 +60,9 @@ Note: Store Binaries (And Their Associated DLLs/Files) In The Following Folder S
      - [ ] Decompile and Analysis Functionaliy
        - &#9746; APK decompilation and analysis<br/>   
        - [ ] OAT decompilation and analysis<br/>
-       - [ ] JAR decompilation and analysis<br/>
+       - &#9746; JAR decompilation and analysis<br/>
        - &#9746; DEX decompilation and analysis<br/>
-       - [ ] CLASS decompilation and analysis<br/>
+       - &#9746; CLASS decompilation and analysis<br/>
        - &#9746; XAPK decompilation and analysis<br/>
        - [ ] vDEX/cDEX decompilation and analysis<br/>
        - [ ] SO decompilation and analysis<br/>
