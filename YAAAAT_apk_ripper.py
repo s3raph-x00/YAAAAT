@@ -1,8 +1,8 @@
 ########################################################################################################################################
 #################################################### Author:      s3raph                ################################################
 #################################################### Purpose:     To Pass the Butter    ################################################
-#################################################### Version:     .07157                ################################################
-#################################################### Last Update: 20230227              ################################################
+#################################################### Version:     .07175                ################################################
+#################################################### Last Update: 20230228              ################################################
 ########################################################################################################################################
 
 import sys
@@ -253,6 +253,7 @@ def func_global_var_declare():
     global dict_contained_assets_sha256
     global dict_directory_listing
     global dict_directory_file_listing
+    global dict_ssdeep_so_output
     global var_ip_list_unscrubbed
     global var_proto_list_unscrubbed
 
@@ -272,6 +273,7 @@ def func_global_var_declare():
     dict_contained_assets_sha256 = {}
     dict_directory_listing = {}
     dict_directory_file_listing = {}
+    dict_ssdeep_so_output = {}
     var_ip_list_unscrubbed = []
     var_proto_list_unscrubbed = []
 
@@ -318,6 +320,7 @@ def func_apk_json_map():
         "HASH-SHA256 of Contained Assets": (dict_contained_assets_sha256), #Tuple
         "FILE-Directory Listing": (dict_directory_listing), #Tuple
         "FILE-Directory And File Listing": (dict_directory_file_listing), #Tuple
+        "SO-SSDEEP Parsed Data": (dict_ssdeep_so_output), #Tuple
         "HASH-MD5 Hash": apk_md5_hash,
         "HASH-SHA1 Hash": apk_sha1_hash,
         "HASH-SHA256 Hash": apk_sha256_hash,
@@ -510,27 +513,27 @@ def func_apk_json_map():
         "PERM-WRITE_VOICEMAIL": var_perm_write_voicemail
     }
 
-    def pad_dict_list(dict_list, padel):
-        lmax = 0
-        for lname in dict_list.keys():
-            lmax = max(lmax, len(dict_list[lname]))
-        for lname in dict_list.keys():
-            ll = len(dict_list[lname])
-            if  ll < lmax:
-                dict_list[lname] += [padel] * (lmax - ll)
-        return dict_list
+    #def pad_dict_list(dict_list, padel):
+    #    lmax = 0
+    #    for lname in dict_list.keys():
+    #        lmax = max(lmax, len(dict_list[lname]))
+    #    for lname in dict_list.keys():
+    #        ll = len(dict_list[lname])
+    #        if  ll < lmax:
+    #            dict_list[lname] += [padel] * (lmax - ll)
+    #    return dict_list
 
-    try:
-        var_inputjson = json.dumps(apk_json)
-        var_inputjson = pad_dict_list(var_inputjson, 0)
-        var_jsonconvert = pandas.DataFrame.from_dict(var_inputjson, orient='index')
-        var_jsonconvert = var_jsonconvert.transpose()
-        var_jsonconvert.to_csv('csvfile.csv', encoding='utf-8', index=False)
-    except:
-        if var_forensic_case_bool == 1:
-            log_txt_update.write("[WARN]: Error Converting JSON to CSV: " + var_inputjson + "\n")
-        if arg_verbose_output == 1:
-            print("[WARN]: Error Converting JSON to CSV: " + var_inputjson + "\n")
+    #try:
+    #    var_inputjson = json.dumps(apk_json)
+    #    var_inputjson = pad_dict_list(var_inputjson, 0)
+    #    var_jsonconvert = pandas.DataFrame.from_dict(var_inputjson, orient='index')
+    #    var_jsonconvert = var_jsonconvert.transpose()
+    #    var_jsonconvert.to_csv('csvfile.csv', encoding='utf-8', index=False)
+    #except:
+    #    if var_forensic_case_bool == 1:
+    #        log_txt_update.write("[WARN]: Error Converting JSON to CSV: " + var_inputjson + "\n")
+    #    if arg_verbose_output == 1:
+    #        print("[WARN]: Error Converting JSON to CSV: " + var_inputjson + "\n")
 
 
 def func_find_javahome():
@@ -561,21 +564,27 @@ def func_base64_decode(var_string_decode_req_base64):
                 print("[INFO]: Error Decoding Potential Base64 String: " + var_string_decode_req_base64 + "\n")
 
 def func_so_ssdeep_parser():
+    global var_so_ssdeep_list
+    var_so_ssdeep_list = []
+    
     if os.path.exists(var_ssdeep_output_temp):
         with open(var_ssdeep_output_temp) as var_ssdeep_output_temp_extract_file:
             var_ssdeep_output_temp_extract = var_ssdeep_output_temp_extract_file.readlines()
             for line in var_ssdeep_output_temp_extract:
                 line = line.replace("[", "")
                 line = line.replace("]", "")
-                print(line)
                 var_ssdeep_extract_so_details = re.findall(r'[0-9a-zA-Z+/]*:', line)
                 var_ssdeep_extract_so_details_blocksize = var_ssdeep_extract_so_details[0].replace(":", "")
                 var_ssdeep_extract_so_details_hash1 = var_ssdeep_extract_so_details[1].replace(":", "")
                 var_ssdeep_extract_so_details_2 = re.findall(r'[0-9a-zA-Z+/]*,', line)
                 var_ssdeep_extract_so_details_hash2 = var_ssdeep_extract_so_details_2[0].replace(",", "")
-        print("SO Blocksize is: " + var_ssdeep_extract_so_details_blocksize)
-        print("SO Hash_1 is: " + var_ssdeep_extract_so_details_hash1)
-        print("SO Hash_2 is: " + var_ssdeep_extract_so_details_hash2)
+        var_so_ssdeep_list = [var_ssdeep_file_name, var_ssdeep_extract_so_details_blocksize, var_ssdeep_extract_so_details_hash1, var_ssdeep_extract_so_details_hash2]
+        dict_ssdeep_so_output.append(var_so_ssdeep_list)
+        var_ssdeep_log_txt_up.write("[SO] Filename: " + var_ssdeep_file_name + "\n")
+        var_ssdeep_log_txt_up.write("[SO] Blocksize: " + var_ssdeep_extract_so_details_blocksize + "\n")
+        var_ssdeep_log_txt_up.write("[SO] Hash 1: " + var_ssdeep_extract_so_details_hash1 + "\n")
+        var_ssdeep_log_txt_up.write("[SO] Hash 2: " + var_ssdeep_extract_so_details_hash2 + "\n")
+        var_ssdeep_log_txt_up.write("\n")
 
 def func_so_fileheader_check():
 ########################################################################################################################################
@@ -611,12 +620,15 @@ def func_so_ssdeep_poll():
 ############################################################ SO SSDEEP ANALYSIS ########################################################
 ########################################################################################################################################
     global var_ssdeep_output_temp
+    global var_ssdeep_file_name
     var_ssdeep_output_temp = ""
+    var_ssdeep_file_name = ""
     
     if var_tmp_so_path != "":
         try:
             os.system(".\\win\\ssdeep.exe -c -l " + var_tmp_so_path + " >> " + apk_results_directory + "\\" + apk + "_embedso_" + filename + "_ssdeep_output.txt")
             var_ssdeep_output_temp = (apk_results_directory + "\\" + apk + "_embedso_" + filename + "_ssdeep_output.txt")
+            var_ssdeep_file_name = filename
         except:
             if var_forensic_case_bool == 1:
                 log_txt_update.write("[WARN]: ssdeep failed to run against: " + var_tmp_so_path + "\n")
@@ -1673,6 +1685,7 @@ def main(argv):
         global custom_search_write
         global count_stats_write_txt
         global var_yara_log_txt
+        global var_ssdeep_log_txt
         
         ipv6_extract_write_txt = apk_results_directory + "\\" + apk + "_regex_IPv6.txt"
         mani_unproc_write_txt = apk_results_directory + "\\" + apk + "_manifest_info_unproc.txt"
@@ -1690,6 +1703,8 @@ def main(argv):
         custom_search_write = apk_results_directory + "\\" + apk + "_search_hits.txt"
         count_stats_write_txt = apk_results_directory + "\\" + apk + "_stats.txt"
         var_yara_log_txt = apk_results_directory + "\\" + apk + "_yara_hits.txt"
+        var_ssdeep_log_txt = apk_results_directory + "\\" + apk + "_ssdeep_log.txt"
+        
         
         global base64_extract_write_txt_up
         global mani_unproc_write_txt_update  
@@ -1705,6 +1720,7 @@ def main(argv):
         global custom_search_write_up
         global count_stats_write_txt_up
         global var_yara_log_write_txt_up
+        global var_ssdeep_log_txt_up
         
         ip_extract_write_txt_update = open(ip_extract_write_txt, "a")
         cert_unproc_txt_update = open(cert_unproc_write_txt, "a")
@@ -1720,6 +1736,7 @@ def main(argv):
         low_conf_URL_extract_write_txt_up = open(low_conf_URL_extract_write_txt, "a")
         count_stats_write_txt_up = open(count_stats_write_txt, "a")
         var_yara_log_write_txt_up = open(var_yara_log_txt, "a")
+        var_ssdeep_log_txt_up = open(var_ssdeep_log_txt, "a")
 
         var_information_filename_write = ("[INFO]: True APK Filename is: " + var_information_true_filename + "\n")
         if var_forensic_case_bool == 1:
@@ -1940,6 +1957,7 @@ def main(argv):
         global dict_contained_assets_sha256
         global dict_directory_listing
         global dict_directory_file_listing
+        global dict_ssdeep_so_output
         global apk_md5_hash
         global apk_sha1_hash
         global apk_sha256_hash
@@ -2150,6 +2168,7 @@ def main(argv):
         dict_contained_assets_sha256 = ['']
         dict_directory_listing = ['']
         dict_directory_file_listing = ['']
+        dict_ssdeep_so_output = ['']
         cert_content_extract_subject = ''
         cert_content_extract_serial = ''
 
