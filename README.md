@@ -63,10 +63,10 @@ Note: Store Binaries (And Their Associated DLLs/Files) In The Following Folder S
        - &#9746; DEX decompilation and analysis<br/>
        - &#9746; CLASS decompilation and analysis<br/>
        - &#9746; XAPK decompilation and analysis<br/>
+       - &#9746; SO decompilation and analysis<br/>
        - [ ] OAT decompilation and analysis<br/>
        - [ ] ELF decompilation and analysis<br/>
        - [ ] vDEX/cDEX decompilation and analysis<br/>
-       - [ ] SO decompilation and analysis<br/>
        - [ ] Testing 
      - [ ] GUI   
   3. Linux/Unix Python Script
@@ -106,3 +106,4 @@ strings: https://docs.microsoft.com/en-us/sysinternals/downloads/strings <br />
 openssl: https://www.openssl.org/source/ <br />
 jadx:    https://github.com/skylot/jadx/releases <br />
 yara:    https://github.com/VirusTotal/yara/releases <br />
+ssdeep:  https://github.com/ssdeep-project/ssdeep <br />
