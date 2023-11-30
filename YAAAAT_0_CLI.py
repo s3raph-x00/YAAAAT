@@ -1,8 +1,8 @@
 ########################################################################################################################################
 #################################################### Author:      s3raph                ################################################
 #################################################### Purpose:     To Pass the Butter    ################################################
-#################################################### Version:     .07170                ################################################
-#################################################### Last Update: 20220605              ################################################
+#################################################### Version:     .07153                ################################################
+#################################################### Last Update: 20220815              ################################################
 ########################################################################################################################################
 
 
@@ -983,21 +983,12 @@ def main(argv):
     if var_dex_ripper_flag == 1:
         script_ext_location_check = 4
         func_command_call()
-    
     if var_so_ripper_flag == 1:
         script_ext_location_check = 5
-        if arg_verbose_output == 1:
-            print("[ERROR]: Not Implemented Yet.\n")
-        if var_forensic_case_bool == 1:
-            log_txt_update.write("[ERROR]: Not Implemented Yet.\n")
-    
+        func_command_call()
     if var_elf_ripper_flag == 1:
         script_ext_location_check = 6
-        if arg_verbose_output == 1:
-            print("[ERROR]: Not Implemented Yet.\n")
-        if var_forensic_case_bool == 1:
-            log_txt_update.write("[ERROR]: Not Implemented Yet.\n")
-    
+        func_command_call()
     if var_jar_ripper_flag == 1:
         script_ext_location_check = 7
         func_command_call()
