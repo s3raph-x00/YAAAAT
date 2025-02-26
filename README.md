@@ -83,12 +83,6 @@ Note: Store Binaries (And Their Associated DLLs/Files) In The Following Folder S
        - [ ] SO decompilation and analysis<br/>
        - [ ] Testing 
      - [ ] GUI   
-  4. ELK/Splunk Linkage Tool
-     - [ ] Core Functionality
-     - [ ] ELK Linkage
-     - [ ] SPLUNK Linkage
-     - [ ] Testing
-     - [ ] GUI
 
 ##### Legend:
 - - [X] - Completed <br />
