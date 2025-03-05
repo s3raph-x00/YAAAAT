@@ -53,7 +53,6 @@ Note: Store Binaries (And Their Associated DLLs/Files) In The Following Folder S
 ### Current Development Status 
   1. Autopsy Plugin
      - [X] Core Functionality <br />
-       [ ] Additional Indicing of Ripped Data   <br/>
        &#9746; Switches and Parametization<br/>
        &#9746; Testing<br/>
      - [ ] GUI   
